@@ -5,4 +5,8 @@ using UnityEngine;
 public abstract class RopeLink : MonoBehaviour
 {
     public abstract void SetConnectedLink(RopeLink link);
+
+    public abstract Vector3 GetLinkOffsetVector();
+
+
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class RopeGenerator : MonoBehaviour
 {
-    public RopeLink ropeLink;
+    public RopeLink RopeLink;
 
-    public abstract GameObject GenerateRopeWithLength(int length);
+    public abstract GameObject GenerateRope(Vector3 position, int length);
 
 }

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class RopeLinkDefault : RopeLink
 {
+    public override Vector3 GetLinkOffsetVector()
+    {
+        return Vector3.down;
+    }
+
     public override void SetConnectedLink(RopeLink link)
     {
-        throw new System.NotImplementedException();
+        GetComponent<Joint>().connectedBody = link.GetComponent<Rigidbody>();
     }
 }
