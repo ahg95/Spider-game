@@ -7,18 +7,27 @@ public class MouseLookRotator : MonoBehaviour
     [SerializeField]
     float mouseSensititvity;
 
+    [SerializeField]
+    Transform transformToRotateHorizontally;
+
+    float localXRotation;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        localXRotation = transform.localRotation.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontalRotationAngle = Input.GetAxis("Mouse X") * mouseSensititvity * Time.deltaTime;
-        float verticalRotationAngle = - Input.GetAxis("Mouse Y") * mouseSensititvity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensititvity * Time.deltaTime;
+        transformToRotateHorizontally.rotation = transformToRotateHorizontally.rotation * Quaternion.Euler(0, mouseX, 0);
 
-        transform.Rotate(Vector3.right * verticalRotationAngle, Space.Self);
-        transform.Rotate(Vector3.up * horizontalRotationAngle, Space.World);
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensititvity * Time.deltaTime;
+        localXRotation = Mathf.Clamp(localXRotation - mouseY, -90, 90);
+        transform.localRotation = Quaternion.Euler(localXRotation, 0, 0);
+
+        //transform.Rotate(Vector3.right * -mouseY, Space.Self);
     }
 }
