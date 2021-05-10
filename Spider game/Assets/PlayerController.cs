@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject spawnedLink = Instantiate(link.gameObject);
+            GameObject spawnedLink = Instantiate(link.gameObject, Vector3.zero, Quaternion.identity);
 
-            spawnedLink.GetComponent<ChainLink>().AttachToChainLinkHook(linkToAttachTo);
+            spawnedLink.GetComponent<ChainLink>().AttachToChainLinkHook(linkToAttachTo, transform.position);
 
             linkToAttachTo = spawnedLink.GetComponent<ChainLink>();
         }
