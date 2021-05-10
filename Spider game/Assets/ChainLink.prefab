@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5225446192563594259}
   m_Layer: 0
-  m_Name: Bottom Connection Point
+  m_Name: Position To Link ChainLink to
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,8 +60,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136654114122630476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.5, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6696840647219830158}
   - {fileID: 5225446192563594259}
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c168277961dc4458208894b2718c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TopConnectionPoint: {fileID: 6696840647219830158}
-  BottomConnectionPoint: {fileID: 5225446192563594259}
+  PositionToLinkChainLinkTo: {fileID: 5225446192563594259}
+  PositionToLinkToHook: {fileID: 6696840647219830158}
 --- !u!54 &8890769437082880687
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 11, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.5, z: 0}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -267,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6696840647219830158}
   m_Layer: 0
-  m_Name: Top Connection Point
+  m_Name: Position To Link To Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

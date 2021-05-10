@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
             shooter.ShootIfCooledDown();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject spawnedLink = Instantiate(link.gameObject);
 
-            spawnedLink.GetComponent<ChainLink>().AttachTo(linkToAttachTo);
+            spawnedLink.GetComponent<ChainLink>().AttachToChainLinkHook(linkToAttachTo);
 
             linkToAttachTo = spawnedLink.GetComponent<ChainLink>();
         }

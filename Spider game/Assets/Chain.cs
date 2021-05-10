@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Chain : MonoBehaviour
 {
+    /*
     public ChainLink lastLinkInChain;
 
     public void SpawnAndAttachRopeLink(ChainLink chainLinkToSpawn)
@@ -21,4 +22,5 @@ public class Chain : MonoBehaviour
         chainLinkToAttach.transform.rotation = lastLinkInChain.transform.rotation;
         chainLinkToAttach.GetComponent<Rigidbody>().velocity = lastLinkInChain.GetComponent<Rigidbody>().velocity;
     }
+    */
 }
