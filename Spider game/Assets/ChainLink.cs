@@ -2,21 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainLink : MonoBehaviour
+[RequireComponent(typeof(Joint))]
+public class ChainLink : ChainLinkHook
 {
-    public Transform TopConnectionPoint;
-    public Transform BottomConnectionPoint;
+    private Joint joint;
 
-    public Vector3 GetTopConnectionPointOffset() => TopConnectionPoint.transform.position - transform.position;
+    [SerializeField]
+    Transform PositionToLinkToHook;
 
-    public Vector3 GetBottomConnectionPointOffset() => BottomConnectionPoint.transform.position - transform.position;
-
-    public void AttachTo(ChainLink linkToAttachTo)
+    public Joint GetJoint()
     {
-        transform.position = linkToAttachTo.transform.position + linkToAttachTo.GetBottomConnectionPointOffset() - linkToAttachTo.GetTopConnectionPointOffset();
-        transform.rotation = linkToAttachTo.transform.rotation;
+        if (joint == null)
+            joint = GetComponent<Joint>();
+        return joint;
+    }
 
-        GetComponent<Rigidbody>().velocity = linkToAttachTo.GetComponent<Rigidbody>().velocity;
-        GetComponent<Joint>().connectedBody = linkToAttachTo.GetComponent<Rigidbody>();
+    public Vector3 GetPositionToLinkToHook() => PositionToLinkToHook.position;
+
+    public Vector3 GetPositionToLinkToHookOffset() => PositionToLinkToHook.position - transform.position;
+
+    public Vector3 GetLinkingPositionToHookPositionOffset() => GetPositionToLinkChainLinkTo() - GetPositionToLinkToHook();
+
+    public void AttachToChainLinkHook(ChainLinkHook hookToAttachTo)
+    {
+        transform.rotation = hookToAttachTo.transform.rotation;
+
+        transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
+
+        GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
+
+        GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
+    }
+
+    public void AttachToChainLinkHook(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
+    {
+        Vector3 targetDirection = positionToRotateChainLinkTowards - transform.position;
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, targetDirection); // TODO: Generalize from Vector3.up to any configuration of ChainLink
+
+        transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
+
+        GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
+
+        GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
     }
 }
