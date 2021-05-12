@@ -15,9 +15,6 @@ public static class Vector3Utility
     /// <returns>The point of the defined smooth curve at the given interpolation value.</returns>
     public static Vector3 GetPointOfSmoothCurveConnectingTwoPoints(Vector3 startPoint, Vector3 startPointDirection, Vector3 endPoint, Vector3 endPointDirection, float t, AnimationCurve smoothingCurve = null)
     {
-        if (smoothingCurve == null)
-            smoothingCurve = new AnimationCurve();
-
         Vector3 smoothCurvePoint;
 
         if (t <= 0)

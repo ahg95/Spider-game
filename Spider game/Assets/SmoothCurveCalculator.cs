@@ -7,6 +7,16 @@ public class SmoothCurveCalculator : MonoBehaviour
     public float DistanceBetweenCurvePoints;
     public AnimationCurve SmoothingCurve;
 
+    public void SetTransformsToModel(Transform[] transforms)
+    {
+
+    }
+
+    public Vector3 GetCurvePositionAtInterpolationValue(float t)
+    {
+        return Vector3.zero;
+    }
+
     public Vector3[] CalculateSmoothCurvePoints(Vector3[] curvePoints)
     {
         // Contains all calculated curve points in order

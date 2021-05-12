@@ -486,3 +486,96 @@ Received Import Request.
 Start importing Assets/CurvePointRenderer.cs using Guid(e5d773b34b515aa469a2e84b5b048b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd82b64a76320b88b08684a49d2168150') in 0.013111 seconds
   Import took 0.017592 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001027 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.26 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.965 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1121 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 60.6 MB.
+System memory in use after: 60.7 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1624.
+Total: 2.244100 ms (FindLiveObjects: 0.235400 ms CreateObjectMapping: 0.098100 ms MarkObjects: 1.841300 ms  DeleteObjects: 0.067600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1249.660727 seconds.
+  path: Assets/SmoothCurveRenderer.cs
+  artifactKey: Guid(e5d773b34b515aa469a2e84b5b048b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/SmoothCurveRenderer.cs using Guid(e5d773b34b515aa469a2e84b5b048b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b292429fca0b0168c4c4576055594ba') in 0.007742 seconds
+  Import took 0.010141 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.444159 seconds.
+  path: Assets/SmoothCurveCalculator.cs
+  artifactKey: Guid(06493bc84ede7ce43a42f2d31465473d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/SmoothCurveCalculator.cs using Guid(06493bc84ede7ce43a42f2d31465473d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e08fe940dda1ca095cceedeb1895b78') in 0.012463 seconds
+  Import took 0.015329 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001889 seconds.
+  path: Assets/SmoothCurveCalculator.cs
+  artifactKey: Guid(06493bc84ede7ce43a42f2d31465473d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/SmoothCurveCalculator.cs using Guid(06493bc84ede7ce43a42f2d31465473d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e08fe940dda1ca095cceedeb1895b78') in 0.003542 seconds
+  Import took 0.006089 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000897 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.26 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.038 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.28 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1121 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 60.6 MB.
+System memory in use after: 60.7 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1627.
+Total: 2.054900 ms (FindLiveObjects: 0.184800 ms CreateObjectMapping: 0.079200 ms MarkObjects: 1.716900 ms  DeleteObjects: 0.072200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 161.776467 seconds.
+  path: Assets/SmoothCurveRenderer.cs
+  artifactKey: Guid(e5d773b34b515aa469a2e84b5b048b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/SmoothCurveRenderer.cs using Guid(e5d773b34b515aa469a2e84b5b048b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec38a15730f71050742d48645d42e427') in 0.005387 seconds
+  Import took 0.012713 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000852 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.28 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.076 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.45 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1121 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 60.6 MB.
+System memory in use after: 60.7 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1630.
+Total: 2.177500 ms (FindLiveObjects: 0.199300 ms CreateObjectMapping: 0.107500 ms MarkObjects: 1.804200 ms  DeleteObjects: 0.064700 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
