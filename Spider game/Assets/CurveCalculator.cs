@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmoothCurveCalculator : MonoBehaviour
+public class CurveCalculator : MonoBehaviour
 {
     public List<Transform> PointsToFitCurveTo;
     public float DistanceBetweenCurvePoints;
     public AnimationCurve SmoothingCurve;
-    public CustomLineRenderer customLineRenderer;
+    public CurveRenderer curveRenderer;
 
     private void Update()
     {
@@ -46,7 +46,7 @@ public class SmoothCurveCalculator : MonoBehaviour
             {
                 Vector3 smoothCurvePoint = Vector3Utility.GetPointOfSmoothCurveConnectingTwoPoints(startPosition, startDirection, endPosition, endDirection, curvePointOffset / startToEndPointDistance, SmoothingCurve);
 
-                customLineRenderer.SetPosition(pointIndexToRender, smoothCurvePoint);
+                curveRenderer.SetPosition(pointIndexToRender, smoothCurvePoint);
 
                 pointIndexToRender++;
                 curvePointOffset += DistanceBetweenCurvePoints;
@@ -54,6 +54,6 @@ public class SmoothCurveCalculator : MonoBehaviour
             curvePointOffset -= startToEndPointDistance;
         }
 
-        customLineRenderer.TrimLineToNumberOfPoints(pointIndexToRender-1);
+        curveRenderer.TrimLineToNumberOfPoints(pointIndexToRender-1);
     }
 }

@@ -439,7 +439,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  customLineRenderer: {fileID: 1081202436}
+  curveRenderer: {fileID: 1081202436}
 --- !u!4 &1081202435
 Transform:
   m_ObjectHideFlags: 0

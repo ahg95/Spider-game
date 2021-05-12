@@ -13,6 +13,16 @@ public class CurveRenderer : MonoBehaviour
         renderObjects = new List<GameObject>();
     }
 
+    private void Update()
+    {
+        Render();
+    }
+
+    private void Render()
+    {
+
+    }
+
     public void SetPosition(int linePointIndex, Vector3 position)
     {
         while (renderObjects.Count <= linePointIndex)
