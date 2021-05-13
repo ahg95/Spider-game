@@ -30,9 +30,10 @@ public class CurveRenderer : MonoBehaviour
 
         while (renderPointDistance < linearInterpolationLength)
         {
-            Vector3 curvePoint = curveCalculator.GetCurvePoint(renderPointDistance / linearInterpolationLength);
+            Vector3 curvePoint = curveCalculator.GetCurvePointAtLength(renderPointDistance);
             SetPosition(pointIndex, curvePoint);
             renderPointDistance += DistanceBetweenRenderPoints;
+            pointIndex++;
         }
         TrimLineToNumberOfPoints(pointIndex);
     }
