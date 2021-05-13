@@ -5,55 +5,86 @@ using UnityEngine;
 public class CurveCalculator : MonoBehaviour
 {
     public List<Transform> PointsToFitCurveTo;
-    public float DistanceBetweenCurvePoints;
     public AnimationCurve SmoothingCurve;
-    public CurveRenderer curveRenderer;
+
+    float linearInterpolationLength;
+    bool linearInterpolationLengthIsDirty = true;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
+    public Vector3 GetCurvePoint(float t)
+    {
+        float startPositionDistance;
+        int startPositionIndex = FindStartPositionIndexForInterpolationValue(t, out startPositionDistance);
+
+        Vector3 startPosition = PointsToFitCurveTo[startPositionIndex].position;
+        Vector3 endPosition = PointsToFitCurveTo[startPositionIndex + 1].position;
+
+        Vector3 startDirection;
+        if (startPositionIndex == 0)
+            startDirection = endPosition - startPosition;
+        else
+            startDirection = endPosition - PointsToFitCurveTo[startPositionIndex - 1].position;
+
+        Vector3 endDirection;
+        if (startPositionIndex == PointsToFitCurveTo.Count - 2) // This is true if the endPoint is the position of the last dataPoint
+            endDirection = endPosition - startPosition;
+        else
+            endDirection = PointsToFitCurveTo[startPositionIndex + 2].position - startPosition;
+
+
+        float max = startPositionDistance + (endPosition - startPosition).magnitude;
+        float curveSectionInterpolation = TransformValueFromIntervalToUnitInterval(t, startPositionDistance, max);
+
+        Vector3 curvePoint = Vector3Utility.GetPointOfSmoothCurveConnectingTwoPoints(startPosition, startDirection, endPosition, endDirection, curveSectionInterpolation, SmoothingCurve);
+
+        return curvePoint;
+    }
+
+    private float TransformValueFromIntervalToUnitInterval(float value, float intervalMinimum, float intervalMaximum)
+    {
+        return (value - intervalMinimum) / (intervalMaximum - intervalMinimum);
+    }
+
+    private int FindStartPositionIndexForInterpolationValue(float t, out float startPositionDistance)
+    {
+        t = Mathf.Clamp(t, 0, 1);
+        startPositionDistance = 0;
+        int startPositionIndex = 0;
+
+        while (startPositionDistance / GetLinearInterpolationLength() < t)
+        {
+            startPositionDistance += (PointsToFitCurveTo[startPositionIndex + 1].position - PointsToFitCurveTo[startPositionIndex].position).magnitude;
+            startPositionIndex++;
+        }
+
+        return startPositionIndex;
+    }
 
     private void Update()
     {
-        RenderCurve();
+        linearInterpolationLengthIsDirty = true;
     }
 
-    public void RenderCurve()
+    public float GetLinearInterpolationLength()
     {
-        // The offset from the startPosition of the currently modeled curve section to the point that should be calculated.
-        float curvePointOffset = 0;
-
-        // The index of the next point to render.
-        int pointIndexToRender = 0;
-
-        // We loop until i = dataPoints.Length - 1 because the last dataPoint has already been modeled as the endpoint of the curve
-        for (int i = 0; i < PointsToFitCurveTo.Count - 1; i++)
+        if (linearInterpolationLengthIsDirty)
         {
-            Vector3 startPosition = PointsToFitCurveTo[i].position;
-            Vector3 endPosition = PointsToFitCurveTo[i + 1].position;
-
-            Vector3 startDirection;
-            if (i == 0)
-                startDirection = endPosition - startPosition;
-            else
-                startDirection = endPosition - PointsToFitCurveTo[i - 1].position;
-
-            Vector3 endDirection;
-            if (i == PointsToFitCurveTo.Count - 2) // This is true if the endPoint is the position of the last dataPoint
-                endDirection = endPosition - startPosition;
-            else
-                endDirection = PointsToFitCurveTo[i + 2].position - startPosition;
-
-            float startToEndPointDistance = (endPosition - startPosition).magnitude;
-
-            while (curvePointOffset < startToEndPointDistance)
-            {
-                Vector3 smoothCurvePoint = Vector3Utility.GetPointOfSmoothCurveConnectingTwoPoints(startPosition, startDirection, endPosition, endDirection, curvePointOffset / startToEndPointDistance, SmoothingCurve);
-
-                curveRenderer.SetPosition(pointIndexToRender, smoothCurvePoint);
-
-                pointIndexToRender++;
-                curvePointOffset += DistanceBetweenCurvePoints;
-            }
-            curvePointOffset -= startToEndPointDistance;
+            CalculateLinearInterpolationLength();
         }
 
-        curveRenderer.TrimLineToNumberOfPoints(pointIndexToRender-1);
+        return linearInterpolationLength;
+    }
+
+    private void CalculateLinearInterpolationLength()
+    {
+        linearInterpolationLength = 0;
+        for (int i = 0; i < PointsToFitCurveTo.Count - 1; i++)
+        {
+            linearInterpolationLength += (PointsToFitCurveTo[i + 1].position - PointsToFitCurveTo[i].position).magnitude;
+        }
     }
 }

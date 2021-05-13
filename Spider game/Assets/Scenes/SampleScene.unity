@@ -414,7 +414,6 @@ MonoBehaviour:
   - {fileID: 1327750330}
   - {fileID: 1264908802}
   - {fileID: 1816551948}
-  DistanceBetweenCurvePoints: 1
   SmoothingCurve:
     serializedVersion: 2
     m_Curve:
@@ -439,7 +438,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  curveRenderer: {fileID: 1081202436}
 --- !u!4 &1081202435
 Transform:
   m_ObjectHideFlags: 0
@@ -473,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderObject: {fileID: 3314943985468566668, guid: ed7913d54eae13f46afc149d2bd2f8cd, type: 3}
+  DistanceBetweenRenderPoints: 0.1
 --- !u!4 &1213428895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2454369354277557907, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
