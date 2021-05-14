@@ -22,7 +22,7 @@ public class CurveRenderer : MonoBehaviour
         RenderCurve();
     }
 
-    private void RenderCurve()
+    protected void RenderCurve()
     {
         float linearInterpolationLength = curveCalculator.GetLinearInterpolationLength();
         float renderPointDistance = 0;

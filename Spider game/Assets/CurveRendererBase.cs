@@ -6,33 +6,12 @@ using UnityEngine;
 public abstract class CurveRendererBase : MonoBehaviour
 {
     public float DistanceBetweenRenderPoints;
+    public CurveCalculator curveCalculator;
 
-    CurveCalculator curveCalculator;
-
-    /*
-    private void OnEnable()
-    {
-        curveCalculator = GetComponent<CurveCalculator>();
-    }
-
-    protected void RenderCurve()
-    {
-        float linearInterpolationLength = curveCalculator.GetLinearInterpolationLength();
-        float renderPointDistance = 0;
-        int pointIndex = 0;
-
-        while (renderPointDistance < linearInterpolationLength)
-        {
-            Vector3 curvePoint = curveCalculator.GetCurvePointAtLength(renderPointDistance);
-            SetPosition(pointIndex, curvePoint);
-            renderPointDistance += DistanceBetweenRenderPoints;
-            pointIndex++;
-        }
-        TrimLineToNumberOfPoints(pointIndex);
-    }
-    */
+    protected void 
 
     protected abstract void SetPosition(int linePointIndex, Vector3 position);
 
     protected abstract void TrimLineToNumberOfPoints(int nrOfPoints);
+
 }
