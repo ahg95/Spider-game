@@ -7,8 +7,7 @@ public class ChainLink : ChainLinkHook
 {
     private Joint joint;
 
-    [SerializeField]
-    Transform PositionToLinkToHook;
+    public Transform PositionToLinkToHook;
 
     public Joint GetJoint()
     {

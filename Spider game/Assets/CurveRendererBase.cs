@@ -1,17 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(CurveCalculator))]
 public abstract class CurveRendererBase : MonoBehaviour
 {
-    public float DistanceBetweenRenderPoints;
     public CurveCalculator curveCalculator;
+    [Range(0.1f, 10.0f)]
+    public float DistanceBetweenRenderPoints;
 
-    protected void 
+    private void LateUpdate()
+    {
+        RenderCurve();
+    }
+
+    protected void RenderCurve()
+    {
+        float linearInterpolationLength = curveCalculator.GetLinearInterpolationLength();
+        float renderPointDistance = 0;
+        int pointIndex = 0;
+
+        // Set first point of the curve
+        SetPosition(pointIndex++, curveCalculator.GetCurvePointAtLength(0));
+
+        while (renderPointDistance < linearInterpolationLength)
+        {
+            SetPosition(pointIndex++, curveCalculator.GetCurvePointAtLength(renderPointDistance));
+            renderPointDistance += DistanceBetweenRenderPoints;
+        }
+        // Set end point of the curve
+        SetPosition(pointIndex++, curveCalculator.GetCurvePointAtLength(curveCalculator.GetLinearInterpolationLength()));
+
+        TrimLineToNumberOfPoints(pointIndex);
+    }
+
+
 
     protected abstract void SetPosition(int linePointIndex, Vector3 position);
 
     protected abstract void TrimLineToNumberOfPoints(int nrOfPoints);
+
+
 
 }

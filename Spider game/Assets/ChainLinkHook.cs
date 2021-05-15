@@ -7,8 +7,7 @@ public class ChainLinkHook : MonoBehaviour
 {
     private new Rigidbody rigidbody;
 
-    [SerializeField]
-    Transform PositionToLinkChainLinkTo;
+    public Transform PositionToLinkChainLinkTo;
 
     public Rigidbody GetRigidbody()
     {
