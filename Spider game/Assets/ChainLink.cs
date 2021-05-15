@@ -35,13 +35,9 @@ public class ChainLink : ChainLinkHook
 
     public void AttachToChainLinkHook(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
     {
+        AttachToChainLinkHook(hookToAttachTo);
+
         Vector3 targetDirection = positionToRotateChainLinkTowards - transform.position;
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, targetDirection); // TODO: Generalize from Vector3.up to any configuration of ChainLink
-
-        transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
-
-        GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
-
-        GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
+        transform.rotation = Quaternion.FromToRotation(-transform.up, targetDirection);
     }
 }
