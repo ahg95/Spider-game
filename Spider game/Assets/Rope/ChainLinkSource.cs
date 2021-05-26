@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))] //, typeof(Joint)
+//, typeof(Joint)
 public class ChainLinkSource : MonoBehaviour
 {
     public ChainLinkHook hookToConnectChainLinkTo;
@@ -15,20 +15,13 @@ public class ChainLinkSource : MonoBehaviour
     public float pushOutForceAmount;
 
     private Joint joint;
-    private new Rigidbody rigidbody;
+    private Vector3 positionAfterPreviousFixedUpdate;
 
     private Joint GetJoint()
     {
         if (joint == null)
             joint = GetComponent<Joint>();
         return joint;
-    }
-
-    private Rigidbody GetRigidbody()
-    {
-        if (rigidbody == null)
-            rigidbody = GetComponent<Rigidbody>();
-        return rigidbody;
     }
 
     // Update is called once per frame
@@ -43,7 +36,13 @@ public class ChainLinkSource : MonoBehaviour
             ApplyFrictionToHookToConnectChainLinkTo();
             ApplyPushOutForce();
         }
+
+        UpdatePositionAfterPreviousFixedUpdate();
     }
+
+    private Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
+
+    private void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
 
     public void DisconnectRope()
     {
@@ -81,12 +80,14 @@ public class ChainLinkSource : MonoBehaviour
 
     private void ApplyFrictionToHookToConnectChainLinkTo()
     {
+        // This function has a problem: it shows creeping behavour, meaning that even if the friction is 1, the hookToConnectChainLinkTo still moves slightly.
+
         Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
 
         hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * frictionForceAmount, ForceMode.VelocityChange);
 
         // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetRigidbody().velocity * frictionForceAmount, ForceMode.VelocityChange);
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetMovementSincePreviousFixedUpdate() * frictionForceAmount, ForceMode.VelocityChange);
     }
 
     private void ApplyPushOutForce()
