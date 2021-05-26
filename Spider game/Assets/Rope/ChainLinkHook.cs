@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ChainLinkHook : MonoBehaviour
 {
-    private new Rigidbody rigidbody;
+    protected new Rigidbody rigidbody;
 
     public Transform PositionToLinkChainLinkTo;
 
