@@ -17,24 +17,31 @@ public class ChainLinkSource : MonoBehaviour
     public float maximumPushOutSpeedForForce;
     public float maximumPullInSpeedForForce;
 
-    private Joint joint;
+    public float maximumPushOutSpeed;
+    public float maximumPullInSpeed;
+
+    private SpringJoint joint;
     private Vector3 positionAfterPreviousFixedUpdate;
 
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
+
+        GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
     }
 
-    private Joint GetJoint()
+    private SpringJoint GetSpringJoint()
     {
         if (joint == null)
-            joint = GetComponent<Joint>();
+            joint = GetComponent<SpringJoint>();
         return joint;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        UpdateSpringJointValues();
+
         if (hookToConnectChainLinkTo != null) {
             if (2 <= Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position))
                 SpawnAndAttachChainLinkToHook();
@@ -43,14 +50,24 @@ public class ChainLinkSource : MonoBehaviour
 
             ApplyFrictionToHookToConnectChainLinkTo();
 
-            float currentPushOutSpeed = CalculateCurrentPushOutSpeed();
+            //float currentPushOutSpeed = CalculateCurrentPushOutSpeed();
 
-            if ((0 < pushOutForceAmount && CalculateCurrentPushOutSpeed() < maximumPushOutSpeedForForce)
-                || (pushOutForceAmount < 0 && -CalculateCurrentPushOutSpeed() < maximumPullInSpeedForForce))
+            //if ((0 < pushOutForceAmount && currentPushOutSpeed < maximumPushOutSpeedForForce)
+            //    || (pushOutForceAmount < 0 && -currentPushOutSpeed < maximumPullInSpeedForForce))
                 ApplyPushOutForce();
+
+
         }
 
         UpdatePositionAfterPreviousFixedUpdate();
+    }
+
+    private void UpdateSpringJointValues()
+    {
+        float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+
+        //GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
+        //GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
     }
 
     private Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
@@ -129,5 +146,7 @@ public class ChainLinkSource : MonoBehaviour
         spawnedChainLink.GetComponent<ChainLink>().AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
 
         hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
+
+        GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
     }
 }
