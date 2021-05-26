@@ -10,7 +10,7 @@ public class ChainLinkSource : MonoBehaviour
     public ChainLink chainLinkPrefab;
 
     [Range(0, 1)]
-    public float frictionForceAmount;
+    public float friction;
 
     public float pushOutForceAmount;
 
@@ -26,8 +26,6 @@ public class ChainLinkSource : MonoBehaviour
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
-
-        //GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
     }
 
     private SpringJoint GetSpringJoint()
@@ -110,10 +108,10 @@ public class ChainLinkSource : MonoBehaviour
 
         Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
 
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * frictionForceAmount, ForceMode.VelocityChange);
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
 
         // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * frictionForceAmount, ForceMode.VelocityChange);
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
     }
 
     private void ApplyPushOutForce()
@@ -134,8 +132,6 @@ public class ChainLinkSource : MonoBehaviour
 
         return pushOutSpeed;
     }
-
-
 
     private void SpawnAndAttachChainLinkToHook()
     {
