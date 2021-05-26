@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(SpringJoint))]
 public class ChainLinkSource : MonoBehaviour
 {
     public ChainLinkHook hookToConnectChainLinkTo;
@@ -17,19 +16,11 @@ public class ChainLinkSource : MonoBehaviour
     public float maximumPushOutSpeedForForce;
     public float maximumPullInSpeedForForce;
 
-    private Joint joint;
     private Vector3 positionAfterPreviousFixedUpdate;
 
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
-    }
-
-    private Joint GetJoint()
-    {
-        if (joint == null)
-            joint = GetComponent<Joint>();
-        return joint;
     }
 
     // Update is called once per frame
@@ -43,10 +34,12 @@ public class ChainLinkSource : MonoBehaviour
 
             ApplyFrictionToHookToConnectChainLinkTo();
 
+            /*
             float currentPushOutSpeed = CalculateCurrentPushOutSpeed();
 
-            if ((0 < pushOutForceAmount && CalculateCurrentPushOutSpeed() < maximumPushOutSpeedForForce)
-                || (pushOutForceAmount < 0 && -CalculateCurrentPushOutSpeed() < maximumPullInSpeedForForce))
+            if ((0 < pushOutForceAmount && currentPushOutSpeed < maximumPushOutSpeedForForce)
+                || (pushOutForceAmount < 0 && -currentPushOutSpeed < maximumPullInSpeedForForce))
+                */
                 ApplyPushOutForce();
         }
 
