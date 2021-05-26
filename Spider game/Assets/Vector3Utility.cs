@@ -36,4 +36,14 @@ public static class Vector3Utility
 
         return smoothCurvePoint;
     }
+
+    public static float GetProjectionFactor(Vector3 toProjectOn, Vector3 toBeProjected)
+    {
+        float projectionFactor = toBeProjected.magnitude / Vector3.Project(toProjectOn, toBeProjected).magnitude;
+
+        if (90 < Vector3.Angle(toProjectOn, toBeProjected))
+            projectionFactor *= -1;
+
+        return projectionFactor;
+    }
 }

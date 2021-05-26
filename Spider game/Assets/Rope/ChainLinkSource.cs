@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//, typeof(Joint)
+[RequireComponent(typeof(Rigidbody), typeof(SpringJoint))]
 public class ChainLinkSource : MonoBehaviour
 {
     public ChainLinkHook hookToConnectChainLinkTo;
@@ -14,8 +14,16 @@ public class ChainLinkSource : MonoBehaviour
 
     public float pushOutForceAmount;
 
+    public float maximumPushOutSpeedForForce;
+    public float maximumPullInSpeedForForce;
+
     private Joint joint;
     private Vector3 positionAfterPreviousFixedUpdate;
+
+    private void OnEnable()
+    {
+        positionAfterPreviousFixedUpdate = transform.position;
+    }
 
     private Joint GetJoint()
     {
@@ -34,7 +42,12 @@ public class ChainLinkSource : MonoBehaviour
                 ShortenRopeByOneLink();
 
             ApplyFrictionToHookToConnectChainLinkTo();
-            ApplyPushOutForce();
+
+            float currentPushOutSpeed = CalculateCurrentPushOutSpeed();
+
+            if ((0 < pushOutForceAmount && CalculateCurrentPushOutSpeed() < maximumPushOutSpeedForForce)
+                || (pushOutForceAmount < 0 && -CalculateCurrentPushOutSpeed() < maximumPullInSpeedForForce))
+                ApplyPushOutForce();
         }
 
         UpdatePositionAfterPreviousFixedUpdate();
@@ -87,17 +100,27 @@ public class ChainLinkSource : MonoBehaviour
         hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * frictionForceAmount, ForceMode.VelocityChange);
 
         // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetMovementSincePreviousFixedUpdate() * frictionForceAmount, ForceMode.VelocityChange);
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * frictionForceAmount, ForceMode.VelocityChange);
     }
 
     private void ApplyPushOutForce()
     {
         Vector3 pushOutForceDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
-
         hookToConnectChainLinkTo.GetRigidbody().AddForce(pushOutForceDirection * pushOutForceAmount);
     }
 
+    private Vector3 GetVelocity() => GetMovementSincePreviousFixedUpdate() / Time.fixedDeltaTime;
 
+    private float CalculateCurrentPushOutSpeed()
+    {
+        float pushOutSpeed;
+
+        Vector3 hookDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
+
+        pushOutSpeed = Vector3Utility.GetProjectionFactor(hookDirection, hookToConnectChainLinkTo.GetRigidbody().velocity - GetVelocity());
+
+        return pushOutSpeed;
+    }
 
     private void SpawnAndAttachChainLinkToHook()
     {
