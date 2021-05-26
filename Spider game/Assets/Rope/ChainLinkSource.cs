@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(SpringJoint))]
 public class ChainLinkSource : MonoBehaviour
 {
     public ChainLinkHook hookToConnectChainLinkTo;
@@ -9,18 +10,29 @@ public class ChainLinkSource : MonoBehaviour
     public ChainLink chainLinkPrefab;
 
     [Range(0, 1)]
-    public float frictionForceAmount;
+    public float friction;
 
     public float pushOutForceAmount;
 
     public float maximumPushOutSpeedForForce;
     public float maximumPullInSpeedForForce;
 
+    public float maximumPushOutSpeed;
+    public float maximumPullInSpeed;
+
+    private SpringJoint joint;
     private Vector3 positionAfterPreviousFixedUpdate;
 
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
+    }
+
+    private SpringJoint GetSpringJoint()
+    {
+        if (joint == null)
+            joint = GetComponent<SpringJoint>();
+        return joint;
     }
 
     // Update is called once per frame
@@ -34,16 +46,20 @@ public class ChainLinkSource : MonoBehaviour
 
             ApplyFrictionToHookToConnectChainLinkTo();
 
-            /*
-            float currentPushOutSpeed = CalculateCurrentPushOutSpeed();
-
-            if ((0 < pushOutForceAmount && currentPushOutSpeed < maximumPushOutSpeedForForce)
-                || (pushOutForceAmount < 0 && -currentPushOutSpeed < maximumPullInSpeedForForce))
-                */
-                ApplyPushOutForce();
+            ApplyPushOutForce();
         }
 
+        UpdateSpringJointValues();
+
         UpdatePositionAfterPreviousFixedUpdate();
+    }
+
+    private void UpdateSpringJointValues()
+    {
+        float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+
+        GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
+        GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
     }
 
     private Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
@@ -81,6 +97,8 @@ public class ChainLinkSource : MonoBehaviour
             hookToConnectChainLinkTo = attachedChainLink.AttachedToHook;
 
             Destroy(objectToDestroy);
+
+            ConnectSpringJointTohookToConnectChainLinkTo();
         }
     }
 
@@ -90,10 +108,10 @@ public class ChainLinkSource : MonoBehaviour
 
         Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
 
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * frictionForceAmount, ForceMode.VelocityChange);
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
 
         // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * frictionForceAmount, ForceMode.VelocityChange);
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
     }
 
     private void ApplyPushOutForce()
@@ -122,5 +140,11 @@ public class ChainLinkSource : MonoBehaviour
         spawnedChainLink.GetComponent<ChainLink>().AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
 
         hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
+
+        ConnectSpringJointTohookToConnectChainLinkTo();
     }
+
+
+
+    private void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
 }
