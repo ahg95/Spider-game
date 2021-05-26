@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(Joint))]
+[RequireComponent(typeof(Rigidbody))] //, typeof(Joint)
 public class ChainLinkSource : MonoBehaviour
 {
     public ChainLinkHook hookToConnectChainLinkTo;
@@ -15,6 +15,7 @@ public class ChainLinkSource : MonoBehaviour
     public float pushOutForceAmount;
 
     private Joint joint;
+    private new Rigidbody rigidbody;
 
     private Joint GetJoint()
     {
@@ -23,9 +24,11 @@ public class ChainLinkSource : MonoBehaviour
         return joint;
     }
 
-    private void OnEnable()
+    private Rigidbody GetRigidbody()
     {
-        joint = GetComponent<Joint>();
+        if (rigidbody == null)
+            rigidbody = GetComponent<Rigidbody>();
+        return rigidbody;
     }
 
     // Update is called once per frame
@@ -81,6 +84,9 @@ public class ChainLinkSource : MonoBehaviour
         Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
 
         hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * frictionForceAmount, ForceMode.VelocityChange);
+
+        // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
+        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetRigidbody().velocity * frictionForceAmount, ForceMode.VelocityChange);
     }
 
     private void ApplyPushOutForce()
