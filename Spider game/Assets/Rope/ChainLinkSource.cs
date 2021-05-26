@@ -27,7 +27,7 @@ public class ChainLinkSource : MonoBehaviour
     {
         positionAfterPreviousFixedUpdate = transform.position;
 
-        GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+        //GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
     }
 
     private SpringJoint GetSpringJoint()
@@ -147,6 +147,6 @@ public class ChainLinkSource : MonoBehaviour
 
         hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
 
-        GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+        //GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
     }
 }
