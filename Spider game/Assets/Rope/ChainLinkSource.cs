@@ -40,8 +40,6 @@ public class ChainLinkSource : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdateSpringJointValues();
-
         if (hookToConnectChainLinkTo != null) {
             if (2 <= Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position))
                 SpawnAndAttachChainLinkToHook();
@@ -50,14 +48,10 @@ public class ChainLinkSource : MonoBehaviour
 
             ApplyFrictionToHookToConnectChainLinkTo();
 
-            //float currentPushOutSpeed = CalculateCurrentPushOutSpeed();
-
-            //if ((0 < pushOutForceAmount && currentPushOutSpeed < maximumPushOutSpeedForForce)
-            //    || (pushOutForceAmount < 0 && -currentPushOutSpeed < maximumPullInSpeedForForce))
-                ApplyPushOutForce();
-
-
+            ApplyPushOutForce();
         }
+
+        UpdateSpringJointValues();
 
         UpdatePositionAfterPreviousFixedUpdate();
     }
@@ -66,8 +60,8 @@ public class ChainLinkSource : MonoBehaviour
     {
         float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
 
-        //GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
-        //GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
+        GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
+        GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
     }
 
     private Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
@@ -105,6 +99,8 @@ public class ChainLinkSource : MonoBehaviour
             hookToConnectChainLinkTo = attachedChainLink.AttachedToHook;
 
             Destroy(objectToDestroy);
+
+            ConnectSpringJointTohookToConnectChainLinkTo();
         }
     }
 
@@ -139,6 +135,8 @@ public class ChainLinkSource : MonoBehaviour
         return pushOutSpeed;
     }
 
+
+
     private void SpawnAndAttachChainLinkToHook()
     {
         GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject);
@@ -147,6 +145,10 @@ public class ChainLinkSource : MonoBehaviour
 
         hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
 
-        //GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+        ConnectSpringJointTohookToConnectChainLinkTo();
     }
+
+
+
+    private void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
 }
