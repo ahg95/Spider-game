@@ -11,7 +11,7 @@ public class CurveCalculator : MonoBehaviour
     bool linearInterpolationLengthIsOutdated = true;
 
     /// <summary>
-    /// 
+    /// Returns the point where the smooth curve would end if it was as long as length.
     /// </summary>
     /// <param name="length"></param>
     /// <returns></returns>
@@ -41,31 +41,6 @@ public class CurveCalculator : MonoBehaviour
 
         return curvePoint;
     }
-
-    private float TransformValueFromIntervalToUnitInterval(float value, float intervalMinimum, float intervalMaximum)
-    {
-        return (value - intervalMinimum) / (intervalMaximum - intervalMinimum);
-    }
-
-    /*
-    private int FindStartPositionIndexForInterpolationValue(float t, out float startPositionDistance)
-    {
-        t = Mathf.Clamp(t, 0, 1);
-        startPositionDistance = 0;
-        int startPositionIndex = 0;
-
-        while (startPositionDistance / GetLinearInterpolationLength() < t && startPositionIndex < PointsToFitCurveTo.Count - 2)
-        {
-            startPositionDistance += (PointsToFitCurveTo[startPositionIndex + 1].position - PointsToFitCurveTo[startPositionIndex].position).magnitude;
-            startPositionIndex++;
-        }
-
-        if (startPositionIndex < 0 || PointsToFitCurveTo.Count <= startPositionIndex)
-            Debug.LogWarning("Index out of range");
-
-        return startPositionIndex - 1;
-    }
-    */
 
     private int FindStartPositionIndexForLength(float length, out float lengthAtStartPosition)
     {

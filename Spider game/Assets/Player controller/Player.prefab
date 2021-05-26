@@ -93,12 +93,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae9cee2f111e8ec4eb0a1c107519ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensititvity: 100
+  transformToRotateHorizontally: {fileID: 2454369354277557907}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4c8bb1b5a3f789449f28672beba25bb, type: 3}
   m_Name: 
@@ -114,6 +115,7 @@ MonoBehaviour:
   shooter: {fileID: 1824113508}
   link: {fileID: 3379340417636183183, guid: dcf168df0f4ef364f8170eb941f0b499, type: 3}
   linkToAttachTo: {fileID: 0}
+  calculator: {fileID: 0}
 --- !u!1 &1824113506
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,11 +302,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &6025585511429867172
 MonoBehaviour:

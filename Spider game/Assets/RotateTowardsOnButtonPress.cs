@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyTestScript : MonoBehaviour
+public class RotateTowardsOnButtonPress : MonoBehaviour
 {
     public Transform target;
 
-    // Start is called before the first frame update
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))

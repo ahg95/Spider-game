@@ -5,10 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ChainLinkHook : MonoBehaviour
 {
-    private new Rigidbody rigidbody;
+    protected new Rigidbody rigidbody;
 
-    [SerializeField]
-    Transform PositionToLinkChainLinkTo;
+    public Transform PositionToLinkChainLinkTo;
 
     public Rigidbody GetRigidbody()
     {

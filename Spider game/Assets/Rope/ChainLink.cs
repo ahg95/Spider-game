@@ -7,8 +7,9 @@ public class ChainLink : ChainLinkHook
 {
     private Joint joint;
 
-    [SerializeField]
-    Transform PositionToLinkToHook;
+    public ChainLinkHook AttachedToHook { get; private set; }
+
+    public Transform PositionToLinkToHook;
 
     public Joint GetJoint()
     {
@@ -30,19 +31,18 @@ public class ChainLink : ChainLinkHook
         transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
 
         GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
-
         GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
+
+        AttachedToHook = hookToAttachTo;
     }
 
-    public void AttachToChainLinkHook(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
+    public void AttachToChainLinkHookAndRotateTowards(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
     {
-        Vector3 targetDirection = positionToRotateChainLinkTowards - transform.position;
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, targetDirection); // TODO: Generalize from Vector3.up to any configuration of ChainLink
+        AttachToChainLinkHook(hookToAttachTo);
+
+        Vector3 targetDirection = positionToRotateChainLinkTowards - (hookToAttachTo.transform.position + hookToAttachTo.GetPositionToLinkChainLinkToOffset());
+        transform.rotation = Quaternion.FromToRotation(Vector3.down, targetDirection);
 
         transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
-
-        GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
-
-        GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
     }
 }
