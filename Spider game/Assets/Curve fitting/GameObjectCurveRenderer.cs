@@ -28,4 +28,9 @@ public class GameObjectCurveRenderer : CurveRendererBase
             renderObjects[i].SetActive(false);
         }
     }
+
+    protected override void RenderCurve()
+    {
+        throw new System.NotImplementedException();
+    }
 }

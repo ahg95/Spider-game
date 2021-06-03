@@ -11,10 +11,11 @@ public abstract class CurveRendererBase : MonoBehaviour
 
     private void LateUpdate()
     {
+        CalculateRenderPoints();
         RenderCurve();
     }
 
-    protected void RenderCurve()
+    protected void CalculateRenderPoints()
     {
         float linearInterpolationLength = curveCalculator.GetLinearInterpolationLength();
         float renderPointDistance = 0;
@@ -40,6 +41,5 @@ public abstract class CurveRendererBase : MonoBehaviour
 
     protected abstract void TrimLineToNumberOfPoints(int nrOfPoints);
 
-
-
+    protected abstract void RenderCurve();
 }

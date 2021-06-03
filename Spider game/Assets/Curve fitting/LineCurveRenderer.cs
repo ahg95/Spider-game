@@ -24,4 +24,9 @@ public class LineCurveRenderer : CurveRendererBase
     {
         lineRenderer.positionCount = nrOfPoints;
     }
+
+    protected override void RenderCurve()
+    {
+        // The lineRenderer already renders the curve automatically.
+    }
 }
