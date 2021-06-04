@@ -52,12 +52,15 @@ public class MeshCurveRenderer : CurveRendererBase
             renderPositions.RemoveRange(nrOfPoints, renderPositions.Count - nrOfPoints);
     }
 
-    private void UpdateMeshFilterMeshFromRenderPositions()
+    private void UpdateMeshFromRenderPositions()
     {
         GetMesh().Clear();
 
         GetMesh().vertices = CalculateVertices();
+
         GetMesh().triangles = CalculateTriangles();
+
+        GetMesh().Optimize();
     }
 
     private Vector3[] CalculateVertices()
@@ -66,7 +69,7 @@ public class MeshCurveRenderer : CurveRendererBase
 
         if (1 < renderPositions.Count )
         {
-            vertices.Capacity = CalculateNumberOfVertices();
+            vertices.Capacity = CalculateTotalNumberOfVertices();
 
             // Add the cap at the start of the curve
             vertices.Add(renderPositions[0]);
@@ -92,10 +95,36 @@ public class MeshCurveRenderer : CurveRendererBase
         return vertices.ToArray();
     }
 
-    private int CalculateNumberOfVertices() {
+    private int[] CalculateTriangles()
+    {
+        List<int> triangles = new List<int>();
+
+        triangles.Capacity = CalculateTotalNumberOfTriangles() * 3;
+
+        triangles.AddRange(CalculateTrianglesBetweenRingAndVertex(0, 0, true));
+
+        // Connect all rings with each other
+        for (int i = 0; i < renderPositions.Count - 1; i++)
+            triangles.AddRange(CalculateTrianglesBetweenRings(i, i + 1));
+
+        triangles.AddRange(CalculateTrianglesBetweenRingAndVertex(renderPositions.Count - 1, CalculateTotalNumberOfVertices() - 1, false));
+
+        return triangles.ToArray();
+    }
+
+    private int CalculateTotalNumberOfVertices() {
         // There are renderPositions.Count rings, and each one has NumberOfVerticesPerRing vertices.
         // In addition, there are two vertices for the end caps of the curve.
-        return renderPositions.Count * NumberOfVerticesPerRing +2;
+        return (renderPositions.Count * NumberOfVerticesPerRing + 2);
+    }
+
+    private int CalculateTotalNumberOfTriangles()
+    {
+        // At each end of the rope we have NumberOfVerticesPerRing triangles that connect the first and last ring
+        // with the first and last cap vertex respectively. In addition, each ring segment has
+        // NumberOfVerticesPerRing * 2 triangles, and we have (renderPositions.Count - 1) ring segments. This
+        // Calculation can be simplified to the following term:
+        return (renderPositions.Count * NumberOfVerticesPerRing *2);
     }
 
     private List<Vector3> CalculateVerticesForRingAtPositionInDirection(Vector3 position, Vector3 direction)
@@ -110,78 +139,87 @@ public class MeshCurveRenderer : CurveRendererBase
         {
             ringVertices.Add(position + vertexPositionOffset);
 
-            vertexPositionOffset = Quaternion.AngleAxis(angleOffset, direction) * vertexPositionOffset;
+            vertexPositionOffset = Quaternion.AngleAxis(-angleOffset, direction) * vertexPositionOffset;
         }
 
         return ringVertices;
     }
 
-    private int[] CalculateTriangles()
-    {
-        List<int> triangles = new List<int>();
-
-        // At each end of the rope we have NumberOfVerticesPerRing triangles that connect the first and last ring
-        // with the first and last cap vertex respectively. In addition, each ring segment has
-        // NumberOfVerticesPerRing * 2 triangles, and we have (renderPositions.Count - 1) ring segments. This
-        // Calculation can be simplified to the following term:
-        int numberOfTriangles = renderPositions.Count * NumberOfVerticesPerRing * 2;
-        triangles.Capacity = numberOfTriangles * 3;
-
-        // Connect the first cap vertex with the first ring
-        for (int i = 0; i < NumberOfVerticesPerRing; i++)
-        {
-            triangles.Add(0);
-            triangles.Add(1 + i);
-            triangles.Add(2 + i);
-        }
-
-        // Connect all rings with each other
-        for (int i = 0; i < renderPositions.Count - 1; i++)
-        {
-            triangles.AddRange(CalculateTrianglesForRingSegment(i));
-        }
-
-        int numberOfVertices = CalculateNumberOfVertices();
-
-        // Connect the last cap vertex with the last ring
-        for (int i = 0; i < NumberOfVerticesPerRing; i++)
-        {
-            triangles.Add(numberOfVertices - 1);
-            triangles.Add(numberOfVertices - 2 - i);
-            triangles.Add(numberOfVertices - 3 - i);
-        }
-
-        return triangles.ToArray();
-    }
-
-    private List<int> CalculateTrianglesForRingSegment(int ringSegmentindex)
+    private List<int> CalculateTrianglesBetweenRings(int ringIndexA, int ringIndexB)
     {
         List<int> triangles = new List<int>();
         triangles.Capacity = NumberOfVerticesPerRing * 2 * 3;
 
-        int vertexIndexOffset = 1 + NumberOfVerticesPerRing * ringSegmentindex;
-
         // Calculate all triangles that point towards the second ring
         for (int i = 0; i < NumberOfVerticesPerRing; i++)
         {
-            triangles.Add(vertexIndexOffset + i);
-            triangles.Add(vertexIndexOffset + i + NumberOfVerticesPerRing);
-            triangles.Add(vertexIndexOffset + i + 1);
-        }
+            // Triangle pointing from ring A to ring B
+            triangles.Add(GetIndexOfRingVertexInMesh(ringIndexA, i));
+            triangles.Add(GetIndexOfRingVertexInMesh(ringIndexB, i));
+            triangles.Add(GetIndexOfRingVertexInMesh(ringIndexA, i+1));
 
-        // Calculate all triangles that point towards the first ring
-        for (int i = 0; i < NumberOfVerticesPerRing; i++)
-        {
-            triangles.Add(vertexIndexOffset + NumberOfVerticesPerRing + i);
-            triangles.Add(vertexIndexOffset + NumberOfVerticesPerRing + i + 1);
-            triangles.Add(vertexIndexOffset + i + 1);
+            // Triangle pointing from ring B to ring A
+            triangles.Add(GetIndexOfRingVertexInMesh(ringIndexB, i));
+            triangles.Add(GetIndexOfRingVertexInMesh(ringIndexB, i+1));
+            triangles.Add(GetIndexOfRingVertexInMesh(ringIndexA, i+1));
         }
 
         return triangles;
     }
 
+    private List<int> CalculateTrianglesBetweenRingAndVertex(int ringIndex, int vertexIndex, bool calculateClockwise)
+    {
+        List<int> triangles = new List<int>();
+        triangles.Capacity = NumberOfVerticesPerRing * 3;
+
+        for (int i = 0; i < NumberOfVerticesPerRing; i++)
+        {
+            triangles.Add(vertexIndex);
+
+            if (calculateClockwise)
+            {
+                triangles.Add(GetIndexOfRingVertexInMesh(ringIndex, i));
+                triangles.Add(GetIndexOfRingVertexInMesh(ringIndex, i + 1));
+            } else
+            {
+                triangles.Add(GetIndexOfRingVertexInMesh(ringIndex, i + 1));
+                triangles.Add(GetIndexOfRingVertexInMesh(ringIndex, i));
+            }
+
+        }
+
+        return triangles;
+    }
+
+    /// <summary>
+    /// Given the index of a ring and the index of a vertex in that ring, the function returns the index of that vertex in the vertices array of the mesh. If
+    /// the index of the vertex in that ring is out of bounds then it performs a modulo operation to keep it inside the bounds. Same applies to the ringIndex.
+    /// </summary>
+    /// <param name="ringIndex"> </param>
+    /// <param name="vertexIndex"></param>
+    /// <returns></returns>
+    private int GetIndexOfRingVertexInMesh(int ringIndex, int vertexIndex)
+    {
+        ringIndex %= renderPositions.Count;
+        vertexIndex %= NumberOfVerticesPerRing;
+
+        return (1 + ringIndex * NumberOfVerticesPerRing + vertexIndex);
+    }
+
     protected override void RenderCurve()
     {
-        UpdateMeshFilterMeshFromRenderPositions();
+        UpdateMeshFromRenderPositions();
+    }
+
+    private void PrintTrianglePositionsInConsole()
+    {
+        for (int i = 0; i < GetMesh().triangles.Length / 3; i++)
+        {
+            Vector3 v1 = GetMesh().vertices[GetMesh().triangles[i * 3]];
+            Vector3 v2 = GetMesh().vertices[GetMesh().triangles[i * 3 + 1]];
+            Vector3 v3 = GetMesh().vertices[GetMesh().triangles[i * 3 + 2]];
+
+            Debug.Log(i + ". Triangle: " + v1 + ", " + v2 + ", " + v3);
+        }
     }
 }

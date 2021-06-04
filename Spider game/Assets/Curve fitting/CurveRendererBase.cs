@@ -21,9 +21,6 @@ public abstract class CurveRendererBase : MonoBehaviour
         float renderPointDistance = 0;
         int pointIndex = 0;
 
-        // Set first point of the curve
-        SetPosition(pointIndex++, curveCalculator.GetCurvePointAtLength(0));
-
         while (renderPointDistance < linearInterpolationLength)
         {
             SetPosition(pointIndex++, curveCalculator.GetCurvePointAtLength(renderPointDistance));
@@ -34,8 +31,6 @@ public abstract class CurveRendererBase : MonoBehaviour
 
         TrimLineToNumberOfPoints(pointIndex);
     }
-
-
 
     protected abstract void SetPosition(int linePointIndex, Vector3 position);
 
