@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 175625882}
   - component: {fileID: 175625881}
   - component: {fileID: 175625880}
-  - component: {fileID: 175625879}
   m_Layer: 0
   m_Name: Curve point (2)
   m_TagString: Untagged
@@ -157,18 +156,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &175625879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175625877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &175625880
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -420,7 +407,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  PointsToFitCurveTo: []
+  PointsToFitCurveTo:
+  - {fileID: 617735256}
+  - {fileID: 1189808060}
+  - {fileID: 175625878}
+  - {fileID: 911982004}
+  - {fileID: 1730960462}
+  - {fileID: 315760424}
+  - {fileID: 1650300572}
+  - {fileID: 1183707740}
 --- !u!1 &237551535
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +524,6 @@ GameObject:
   - component: {fileID: 315760428}
   - component: {fileID: 315760427}
   - component: {fileID: 315760426}
-  - component: {fileID: 315760425}
   m_Layer: 0
   m_Name: Curve point (5)
   m_TagString: Untagged
@@ -551,18 +545,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &315760425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315760423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &315760426
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -637,7 +619,6 @@ GameObject:
   - component: {fileID: 617735260}
   - component: {fileID: 617735259}
   - component: {fileID: 617735258}
-  - component: {fileID: 617735257}
   m_Layer: 0
   m_Name: Curve point
   m_TagString: Untagged
@@ -659,18 +640,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &617735257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617735255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &617735258
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -745,7 +714,6 @@ GameObject:
   - component: {fileID: 911982008}
   - component: {fileID: 911982007}
   - component: {fileID: 911982006}
-  - component: {fileID: 911982005}
   m_Layer: 0
   m_Name: Curve point (3)
   m_TagString: Untagged
@@ -767,18 +735,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &911982005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911982003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &911982006
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -936,7 +892,6 @@ GameObject:
   - component: {fileID: 1183707744}
   - component: {fileID: 1183707743}
   - component: {fileID: 1183707742}
-  - component: {fileID: 1183707741}
   m_Layer: 0
   m_Name: Curve point (7)
   m_TagString: Untagged
@@ -958,18 +913,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1183707741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183707739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1183707742
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1044,7 +987,6 @@ GameObject:
   - component: {fileID: 1189808064}
   - component: {fileID: 1189808063}
   - component: {fileID: 1189808062}
-  - component: {fileID: 1189808061}
   m_Layer: 0
   m_Name: Curve point (1)
   m_TagString: Untagged
@@ -1066,18 +1008,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1189808061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189808059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1189808062
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1152,7 +1082,6 @@ GameObject:
   - component: {fileID: 1650300576}
   - component: {fileID: 1650300575}
   - component: {fileID: 1650300574}
-  - component: {fileID: 1650300573}
   m_Layer: 0
   m_Name: Curve point (6)
   m_TagString: Untagged
@@ -1174,18 +1103,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1650300573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650300571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1650300574
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1260,7 +1177,6 @@ GameObject:
   - component: {fileID: 1730960466}
   - component: {fileID: 1730960465}
   - component: {fileID: 1730960464}
-  - component: {fileID: 1730960463}
   m_Layer: 0
   m_Name: Curve point (4)
   m_TagString: Untagged
@@ -1282,18 +1198,6 @@ Transform:
   m_Father: {fileID: 201615963}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1730960463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730960461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f35f97fbba76e44a419695327da55f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1730960464
 SphereCollider:
   m_ObjectHideFlags: 0

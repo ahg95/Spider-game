@@ -6,81 +6,15 @@ public class CurveCalculator : MonoBehaviour
 {
     public AnimationCurve SmoothingCurve;
 
-    List<Transform> PointsToFitCurveTo = new List<Transform>();
+    public List<Transform> PointsToFitCurveTo = new List<Transform>();
     float linearInterpolationLength;
     bool linearInterpolationLengthIsOutdated = true;
 
-    Vector3 GetPointToFitCurveTo(int index)
-    {
-        return PointsToFitCurveTo[index].position;
-    }
+    public void AddCurvePoint(Transform curvePoint) => PointsToFitCurveTo.Add(curvePoint);
 
-    /// <summary>
-    /// Returns the point where the smooth curve would end if it was as long as length.
-    /// </summary>
-    /// <param name="length"></param>
-    /// <returns></returns>
-    public Vector3 GetCurvePointAtLength(float length)
-    {
-        float lengthAtStartPosition;
-        int startPositionIndex = FindStartPositionIndexForLength(length, out lengthAtStartPosition);
+    public void RemoveCurvePoint(Transform curvePoint) => PointsToFitCurveTo.Remove(curvePoint);
 
-        Vector3 startPosition = PointsToFitCurveTo[startPositionIndex].position;
-        Vector3 endPosition = PointsToFitCurveTo[startPositionIndex + 1].position;
-
-        Vector3 startDirection;
-        if (startPositionIndex == 0)
-            startDirection = endPosition - startPosition;
-        else
-            startDirection = endPosition - PointsToFitCurveTo[startPositionIndex - 1].position;
-
-        Vector3 endDirection;
-        if (startPositionIndex + 1 == PointsToFitCurveTo.Count - 1) // This is true if the endPoint is the position of the last dataPoint
-            endDirection = endPosition - startPosition;
-        else
-            endDirection = PointsToFitCurveTo[startPositionIndex + 2].position - startPosition;
-
-        float t = (length - lengthAtStartPosition) / (PointsToFitCurveTo[startPositionIndex + 1].position - PointsToFitCurveTo[startPositionIndex].position).magnitude;
-
-        Vector3 curvePoint = Vector3Utility.GetPointOfSmoothCurveConnectingTwoPoints(startPosition, startDirection, endPosition, endDirection, t, SmoothingCurve);
-
-        return curvePoint;
-    }
-
-    Vector3 GetCurvePointBetweenTwoPoints(Vector3 aPos, Vector3 aDir, Vector3 bPos, Vector3 bDir, float distance)
-    {
-        distance = Mathf.Clamp(distance, 0, Vector3.Distance(aPos, bPos));
-
-        Vector3 aExtrapolationPoint = aPos + aDir * distance;
-        Vector3 bExtrapolationPoint = bPos - bDir * (Vector3.Distance(aPos, bPos) - distance);
-
-        float interpolationValue = SmoothingCurve.Evaluate(distance / Vector3.Distance(aPos, bPos));
-
-        return Vector3.Lerp(aExtrapolationPoint, bExtrapolationPoint, interpolationValue);
-    }
-
-    int FindStartPositionIndexForLength(float length, out float lengthAtStartPosition)
-    {
-        if (GetLinearInterpolationLength() < length)
-            length = GetLinearInterpolationLength();
-
-        int endPositionIndex = 0;
-        float lengthAtEndPosition = 0;
-
-        do
-        {
-            lengthAtStartPosition = lengthAtEndPosition;
-            endPositionIndex++;
-            lengthAtEndPosition += (PointsToFitCurveTo[endPositionIndex].position - PointsToFitCurveTo[endPositionIndex - 1].position).magnitude;
-        } while (lengthAtEndPosition < length);
-
-        return endPositionIndex - 1;
-    }
-
-    void Update()
-    {
-        linearInterpolationLengthIsOutdated = true;
-    }
+    public int GetNumberOfCurvePoints() => PointsToFitCurveTo.Count;
 
     public float GetLinearInterpolationLength()
     {
@@ -99,13 +33,93 @@ public class CurveCalculator : MonoBehaviour
         }
     }
 
-    public void AddCurvePoint(Transform curvePoint)
+
+    /// <summary>
+    /// Returns the point where the smooth curve would end if it was as long as length.
+    /// </summary>
+    /// <param name="length"></param>
+    /// <returns></returns>
+    public Vector3 GetCurvePointAtLength(float length)
     {
-        PointsToFitCurveTo.Add(curvePoint);
+        Vector3 desiredCurvePoint;
+
+        if (GetNumberOfCurvePoints() == 0)
+            desiredCurvePoint = Vector3.zero;
+        else if (GetNumberOfCurvePoints() == 1)
+            desiredCurvePoint = GetPointToFitCurveTo(0);
+        else
+            desiredCurvePoint = CalculateCurvePoint(length);
+
+        return desiredCurvePoint;
     }
 
-    public void RemoveCurvePoint(Transform curvePoint)
+    Vector3 GetPointToFitCurveTo(int index) => PointsToFitCurveTo[index].position;
+
+    Vector3 CalculateCurvePoint(float length)
     {
-        PointsToFitCurveTo.Remove(curvePoint);
+        Vector3 pointToCalculate = Vector3.zero;
+
+        float sumOfDistancesBetweenCurvePoints = 0;
+
+        for (int i = 0; i < GetNumberOfCurvePoints() - 1; i++)
+        {
+            float distance = Vector3.Distance(GetPointToFitCurveTo(i), GetPointToFitCurveTo(i + 1));
+
+            sumOfDistancesBetweenCurvePoints += distance;
+
+            if (length < sumOfDistancesBetweenCurvePoints)
+            {
+                Vector3 aPos = GetPointToFitCurveTo(i);
+                Vector3 aDir = CalculateCurvePointDirectionForIndex(i);
+
+                Vector3 bPos = GetPointToFitCurveTo(i + 1);
+                Vector3 bDir = GetPointToFitCurveTo(i + 1);
+
+                GetCurvePointBetweenTwoPoints(aPos, aDir, bPos, bDir, sumOfDistancesBetweenCurvePoints - distance + length);
+                break;
+            }
+            // If i is the index of the second to last curve point to fit
+            else if (i == GetNumberOfCurvePoints() - 2)
+                pointToCalculate = GetPointToFitCurveTo(i + 1);
+        }
+
+        return pointToCalculate;
+    }
+
+
+    Vector3 CalculateCurvePointDirectionForIndex(int index)
+    {
+        Vector3 direction = Vector3.zero;
+
+        if (1 < GetNumberOfCurvePoints() && 0 <= index && index < GetNumberOfCurvePoints())
+        {
+            if (index == 0)
+                direction = GetPointToFitCurveTo(1) - GetPointToFitCurveTo(0);
+            else if (index == GetNumberOfCurvePoints() - 1)
+                direction = GetPointToFitCurveTo(GetNumberOfCurvePoints() - 1) - GetPointToFitCurveTo(GetNumberOfCurvePoints() - 2);
+            else
+                direction = GetPointToFitCurveTo(index + 1) - GetPointToFitCurveTo(index - 1);
+        }
+        else
+            Debug.LogError("Index out of range.");
+
+        return direction.normalized;
+    }
+
+    Vector3 GetCurvePointBetweenTwoPoints(Vector3 aPos, Vector3 aDir, Vector3 bPos, Vector3 bDir, float distance)
+    {
+        distance = Mathf.Clamp(distance, 0, Vector3.Distance(aPos, bPos));
+
+        Vector3 aExtrapolationPoint = aPos + aDir * distance;
+        Vector3 bExtrapolationPoint = bPos - bDir * (Vector3.Distance(aPos, bPos) - distance);
+
+        float interpolationValue = SmoothingCurve.Evaluate(distance / Vector3.Distance(aPos, bPos));
+
+        return Vector3.Lerp(aExtrapolationPoint, bExtrapolationPoint, interpolationValue);
+    }
+
+    void FixedUpdate()
+    {
+        linearInterpolationLengthIsOutdated = true;
     }
 }
