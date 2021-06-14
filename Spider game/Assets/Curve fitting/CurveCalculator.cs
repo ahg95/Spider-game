@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CurveCalculator : MonoBehaviour
 {
-    public List<Transform> PointsToFitCurveTo;
     public AnimationCurve SmoothingCurve;
 
+    List<Transform> PointsToFitCurveTo = new List<Transform>();
     float linearInterpolationLength;
     bool linearInterpolationLengthIsOutdated = true;
+
+    Vector3 GetPointToFitCurveTo(int index)
+    {
+        return PointsToFitCurveTo[index].position;
+    }
 
     /// <summary>
     /// Returns the point where the smooth curve would end if it was as long as length.
@@ -42,7 +47,19 @@ public class CurveCalculator : MonoBehaviour
         return curvePoint;
     }
 
-    private int FindStartPositionIndexForLength(float length, out float lengthAtStartPosition)
+    Vector3 GetCurvePointBetweenTwoPoints(Vector3 aPos, Vector3 aDir, Vector3 bPos, Vector3 bDir, float distance)
+    {
+        distance = Mathf.Clamp(distance, 0, Vector3.Distance(aPos, bPos));
+
+        Vector3 aExtrapolationPoint = aPos + aDir * distance;
+        Vector3 bExtrapolationPoint = bPos - bDir * (Vector3.Distance(aPos, bPos) - distance);
+
+        float interpolationValue = SmoothingCurve.Evaluate(distance / Vector3.Distance(aPos, bPos));
+
+        return Vector3.Lerp(aExtrapolationPoint, bExtrapolationPoint, interpolationValue);
+    }
+
+    int FindStartPositionIndexForLength(float length, out float lengthAtStartPosition)
     {
         if (GetLinearInterpolationLength() < length)
             length = GetLinearInterpolationLength();
@@ -60,7 +77,7 @@ public class CurveCalculator : MonoBehaviour
         return endPositionIndex - 1;
     }
 
-    private void Update()
+    void Update()
     {
         linearInterpolationLengthIsOutdated = true;
     }
@@ -73,12 +90,22 @@ public class CurveCalculator : MonoBehaviour
         return linearInterpolationLength;
     }
 
-    private void CalculateLinearInterpolationLength()
+    void CalculateLinearInterpolationLength()
     {
         linearInterpolationLength = 0;
         for (int i = 0; i < PointsToFitCurveTo.Count - 1; i++)
         {
             linearInterpolationLength += (PointsToFitCurveTo[i + 1].position - PointsToFitCurveTo[i].position).magnitude;
         }
+    }
+
+    public void AddCurvePoint(Transform curvePoint)
+    {
+        PointsToFitCurveTo.Add(curvePoint);
+    }
+
+    public void RemoveCurvePoint(Transform curvePoint)
+    {
+        PointsToFitCurveTo.Remove(curvePoint);
     }
 }

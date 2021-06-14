@@ -135,7 +135,7 @@ public class ChainLinkSource : MonoBehaviour
 
     private void SpawnAndAttachChainLinkToHook()
     {
-        GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject);
+        GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, transform);
 
         spawnedChainLink.GetComponent<ChainLink>().AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
 
