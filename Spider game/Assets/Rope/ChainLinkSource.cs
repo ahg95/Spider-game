@@ -132,8 +132,6 @@ public class ChainLinkSource : MonoBehaviour
 
     private void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
 
-
-
     private void OnValidate()
     {
         ValidateSpringJointValues();
@@ -141,8 +139,24 @@ public class ChainLinkSource : MonoBehaviour
 
     private void ValidateSpringJointValues()
     {
-        if (GetSpringJoint().spring < float.MaxValue * 0.9)
-            Debug.LogWarning("The spring SpringJoint of a ChainLinkSource has a spring value that is lower that the maximum possible value. This can lead to unexpected behaviour for the maximumPushOutSpeed and maximumPullInSpeed variables.");
+        // The spring value of a SpringJoint determines how strong it is. If the spring is not strong enough, the length of the rope cannot be locked securely.
+        if (GetSpringJoint().spring < float.MaxValue * 0.99) // I use a factor of 99% here because else the if clause would still be entered even if the spring value was equal to "float.MaxValue"
+            Debug.LogWarning("The SpringJoint of a ChainLinkSource has a spring value that is lower that the maximum possible value. This can lead to unexpected behaviour for the maximumPushOutSpeed and maximumPullInSpeed variables.");
+
+        if (GetSpringJoint().damper != 0)
+            Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
+
+        if (0.00000000000000001 < GetSpringJoint().tolerance)
+            Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
+
+        if (GetSpringJoint().autoConfigureConnectedAnchor != false)
+            Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
+
+        if (GetSpringJoint().anchor != Vector3.zero)
+            Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
+
+        if (GetSpringJoint().connectedAnchor != Vector3.zero)
+            Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
     }
 
     private void Reset()
@@ -156,5 +170,7 @@ public class ChainLinkSource : MonoBehaviour
         GetSpringJoint().damper = 0;
         GetSpringJoint().tolerance = 0;
         GetSpringJoint().autoConfigureConnectedAnchor = false;
+        GetSpringJoint().anchor = Vector3.zero;
+        GetSpringJoint().connectedAnchor = Vector3.zero;
     }
 }

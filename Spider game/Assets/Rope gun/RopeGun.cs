@@ -6,7 +6,7 @@ public class RopeGun : MonoBehaviour
 {
     public float GrappleShootingForce;
     public ChainLinkSource chainLinkSource;
-    public Rigidbody grappler;
+    public RopeGunGrappler grappler;
     public Transform shootingDirection;
 
     RopeGunState gunState;
@@ -53,6 +53,7 @@ public class RopeGun : MonoBehaviour
         gunState = RopeGunState.loaded;
         chainLinkSource.maximumPullInSpeed = 0;
         chainLinkSource.maximumPushOutSpeed = 0;
+        grappler.DisableConnectionOnContact();
     }
 
     void SwitchToGrappleInAirState()
@@ -60,6 +61,7 @@ public class RopeGun : MonoBehaviour
         gunState = RopeGunState.grappleInAir;
         chainLinkSource.maximumPullInSpeed = Mathf.Infinity;
         chainLinkSource.maximumPushOutSpeed = Mathf.Infinity;
+        grappler.EnableConnectionOnContact();
     }
 
     void SwitchToGrappleConnectedState()
@@ -71,7 +73,7 @@ public class RopeGun : MonoBehaviour
 
     private void ShootGrappler()
     {
-        grappler.AddForce(shootingDirection.forward * GrappleShootingForce, ForceMode.VelocityChange);
+        grappler.GetRigidbody()?.AddForce(shootingDirection.forward * GrappleShootingForce, ForceMode.VelocityChange);
     }
 
     public void OnGrappleConnected()

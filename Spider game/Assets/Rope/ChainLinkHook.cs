@@ -9,6 +9,12 @@ public class ChainLinkHook : MonoBehaviour
 
     public Transform PositionToLinkChainLinkTo;
 
+    private void Enable()
+    {
+        if (PositionToLinkChainLinkTo == null)
+            PositionToLinkChainLinkTo = transform;
+    }
+
     public Rigidbody GetRigidbody()
     {
         if (rigidbody == null)

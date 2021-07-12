@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -123,13 +123,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1824113507}
   - component: {fileID: 1824113508}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ProjectileShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1824113507
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 729994906096328846}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ground check origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 64355146124623536}
   - component: {fileID: 2585736452109968280}
   - component: {fileID: 6025585511429867172}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

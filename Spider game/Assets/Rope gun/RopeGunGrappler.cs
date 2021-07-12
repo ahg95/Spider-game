@@ -9,10 +9,32 @@ public class RopeGunGrappler : MonoBehaviour
 
     bool isConnectedToSomeGameObject = false;
 
+    bool connectionOnContactEnabled = false;
+
+    new Rigidbody rigidbody;
+
+    public void EnableConnectionOnContact()
+    {
+        connectionOnContactEnabled = true;
+    }
+
+    public void DisableConnectionOnContact()
+    {
+        connectionOnContactEnabled = false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (!IsConnectedToSomeGameObject())
+        if (!IsConnectedToSomeGameObject() && connectionOnContactEnabled)
             ConnectToGameObject(collision.gameObject);
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        if (!rigidbody)
+            rigidbody = GetComponent<Rigidbody>();
+
+        return rigidbody;
     }
 
     void ConnectToGameObject(GameObject gameObjectToConnectTo)
