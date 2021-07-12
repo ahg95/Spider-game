@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RopeGun : MonoBehaviour
 {
-    public float GrappleShootingForce;
+    public float shootingForce;
+    public Transform muzzle;
     public ChainLinkSource chainLinkSource;
-    public Rigidbody grappler;
-    public Transform shootingDirection;
+    public Sticky projectilePrefab;
+    public Sticky projectile;
 
     RopeGunState gunState;
 
@@ -39,10 +40,9 @@ public class RopeGun : MonoBehaviour
 
     public void PressReloadButton()
     {
-
+        projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+        chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
     }
-
-
 
     void SwitchToState(RopeGunState state)
     {
@@ -65,7 +65,7 @@ public class RopeGun : MonoBehaviour
         gunState = RopeGunState.loaded;
         chainLinkSource.maximumPullInSpeed = 0;
         chainLinkSource.maximumPushOutSpeed = 0;
-        grappler.DisableStickiness();
+        projectile.DisableStickiness();
     }
 
     void SwitchToGrappleInAirState()
@@ -73,7 +73,7 @@ public class RopeGun : MonoBehaviour
         gunState = RopeGunState.grappleInAir;
         chainLinkSource.maximumPullInSpeed = Mathf.Infinity;
         chainLinkSource.maximumPushOutSpeed = Mathf.Infinity;
-        grappler.EnableStickiness();
+        projectile.EnableStickiness();
     }
 
     void SwitchToGrappleConnectedState()
@@ -85,7 +85,7 @@ public class RopeGun : MonoBehaviour
 
     private void ShootGrappler()
     {
-        grappler.GetRigidbody()?.AddForce(shootingDirection.forward * GrappleShootingForce, ForceMode.VelocityChange);
+        projectile.GetRigidbody()?.AddForce(muzzle.forward * shootingForce, ForceMode.VelocityChange);
     }
 
     public void OnGrappleConnected()

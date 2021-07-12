@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UnityEngine.Rigidbody), typeof(SpringJoint))]
+[RequireComponent(typeof(Rigidbody), typeof(SpringJoint))]
 public class ChainLinkSource : MonoBehaviour
 {
-    public ChainLinkHook hookToConnectChainLinkTo;
+    [SerializeField]
+    ChainLinkHook hookToConnectChainLinkTo;
 
     public ChainLink chainLinkPrefab;
 
@@ -23,17 +24,17 @@ public class ChainLinkSource : MonoBehaviour
     SpringJoint joint;
     Vector3 positionAfterPreviousFixedUpdate;
 
-    private void OnEnable()
-    {
-        positionAfterPreviousFixedUpdate = transform.position;
-        ConnectSpringJointTohookToConnectChainLinkTo();
-    }
-
     private SpringJoint GetSpringJoint()
     {
         if (joint == null)
             joint = GetComponent<SpringJoint>();
         return joint;
+    }
+
+    private void OnEnable()
+    {
+        positionAfterPreviousFixedUpdate = transform.position;
+        ConnectSpringJointTohookToConnectChainLinkTo();
     }
 
     // Update is called once per frame
@@ -55,24 +56,24 @@ public class ChainLinkSource : MonoBehaviour
         UpdatePositionAfterPreviousFixedUpdate();
     }
 
-    private void UpdateSpringJointValues()
+    public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
     {
-        float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+        hookToConnectChainLinkTo = hook;
 
-        GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
-        GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
     }
 
-    private Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
-
-    private void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
-
-    public void DisconnectRope()
+    void SpawnAndAttachChainLinkToHook()
     {
-        hookToConnectChainLinkTo = null;
+        GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);
+
+        spawnedChainLink.GetComponent<ChainLink>().AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
+
+        hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
+
+        ConnectSpringJointTohookToConnectChainLinkTo();
     }
 
-    private void ShortenRopeByOneLink()
+    void ShortenRopeByOneLink()
     {
         GameObject objectToDestroy = hookToConnectChainLinkTo.gameObject;
 
@@ -88,10 +89,9 @@ public class ChainLinkSource : MonoBehaviour
         }
     }
 
-    private void ApplyFrictionToHookToConnectChainLinkTo()
+    void ApplyFrictionToHookToConnectChainLinkTo()
     {
         // This function has a problem: it shows creeping behavour, meaning that even if the friction is 1, the hookToConnectChainLinkTo still moves slightly.
-
         Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
 
         hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
@@ -100,15 +100,29 @@ public class ChainLinkSource : MonoBehaviour
         hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
     }
 
-    private void ApplyPushOutForce()
+    void ApplyPushOutForce()
     {
         Vector3 pushOutForceDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
         hookToConnectChainLinkTo.GetRigidbody().AddForce(pushOutForceDirection * pushOutForceAmount);
     }
 
-    private Vector3 GetVelocity() => GetMovementSincePreviousFixedUpdate() / Time.fixedDeltaTime;
+    void UpdateSpringJointValues()
+    {
+        float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
 
-    private float CalculateCurrentPushOutSpeed()
+        GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
+        GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
+    }
+
+    void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+
+    Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
+
+    void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
+
+    Vector3 GetVelocity() => GetMovementSincePreviousFixedUpdate() / Time.fixedDeltaTime;
+
+    float CalculateCurrentPushOutSpeed()
     {
         float pushOutSpeed;
 
@@ -119,25 +133,14 @@ public class ChainLinkSource : MonoBehaviour
         return pushOutSpeed;
     }
 
-    private void SpawnAndAttachChainLinkToHook()
-    {
-        GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);
 
-        spawnedChainLink.GetComponent<ChainLink>().AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
-
-        hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
-
-        ConnectSpringJointTohookToConnectChainLinkTo();
-    }
-
-    private void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
 
     private void OnValidate()
     {
         ValidateSpringJointValues();
     }
 
-    private void ValidateSpringJointValues()
+    void ValidateSpringJointValues()
     {
         // The spring value of a SpringJoint determines how strong it is. If the spring is not strong enough, the length of the rope cannot be locked securely.
         if (GetSpringJoint().spring < float.MaxValue * 0.99) // I use a factor of 99% here because else the if clause would still be entered even if the spring value was equal to "float.MaxValue"
@@ -164,7 +167,7 @@ public class ChainLinkSource : MonoBehaviour
         ConfigureSpringJointValues();
     }
 
-    private void ConfigureSpringJointValues()
+    void ConfigureSpringJointValues()
     {
         GetSpringJoint().spring = float.MaxValue;
         GetSpringJoint().damper = 0;
