@@ -42,6 +42,8 @@ public class RopeGun : MonoBehaviour
     {
         projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
         chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+
+        SwitchToState(RopeGunState.loaded);
     }
 
     void SwitchToState(RopeGunState state)

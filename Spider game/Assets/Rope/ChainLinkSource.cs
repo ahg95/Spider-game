@@ -59,7 +59,7 @@ public class ChainLinkSource : MonoBehaviour
     public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
     {
         hookToConnectChainLinkTo = hook;
-
+        ConnectSpringJointTohookToConnectChainLinkTo();
     }
 
     void SpawnAndAttachChainLinkToHook()
