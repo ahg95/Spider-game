@@ -49,10 +49,13 @@ public class Sticky : MonoBehaviour
 
     bool IsStickingToSomething() => isStickingToSomething;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (!IsStickingToSomething() && StickinessIsEnabled())
+        {
             StickTo(collision.gameObject);
+            Debug.Log("Started sticking");
+        }
     }
 
     void StickTo(GameObject gameObjectToStickTo)
