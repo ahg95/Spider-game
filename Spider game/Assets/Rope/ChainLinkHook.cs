@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(UnityEngine.Rigidbody))]
 public class ChainLinkHook : MonoBehaviour
 {
-    protected new Rigidbody rigidbody;
+    protected new UnityEngine.Rigidbody rigidbody;
 
     public Transform PositionToLinkChainLinkTo;
 
@@ -15,10 +15,10 @@ public class ChainLinkHook : MonoBehaviour
             PositionToLinkChainLinkTo = transform;
     }
 
-    public Rigidbody GetRigidbody()
+    public UnityEngine.Rigidbody GetRigidbody()
     {
         if (rigidbody == null)
-            rigidbody = GetComponent<Rigidbody>();
+            rigidbody = GetComponent<UnityEngine.Rigidbody>();
         return rigidbody;
     }
 

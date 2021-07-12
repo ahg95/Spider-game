@@ -6,7 +6,7 @@ public class RopeGun : MonoBehaviour
 {
     public float GrappleShootingForce;
     public ChainLinkSource chainLinkSource;
-    public RopeGunGrappler grappler;
+    public Rigidbody grappler;
     public Transform shootingDirection;
 
     RopeGunState gunState;
@@ -32,6 +32,18 @@ public class RopeGun : MonoBehaviour
         }
     }
 
+    public void StopPressingTrigger()
+    {
+
+    }
+
+    public void PressReloadButton()
+    {
+
+    }
+
+
+
     void SwitchToState(RopeGunState state)
     {
         switch(state)
@@ -53,7 +65,7 @@ public class RopeGun : MonoBehaviour
         gunState = RopeGunState.loaded;
         chainLinkSource.maximumPullInSpeed = 0;
         chainLinkSource.maximumPushOutSpeed = 0;
-        grappler.DisableConnectionOnContact();
+        grappler.DisableStickiness();
     }
 
     void SwitchToGrappleInAirState()
@@ -61,7 +73,7 @@ public class RopeGun : MonoBehaviour
         gunState = RopeGunState.grappleInAir;
         chainLinkSource.maximumPullInSpeed = Mathf.Infinity;
         chainLinkSource.maximumPushOutSpeed = Mathf.Infinity;
-        grappler.EnableConnectionOnContact();
+        grappler.EnableStickiness();
     }
 
     void SwitchToGrappleConnectedState()

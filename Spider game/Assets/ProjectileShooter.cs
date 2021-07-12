@@ -50,7 +50,7 @@ public class ProjectileShooter : MonoBehaviour
 
     private void AccelerateProjectile(GameObject projectile)
     {
-        Rigidbody rigidbody = projectile.GetComponent<Rigidbody>();
+        UnityEngine.Rigidbody rigidbody = projectile.GetComponent<UnityEngine.Rigidbody>();
 
         rigidbody?.AddForce(transform.forward * projectileAccelerationForce);
     }
