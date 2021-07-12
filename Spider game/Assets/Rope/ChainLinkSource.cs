@@ -20,15 +20,14 @@ public class ChainLinkSource : MonoBehaviour
     public float maximumPushOutSpeed;
     public float maximumPullInSpeed;
 
-    private SpringJoint joint;
-    private Vector3 positionAfterPreviousFixedUpdate;
+    SpringJoint joint;
+    Vector3 positionAfterPreviousFixedUpdate;
 
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
         ConnectSpringJointTohookToConnectChainLinkTo();
     }
-
 
     private SpringJoint GetSpringJoint()
     {
