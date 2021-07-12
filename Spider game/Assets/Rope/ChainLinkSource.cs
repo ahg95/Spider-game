@@ -72,21 +72,6 @@ public class ChainLinkSource : MonoBehaviour
         hookToConnectChainLinkTo = null;
     }
 
-    public void LockRopePullOut()
-    {
-
-    }
-
-    public void UnlockRopePullOut()
-    {
-
-    }
-
-    public void LockRopePullIn()
-    {
-
-    }
-
     private void ShortenRopeByOneLink()
     {
         GameObject objectToDestroy = hookToConnectChainLinkTo.gameObject;

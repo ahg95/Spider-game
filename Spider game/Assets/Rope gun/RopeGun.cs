@@ -7,6 +7,7 @@ public class RopeGun : MonoBehaviour
     public float GrappleShootingForce;
     public ChainLinkSource chainLinkSource;
     public Rigidbody grappler;
+    public Transform shootingDirection;
 
     RopeGunState gunState;
 
@@ -70,7 +71,7 @@ public class RopeGun : MonoBehaviour
 
     private void ShootGrappler()
     {
-        grappler.AddForce(Vector3.forward * GrappleShootingForce, ForceMode.VelocityChange);
+        grappler.AddForce(shootingDirection.forward * GrappleShootingForce, ForceMode.VelocityChange);
     }
 
     public void OnGrappleConnected()

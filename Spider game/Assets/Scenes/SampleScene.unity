@@ -254,10 +254,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hookToConnectChainLinkTo: {fileID: 1664940517}
   chainLinkPrefab: {fileID: 3379340417636183183, guid: dcf168df0f4ef364f8170eb941f0b499, type: 3}
+  chainLinkParent: {fileID: 0}
   friction: 0
   pushOutForceAmount: 0
-  maximumPushOutSpeed: 1
-  maximumPullInSpeed: 1
+  maximumPushOutSpeed: 0
+  maximumPullInSpeed: 0
 --- !u!4 &1613152444
 Transform:
   m_ObjectHideFlags: 0

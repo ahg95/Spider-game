@@ -7,18 +7,12 @@ public class RopeGunGrappler : MonoBehaviour
 {
     public GameEvent grapplerConnectedWithSomething;
 
-    private void OnValidate()
-    {
-        if (gameObject.layer != 10)
-            Debug.LogWarning("A gameObject with the script RopeGunGrappler is not on the layer 'Grapple'");
-    }
-
     bool isConnectedToSomeGameObject = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        ConnectToGameObject(collision.gameObject);
-        //Debug.Log("collided");
+        if (!IsConnectedToSomeGameObject())
+            ConnectToGameObject(collision.gameObject);
     }
 
     void ConnectToGameObject(GameObject gameObjectToConnectTo)
@@ -40,5 +34,11 @@ public class RopeGunGrappler : MonoBehaviour
     bool IsConnectedToSomeGameObject()
     {
         return isConnectedToSomeGameObject;
+    }
+
+    private void OnValidate()
+    {
+        if (gameObject.layer != 10)
+            Debug.LogWarning("A gameObject with the script RopeGunGrappler is not on the layer 'Grapple'");
     }
 }
