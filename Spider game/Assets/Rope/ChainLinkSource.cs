@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,12 @@ public class ChainLinkSource : MonoBehaviour
 
     public ChainLink chainLinkPrefab;
 
+    public Transform chainLinkParent;
+
     [Range(0, 1)]
     public float friction;
 
     public float pushOutForceAmount;
-
-    public float maximumPushOutSpeedForForce;
-    public float maximumPullInSpeedForForce;
 
     public float maximumPushOutSpeed;
     public float maximumPullInSpeed;
@@ -26,7 +26,9 @@ public class ChainLinkSource : MonoBehaviour
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
+        ConnectSpringJointTohookToConnectChainLinkTo();
     }
+
 
     private SpringJoint GetSpringJoint()
     {
@@ -135,7 +137,7 @@ public class ChainLinkSource : MonoBehaviour
 
     private void SpawnAndAttachChainLinkToHook()
     {
-        GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, transform);
+        GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);
 
         spawnedChainLink.GetComponent<ChainLink>().AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
 
@@ -144,7 +146,31 @@ public class ChainLinkSource : MonoBehaviour
         ConnectSpringJointTohookToConnectChainLinkTo();
     }
 
-
-
     private void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+
+
+
+    private void OnValidate()
+    {
+        ValidateSpringJointValues();
+    }
+
+    private void ValidateSpringJointValues()
+    {
+        if (GetSpringJoint().spring < float.MaxValue * 0.9)
+            Debug.LogWarning("The spring SpringJoint of a ChainLinkSource has a spring value that is lower that the maximum possible value. This can lead to unexpected behaviour for the maximumPushOutSpeed and maximumPullInSpeed variables.");
+    }
+
+    private void Reset()
+    {
+        ConfigureSpringJointValues();
+    }
+
+    private void ConfigureSpringJointValues()
+    {
+        GetSpringJoint().spring = float.MaxValue;
+        GetSpringJoint().damper = 0;
+        GetSpringJoint().tolerance = 0;
+        GetSpringJoint().autoConfigureConnectedAnchor = false;
+    }
 }

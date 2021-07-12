@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9cee2f111e8ec4eb0a1c107519ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensititvity: 100
+  mouseSensititvity: 1000
   transformToRotateHorizontally: {fileID: 2454369354277557907}
 --- !u!114 &963194230
 MonoBehaviour:
@@ -113,9 +113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 1824113508}
-  link: {fileID: 3379340417636183183, guid: dcf168df0f4ef364f8170eb941f0b499, type: 3}
-  linkToAttachTo: {fileID: 0}
-  calculator: {fileID: 0}
 --- !u!1 &1824113506
 GameObject:
   m_ObjectHideFlags: 0
