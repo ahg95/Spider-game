@@ -872,6 +872,10 @@ PrefabInstance:
       propertyPath: hookToConnectChainLinkTo
       value: 
       objectReference: {fileID: 64238275}
+    - target: {fileID: 1790873913, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: characterBody
+      value: 
+      objectReference: {fileID: 2137803565}
     - target: {fileID: 2454369354277557907, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1021,3 +1025,14 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071814379}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2137803565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+  m_PrefabInstance: {fileID: 1593940956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f369abede6a2955439cafba45f1482de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
