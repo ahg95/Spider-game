@@ -24,6 +24,16 @@ public class RopeGun : MonoBehaviour
         SwitchToState(RopeGunState.loaded);
     }
 
+    private void Update()
+    {
+        if (gunState == RopeGunState.loaded)
+        {
+            projectile.transform.position = muzzle.position;
+            projectile.transform.rotation = muzzle.rotation;
+        }
+
+    }
+
     public void StartPressingTrigger()
     {
         if (gunState == RopeGunState.loaded)
