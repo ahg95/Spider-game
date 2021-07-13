@@ -10,14 +10,11 @@ public class ChainLinkSource : MonoBehaviour
     ChainLinkHook hookToConnectChainLinkTo;
 
     public ChainLink chainLinkPrefab;
-
     public Transform chainLinkParent;
 
     [Range(0, 1)]
     public float friction;
-
     public float pushOutForceAmount;
-
     public float maximumPushOutSpeed;
     public float maximumPullInSpeed;
 
@@ -49,9 +46,9 @@ public class ChainLinkSource : MonoBehaviour
             ApplyFrictionToHookToConnectChainLinkTo();
 
             ApplyPushOutForce();
-        }
 
-        UpdateSpringJointValues();
+            UpdateSpringJointValues();
+        }
 
         UpdatePositionAfterPreviousFixedUpdate();
     }

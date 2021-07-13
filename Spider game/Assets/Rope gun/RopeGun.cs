@@ -40,10 +40,22 @@ public class RopeGun : MonoBehaviour
 
     public void PressReloadButton()
     {
+        DestroyRope();
+
         projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
         chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
 
         SwitchToState(RopeGunState.loaded);
+    }
+
+    void DestroyRope()
+    {
+        for (int i = 0; i < chainLinkSource.chainLinkParent.childCount; i++)
+        {
+            Destroy(chainLinkSource.chainLinkParent.GetChild(i).gameObject);
+        }
+
+        Destroy(projectile.gameObject);
     }
 
     void SwitchToState(RopeGunState state)
