@@ -28,6 +28,8 @@ public class PhysicsCharacterBody : MonoBehaviour
     private void FixedUpdate()
     {
         MoveAccordingToSetMovementAmounts();
+
+
     }
 
     void OnDrawGizmosSelected()
@@ -61,10 +63,16 @@ public class PhysicsCharacterBody : MonoBehaviour
 
     void MoveAccordingToSetMovementAmounts()
     {
-        Vector3 movementVector = transform.forward * amountToMoveForward + transform.right * amountToMoveRight;
-        movementVector *= Time.fixedDeltaTime * movementSpeed;
+        //if (IsInContactWithGround())
+        {
+            Vector3 movementVector = transform.forward * amountToMoveForward + transform.right * amountToMoveRight;
+            movementVector *= Time.fixedDeltaTime * movementSpeed;
 
-        GetRigidbody().MovePosition(transform.position + movementVector);
+            GetRigidbody().MovePosition(transform.position + movementVector);
+        }
+
+
+
     }
 
     float CalculateJumpingForceToReachHeight(float height) => Mathf.Sqrt(2 * height * -Physics.gravity.y);

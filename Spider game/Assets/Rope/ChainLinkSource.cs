@@ -19,7 +19,11 @@ public class ChainLinkSource : MonoBehaviour
     public float maximumPullInSpeed;
 
     SpringJoint joint;
+
     Vector3 positionAfterPreviousFixedUpdate;
+
+    // This value is used to correctly calculate the SpringJoint values.
+    Vector3 positionAfterPreviousLateUpdate;
 
     private SpringJoint GetSpringJoint()
     {
@@ -31,6 +35,7 @@ public class ChainLinkSource : MonoBehaviour
     private void OnEnable()
     {
         positionAfterPreviousFixedUpdate = transform.position;
+        positionAfterPreviousLateUpdate = transform.position;
         ConnectSpringJointTohookToConnectChainLinkTo();
     }
 
@@ -47,10 +52,17 @@ public class ChainLinkSource : MonoBehaviour
 
             ApplyPushOutForce();
 
+            
+
             UpdateSpringJointValues();
         }
 
         UpdatePositionAfterPreviousFixedUpdate();
+    }
+
+    private void LateUpdate()
+    {
+        positionAfterPreviousLateUpdate = transform.position;
     }
 
     public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
@@ -105,7 +117,7 @@ public class ChainLinkSource : MonoBehaviour
 
     void UpdateSpringJointValues()
     {
-        float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+        float distanceToHook = (hookToConnectChainLinkTo.transform.position - positionAfterPreviousLateUpdate).magnitude;
 
         GetSpringJoint().minDistance = distanceToHook - maximumPullInSpeed * Time.fixedDeltaTime;
         GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
@@ -129,8 +141,6 @@ public class ChainLinkSource : MonoBehaviour
 
         return pushOutSpeed;
     }
-
-
 
     private void OnValidate()
     {
