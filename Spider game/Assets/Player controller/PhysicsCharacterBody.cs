@@ -5,18 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PhysicsCharacterBody : MonoBehaviour
 {
-    public float maximumGroundVelocity;
-    public float maximumAirVelocity;
+    [Header("Ground movement")]
+    public float groundMaximumSpeed;
     public float groundAcceleration;
+
+    [Header("Air movement")]
+    public float airMaximumSpeed;
     public float airAcceleration;
 
+    [Header("Jumping")]
     public float jumpHeight;
+
+    [Header("Ground checking")]
     public float groundCheckRadius;
     public LayerMask groundObjectLayers;
     public Transform groundCheckOrigin;
 
-    float amountToMoveForward;
-    float amountToMoveRight;
+    Vector2 movementInput;
 
     new Rigidbody rigidbody;
 
@@ -30,7 +35,7 @@ public class PhysicsCharacterBody : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveAccordingToSetMovementAmounts();
+        MoveAccordingToMovementInput();
     }
 
     void OnDrawGizmosSelected()
@@ -45,14 +50,9 @@ public class PhysicsCharacterBody : MonoBehaviour
             Jump();
     }
 
-    public void SetAmountToMoveForward(float amount)
+    public void SetMovementInput(Vector2 input)
     {
-        amountToMoveForward = Mathf.Clamp(amount, -1, 1);
-    }
-
-    public void SetAmountToMoveRight(float amount)
-    {
-        amountToMoveRight = Mathf.Clamp(amount, -1, 1);
+        this.movementInput = input;
     }
 
     void Jump()
@@ -62,45 +62,42 @@ public class PhysicsCharacterBody : MonoBehaviour
         GetRigidbody().AddForce(jumpingForce, ForceMode.VelocityChange);
     }
 
-    void MoveAccordingToSetMovementAmounts()
+    void MoveAccordingToMovementInput()
     {
         float maximumSpeed;
-        float acceleration;
+        float maximumDeltaVelocity;
 
         if (IsInContactWithGround())
         {
-            maximumSpeed = maximumGroundVelocity;
-            acceleration = groundAcceleration;
+            maximumSpeed = groundMaximumSpeed;
+            maximumDeltaVelocity = groundAcceleration;
         }
         else
         {
-            maximumSpeed = maximumAirVelocity;
-            acceleration = airAcceleration;
+            maximumSpeed = airMaximumSpeed;
+            maximumDeltaVelocity = airAcceleration;
         }
 
+        // The following line prevents that the character moves faster diagonally
+        Vector2 movement = TransformSquareDomainVectorToCircleDomain(movementInput);
+
         // Calculate how fast we should be moving in which direction
-        Vector3 localTargetVelocity = (Vector3.right * amountToMoveRight + Vector3.forward * amountToMoveForward) * maximumSpeed;
-
-
+        Vector3 localTargetVelocity = (Vector3.right * movement.x + Vector3.forward * movement.y) * maximumSpeed;
 
         Vector3 localVelocity = transform.InverseTransformVector(GetRigidbody().velocity);
 
-        //Debug.Log(localTargetVelocity);
-
         Vector3 localForceToApply = Vector3.zero;
-        Vector3 velocityOffset = (localTargetVelocity - localVelocity);
+        Vector3 localVelocityOffset = (localTargetVelocity - localVelocity);
 
-        // If the body is not moving in the target direction or if it is not moving fast enough, then apply a force in that direction.
-        //if (Mathf.Sign(localVelocity.x) != Mathf.Sign(localTargetVelocity.x) || Mathf.Abs(localTargetVelocity.x) < Mathf.Abs(localVelocity.x))
-        {
-            localForceToApply.x = Mathf.Clamp(velocityOffset.x, -acceleration, acceleration);
-        }
+        if (   (0 < localTargetVelocity.x && localVelocity.x < localTargetVelocity.x) // If we want to move right and we are moving slower than we want
+            || (localTargetVelocity.x < 0 && localTargetVelocity.x < localVelocity.x) // or if we want to move left and we are moving slower than we want
+            || (localTargetVelocity.x == 0 && localVelocity.x != 0) ) // or if we don't want to move right or left, but we are
+            localForceToApply.x = Mathf.Clamp(localVelocityOffset.x, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
-        // Same calculation is done using the z axis.
-        //if (Mathf.Sign(localVelocity.z) != Mathf.Sign(localTargetVelocity.z) || Mathf.Abs(localTargetVelocity.z) < Mathf.Abs(localVelocity.z))
-        {
-            localForceToApply.z = Mathf.Clamp(velocityOffset.z, -acceleration, acceleration);
-        }
+        if (   (0 < localTargetVelocity.z && localVelocity.z < localTargetVelocity.z) // If we want to move forward and we are moving slower than we want
+            || (localTargetVelocity.z < 0 && localTargetVelocity.z < localVelocity.z) // or if we want to move backward and we are moving slower than we want
+            || (localTargetVelocity.z == 0 && localVelocity.z != 0) ) // or if we don't want to move forward or backward, but we are
+            localForceToApply.z = Mathf.Clamp(localVelocityOffset.z, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
         Vector3 forceToApply = transform.TransformVector(localForceToApply);
 
@@ -108,34 +105,44 @@ public class PhysicsCharacterBody : MonoBehaviour
     }
 
     /// <summary>
-    /// Imagine a square with the vertices (-1, -1), (-1, 1), (1, -1), and (1, 1), and a vector inside this square. This function returns a factor that, if applied to the vector, projects it onto the unit circle. This can, for example, be used to prevent strafing in first-person games.
+    /// Imagine the given vector would lie inside a square with its center at (0,0). Now imagine a circle at the same position that perfectly fits into this square. This function returns a scaled-down version of the given vector that transforms it from the square domain to the circle domain.
     /// </summary>
-    /// <param name="boxVector"></param>
+    /// <param name="squareDomainVector"></param>
     /// <returns></returns>
-    float CalculateSquareToCircleProjectionFactorForVector(Vector2 boxVector)
+    Vector2 TransformSquareDomainVectorToCircleDomain(Vector2 squareDomainVector)
     {
-        boxVector = boxVector.normalized;
+        Vector2 circleDomainVector = squareDomainVector;
 
-        float projectionFactor;
+        float transformationDividend = ProjectVectorOntoUnitSquareBounds(squareDomainVector).magnitude;
 
-        float xAbs = Mathf.Abs(boxVector.x);
-        float yAbs = Mathf.Abs(boxVector.y);
+        if (transformationDividend != 0)
+            circleDomainVector = squareDomainVector / transformationDividend;
 
-        if (xAbs == 0 && yAbs == 0)
-            projectionFactor = 0;
-        else
+        return circleDomainVector;
+    }
+
+    /// <summary>
+    /// Imagine a square with the bounds (-1, -1), (-1, 1), (1, -1), and (1, 1), and some two dimensional vector. This function returns a vector with the same direction, but which lies on the bounds of this square.
+    /// </summary>
+    /// <param name="vectorToProject"></param>
+    /// <returns></returns>
+    Vector2 ProjectVectorOntoUnitSquareBounds(Vector2 vectorToProject)
+    {
+        Vector2 projectedVector = Vector2.zero;
+
+        if (vectorToProject != Vector2.zero)
         {
-            Vector3 vectorProjectedToSquareBounds;
+            float xAbs = Mathf.Abs(vectorToProject.x);
+            float yAbs = Mathf.Abs(vectorToProject.y);
 
+            // First we determine if the vectorToProject is further away from the unit square in the x dimension or in the y dimension. If we divide the vector by the distance in that dimension, we have projected the vector to the square bounds.
             if (xAbs <= yAbs && yAbs != 0)
-                vectorProjectedToSquareBounds = boxVector / yAbs;
-            else // Don't need to check here if xAbs != 0 since either zAbs was 0 but they cannot both be zero, or zAbs was smaller than xAbs which means that it has to be greater than zero
-                vectorProjectedToSquareBounds = boxVector / xAbs;
-
-            projectionFactor = 1 / vectorProjectedToSquareBounds.magnitude;
+                projectedVector = vectorToProject / yAbs;
+            else // Don't need to check here if xAbs != 0 since either 1) yAbs is 0 but not both are zero, meaning that xAbs is not zero, or 2) zAbs was smaller than xAbs which means that it has to be greater than zero
+                projectedVector = vectorToProject / xAbs;
         }
 
-        return projectionFactor;
+        return projectedVector;
     }
 
     float CalculateJumpingForceToReachHeight(float height) => Mathf.Sqrt(2 * height * -Physics.gravity.y);

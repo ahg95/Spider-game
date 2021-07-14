@@ -20,16 +20,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             ropeGun.PressReloadButton();
 
-
         // Character movement input
 
         if (Input.GetKeyDown(KeyCode.Space))
             characterBody.AttemptJump();
 
-        characterBody.SetAmountToMoveForward(Input.GetAxisRaw("Vertical"));
-
-        characterBody.SetAmountToMoveRight(Input.GetAxisRaw("Horizontal"));
-
-        Debug.Log(Input.GetAxis("Horizontal") + " " + Input.GetAxis("Vertical"));
+        characterBody.SetMovementInput(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
     }
 }
