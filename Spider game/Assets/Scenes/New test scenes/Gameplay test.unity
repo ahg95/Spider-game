@@ -1154,6 +1154,30 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: airAcceleration
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: groundAcceleration
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: maximumAirVelocity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: maximumGroundVelocity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: maximumAirMovementSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: maximumGroundMovementSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
 --- !u!1 &2029447755

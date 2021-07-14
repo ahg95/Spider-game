@@ -5,7 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PhysicsCharacterBody : MonoBehaviour
 {
-    public float movementSpeed;
+    public float maximumGroundVelocity;
+    public float maximumAirVelocity;
+    public float groundAcceleration;
+    public float airAcceleration;
 
     public float jumpHeight;
     public float groundCheckRadius;
@@ -28,8 +31,6 @@ public class PhysicsCharacterBody : MonoBehaviour
     private void FixedUpdate()
     {
         MoveAccordingToSetMovementAmounts();
-
-
     }
 
     void OnDrawGizmosSelected()
@@ -63,16 +64,77 @@ public class PhysicsCharacterBody : MonoBehaviour
 
     void MoveAccordingToSetMovementAmounts()
     {
-        //if (IsInContactWithGround())
-        {
-            Vector3 movementVector = transform.forward * amountToMoveForward + transform.right * amountToMoveRight;
-            movementVector *= Time.fixedDeltaTime * movementSpeed;
+        float maximumSpeed;
+        float acceleration;
 
-            GetRigidbody().MovePosition(transform.position + movementVector);
+        if (IsInContactWithGround())
+        {
+            maximumSpeed = maximumGroundVelocity;
+            acceleration = groundAcceleration;
+        }
+        else
+        {
+            maximumSpeed = maximumAirVelocity;
+            acceleration = airAcceleration;
         }
 
+        // Calculate how fast we should be moving in which direction
+        Vector3 targetVelocity = (transform.right * amountToMoveRight + transform.forward * amountToMoveForward) * maximumSpeed;
+
+        Vector3 velocityOffset = (targetVelocity - GetRigidbody().velocity);
+
+        Vector3 forceToApply = Vector3.zero;
 
 
+        Vector3 localTargetVelocity = transform.InverseTransformDirection(targetVelocity);
+        Vector3 localVelocity = transform.InverseTransformDirection(GetRigidbody().velocity);
+
+        Debug.Log(localTargetVelocity);
+
+        // If the body is not moving in the target direction or if it is not moving fast enough, then apply a force in that direction.
+        if (Mathf.Sign(localVelocity.x) != Mathf.Sign(localTargetVelocity.x) || Mathf.Abs(localTargetVelocity.x) < Mathf.Abs(localVelocity.x))
+        {
+            forceToApply.x = Mathf.Clamp(velocityOffset.x, -acceleration, acceleration);
+        }
+
+        // Same calculation is done using the z axis.
+        if (Mathf.Sign(localVelocity.z) != Mathf.Sign(localTargetVelocity.z) || Mathf.Abs(localTargetVelocity.z) < Mathf.Abs(localVelocity.z))
+        {
+            forceToApply.z = Mathf.Clamp(velocityOffset.z, -acceleration, acceleration);
+        }
+
+        rigidbody.AddForce(forceToApply, ForceMode.VelocityChange);
+    }
+
+    /// <summary>
+    /// Imagine a square with the vertices (-1, -1), (-1, 1), (1, -1), and (1, 1), and a vector inside this square. This function returns a factor that, if applied to the vector, projects it onto the unit circle. This can, for example, be used to prevent strafing in first-person games.
+    /// </summary>
+    /// <param name="boxVector"></param>
+    /// <returns></returns>
+    float CalculateSquareToCircleProjectionFactorForVector(Vector2 boxVector)
+    {
+        boxVector = boxVector.normalized;
+
+        float projectionFactor;
+
+        float xAbs = Mathf.Abs(boxVector.x);
+        float yAbs = Mathf.Abs(boxVector.y);
+
+        if (xAbs == 0 && yAbs == 0)
+            projectionFactor = 0;
+        else
+        {
+            Vector3 vectorProjectedToSquareBounds;
+
+            if (xAbs <= yAbs && yAbs != 0)
+                vectorProjectedToSquareBounds = boxVector / yAbs;
+            else // Don't need to check here if xAbs != 0 since either zAbs was 0 but they cannot both be zero, or zAbs was smaller than xAbs which means that it has to be greater than zero
+                vectorProjectedToSquareBounds = boxVector / xAbs;
+
+            projectionFactor = 1 / vectorProjectedToSquareBounds.magnitude;
+        }
+
+        return projectionFactor;
     }
 
     float CalculateJumpingForceToReachHeight(float height) => Mathf.Sqrt(2 * height * -Physics.gravity.y);
