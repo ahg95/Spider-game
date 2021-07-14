@@ -79,22 +79,25 @@ public class PhysicsCharacterBody : MonoBehaviour
         }
 
         // Calculate how fast we should be moving in which direction
-        Vector3 targetVelocity = (transform.right * amountToMoveRight + transform.forward * amountToMoveForward) * maximumSpeed;
-        Vector3 localTargetVelocity = transform.InverseTransformVector(targetVelocity);
+        Vector3 localTargetVelocity = (Vector3.right * amountToMoveRight + Vector3.forward * amountToMoveForward) * maximumSpeed;
+
+
 
         Vector3 localVelocity = transform.InverseTransformVector(GetRigidbody().velocity);
+
+        //Debug.Log(localTargetVelocity);
 
         Vector3 localForceToApply = Vector3.zero;
         Vector3 velocityOffset = (localTargetVelocity - localVelocity);
 
         // If the body is not moving in the target direction or if it is not moving fast enough, then apply a force in that direction.
-        if (Mathf.Sign(localVelocity.x) != Mathf.Sign(localTargetVelocity.x) || Mathf.Abs(localTargetVelocity.x) < Mathf.Abs(localVelocity.x))
+        //if (Mathf.Sign(localVelocity.x) != Mathf.Sign(localTargetVelocity.x) || Mathf.Abs(localTargetVelocity.x) < Mathf.Abs(localVelocity.x))
         {
             localForceToApply.x = Mathf.Clamp(velocityOffset.x, -acceleration, acceleration);
         }
 
         // Same calculation is done using the z axis.
-        if (Mathf.Sign(localVelocity.z) != Mathf.Sign(localTargetVelocity.z) || Mathf.Abs(localTargetVelocity.z) < Mathf.Abs(localVelocity.z))
+        //if (Mathf.Sign(localVelocity.z) != Mathf.Sign(localTargetVelocity.z) || Mathf.Abs(localTargetVelocity.z) < Mathf.Abs(localVelocity.z))
         {
             localForceToApply.z = Mathf.Clamp(velocityOffset.z, -acceleration, acceleration);
         }

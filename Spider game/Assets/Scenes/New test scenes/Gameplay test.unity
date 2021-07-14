@@ -1156,11 +1156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: airAcceleration
-      value: 100
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: groundAcceleration
-      value: 100
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: maximumAirVelocity
