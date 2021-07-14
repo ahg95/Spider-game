@@ -100,12 +100,12 @@ public class PhysicsCharacterBody : MonoBehaviour
 
         if (   (0 < localTargetVelocity.x && localVelocity.x < localTargetVelocity.x) // If we want to move right and we are moving slower than we want
             || (localTargetVelocity.x < 0 && localTargetVelocity.x < localVelocity.x) // or if we want to move left and we are moving slower than we want
-            || (localTargetVelocity.x == 0 && localVelocity.x != 0) ) // or if we don't want to move right or left, but we are
+            || (localTargetVelocity.x == 0 && localVelocity.x != 0)) // or if we don't want to move right or left, but we are
             localForceToApply.x = Mathf.Clamp(localVelocityOffset.x, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
         if (   (0 < localTargetVelocity.z && localVelocity.z < localTargetVelocity.z) // If we want to move forward and we are moving slower than we want
             || (localTargetVelocity.z < 0 && localTargetVelocity.z < localVelocity.z) // or if we want to move backward and we are moving slower than we want
-            || (localTargetVelocity.z == 0 && localVelocity.z != 0) ) // or if we don't want to move forward or backward, but we are
+            || (localTargetVelocity.z == 0 && localVelocity.z != 0)) // or if we don't want to move forward or backward, but we are
             localForceToApply.z = Mathf.Clamp(localVelocityOffset.z, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
         // We have to transform the local force vector to world space or the character would not move according to its own orientation.
