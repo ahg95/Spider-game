@@ -52,7 +52,7 @@ public class PhysicsCharacterBody : MonoBehaviour
 
     public void SetMovementInput(Vector2 input)
     {
-        this.movementInput = input;
+        movementInput = input;
     }
 
     void Jump()
@@ -62,6 +62,10 @@ public class PhysicsCharacterBody : MonoBehaviour
         GetRigidbody().AddForce(jumpingForce, ForceMode.VelocityChange);
     }
 
+
+    /// <summary>
+    /// Applies the movement to this character according to the movementInput member.
+    /// </summary>
     void MoveAccordingToMovementInput()
     {
         float maximumSpeed;
@@ -81,7 +85,12 @@ public class PhysicsCharacterBody : MonoBehaviour
         // The following line prevents that the character moves faster diagonally
         Vector2 movement = TransformSquareDomainVectorToCircleDomain(movementInput);
 
-        // Calculate how fast we should be moving in which direction
+
+        /* The following vectors are created or transformed to the local space of this transform because it is necessary for the following if clauses. If the vectors were in world space, the individual components of the vectors would
+         * not represent the axes on which the player is moving.
+         */
+
+        // The following vector represents the desired velocity for this character in local space.
         Vector3 localTargetVelocity = (Vector3.right * movement.x + Vector3.forward * movement.y) * maximumSpeed;
 
         Vector3 localVelocity = transform.InverseTransformVector(GetRigidbody().velocity);
@@ -99,13 +108,16 @@ public class PhysicsCharacterBody : MonoBehaviour
             || (localTargetVelocity.z == 0 && localVelocity.z != 0) ) // or if we don't want to move forward or backward, but we are
             localForceToApply.z = Mathf.Clamp(localVelocityOffset.z, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
+        // We have to transform the local force vector to world space or the character would not move according to its own orientation.
         Vector3 forceToApply = transform.TransformVector(localForceToApply);
 
         rigidbody.AddForce(forceToApply, ForceMode.VelocityChange);
     }
 
     /// <summary>
-    /// Imagine the given vector would lie inside a square with its center at (0,0). Now imagine a circle at the same position that perfectly fits into this square. This function returns a scaled-down version of the given vector that transforms it from the square domain to the circle domain.
+    /// Imagine the given vector would lie inside a square with its center at (0,0). Now imagine a circle at the same position that perfectly fits into this square.
+    /// This function returns a scaled-down version of the given vector that transforms it from the square domain to the circle domain.
+    /// It can be used to transform playor input from a square domain to a circle domain to prevent strafing diagonally to move faster.
     /// </summary>
     /// <param name="squareDomainVector"></param>
     /// <returns></returns>
