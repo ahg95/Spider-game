@@ -70,12 +70,12 @@ public class PhysicsCharacterBody : MonoBehaviour
         if (IsInContactWithGround())
         {
             maximumSpeed = groundMaximumSpeed;
-            maximumDeltaVelocity = groundAcceleration;
+            maximumDeltaVelocity = groundAcceleration * Time.fixedDeltaTime;
         }
         else
         {
             maximumSpeed = airMaximumSpeed;
-            maximumDeltaVelocity = airAcceleration;
+            maximumDeltaVelocity = airAcceleration * Time.fixedDeltaTime;
         }
 
         // The following line prevents that the character moves faster diagonally

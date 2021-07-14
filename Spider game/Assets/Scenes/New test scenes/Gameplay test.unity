@@ -1156,15 +1156,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: airAcceleration
-      value: 10000000
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: airMaximumSpeed
-      value: 10000000
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: groundAcceleration
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: groundMaximumSpeed
