@@ -20,7 +20,6 @@ public class CurveCalculator : MonoBehaviour
     public void RemoveCurvePoint(Transform curvePoint) => PointsToFitCurveTo.Remove(curvePoint);
 
     public void SetCurvePoints(List<Transform> curvePoints) {
-        PointsToFitCurveTo.Clear();
         PointsToFitCurveTo = curvePoints;
     }
 

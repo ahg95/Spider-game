@@ -52,8 +52,6 @@ public class ChainLinkSource : MonoBehaviour
 
             ApplyPushOutForce();
 
-            
-
             UpdateSpringJointValues();
         }
 

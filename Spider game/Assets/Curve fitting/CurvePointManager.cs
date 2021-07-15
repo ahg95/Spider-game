@@ -19,13 +19,10 @@ public class CurvePointManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-            Debug.Log("TEST");
-
         FindAllCurvePointsInChildrenAndUpdateCurveCalculator();
     }
 
-    void FindAllCurvePointsInChildrenAndUpdateCurveCalculator()
+    public void FindAllCurvePointsInChildrenAndUpdateCurveCalculator()
     {
         curveCalculatorToManagePointsFor.SetCurvePoints(GetAllCurvePointsInChildrenInOrderOfTransform(parentOfCurvePoints));
     }
