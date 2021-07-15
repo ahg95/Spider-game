@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class models a smooth curve based on a list of points to fit the curve to. For an explanation on how the algorithm works, please see <see cref="https://www.linkedin.com/pulse/simple-curve-fitting-algorithm-games-ansgar-glup/?trackingId=bjEHvl1HFJ1L7gFsZFsUbw%3D%3D"/>, 
+/// </summary>
 public class CurveCalculator : MonoBehaviour
 {
     public AnimationCurve SmoothingCurve;
@@ -73,9 +76,9 @@ public class CurveCalculator : MonoBehaviour
                 Vector3 aDir = CalculateCurvePointDirectionForIndex(i);
 
                 Vector3 bPos = GetPointToFitCurveTo(i + 1);
-                Vector3 bDir = GetPointToFitCurveTo(i + 1);
+                Vector3 bDir = CalculateCurvePointDirectionForIndex(i + 1);
 
-                GetCurvePointBetweenTwoPoints(aPos, aDir, bPos, bDir, sumOfDistancesBetweenCurvePoints - distance + length);
+                pointToCalculate = GetCurvePointBetweenTwoPoints(aPos, aDir, bPos, bDir, length - (sumOfDistancesBetweenCurvePoints - distance));
                 break;
             }
             // If i is the index of the second to last curve point to fit
@@ -85,7 +88,6 @@ public class CurveCalculator : MonoBehaviour
 
         return pointToCalculate;
     }
-
 
     Vector3 CalculateCurvePointDirectionForIndex(int index)
     {
@@ -108,6 +110,8 @@ public class CurveCalculator : MonoBehaviour
 
     Vector3 GetCurvePointBetweenTwoPoints(Vector3 aPos, Vector3 aDir, Vector3 bPos, Vector3 bDir, float distance)
     {
+        Vector3 curvePointBetweenTwoPoints;
+
         distance = Mathf.Clamp(distance, 0, Vector3.Distance(aPos, bPos));
 
         Vector3 aExtrapolationPoint = aPos + aDir * distance;
@@ -115,7 +119,9 @@ public class CurveCalculator : MonoBehaviour
 
         float interpolationValue = SmoothingCurve.Evaluate(distance / Vector3.Distance(aPos, bPos));
 
-        return Vector3.Lerp(aExtrapolationPoint, bExtrapolationPoint, interpolationValue);
+        curvePointBetweenTwoPoints = Vector3.Lerp(aExtrapolationPoint, bExtrapolationPoint, interpolationValue);
+
+        return curvePointBetweenTwoPoints;
     }
 
     void FixedUpdate()

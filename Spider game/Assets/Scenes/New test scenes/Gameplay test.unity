@@ -1090,6 +1090,10 @@ PrefabInstance:
       propertyPath: projectile
       value: 
       objectReference: {fileID: 379039452}
+    - target: {fileID: 1790873911, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: grappleDisconnected
+      value: 
+      objectReference: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
     - target: {fileID: 1790873912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: chainLinkParent
       value: 
@@ -1220,6 +1224,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ropeGun: {fileID: 1706410838}
   characterBody: {fileID: 2137803565}
+--- !u!114 &1873779436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873779434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2137803565}
+        m_TargetAssemblyTypeName: PhysicsCharacterBody, Assembly-CSharp
+        m_MethodName: ActivateStopAirMovementWhenNoInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1873779437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873779434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: f4a073eae43a72f4d8e5331240bcb196, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2137803565}
+        m_TargetAssemblyTypeName: PhysicsCharacterBody, Assembly-CSharp
+        m_MethodName: DeactivateStopAirMovementWhenNoInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2029447755
 GameObject:
   m_ObjectHideFlags: 0

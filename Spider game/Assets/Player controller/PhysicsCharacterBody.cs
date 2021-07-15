@@ -12,6 +12,8 @@ public class PhysicsCharacterBody : MonoBehaviour
     [Header("Air movement")]
     public float airMaximumSpeed;
     public float airAcceleration;
+    [Tooltip("When activated, the character stops moving in the air when no input is given.")]
+    public bool automaticAirMotionStop = true;
 
     [Header("Jumping")]
     public float jumpHeight;
@@ -43,6 +45,10 @@ public class PhysicsCharacterBody : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(groundCheckOrigin.position, groundCheckRadius);
     }
+
+    public void ActivateAutomaticAirMotionStop() => automaticAirMotionStop = true;
+
+    public void DeactivateAutomaticAirMotionStop() => automaticAirMotionStop = false;
 
     public void AttemptJump()
     {
@@ -84,9 +90,8 @@ public class PhysicsCharacterBody : MonoBehaviour
         // The following line prevents that the character moves faster diagonally
         Vector2 movement = TransformSquareDomainVectorToCircleDomain(movementInput);
 
-
         /* The following vectors are created or transformed to the local space of this transform because it is necessary for the following if clauses. If the vectors were in world space, the individual components of the vectors would
-         * not represent the axes on which the player is moving.
+         * not correspong to the actual axes on which the player is moving.
          */
 
         // The following vector represents the desired velocity for this character in local space.
@@ -99,12 +104,12 @@ public class PhysicsCharacterBody : MonoBehaviour
 
         if (   (0 < localTargetVelocity.x && localVelocity.x < localTargetVelocity.x) // If we want to move right and we are moving slower than we want
             || (localTargetVelocity.x < 0 && localTargetVelocity.x < localVelocity.x) // or if we want to move left and we are moving slower than we want
-            || (localTargetVelocity.x == 0 && localVelocity.x != 0)) // or if we don't want to move right or left, but we are
+            || (localTargetVelocity.x == 0 && localVelocity.x != 0 && (IsInContactWithGround() || automaticAirMotionStop))) // or if we don't want to move right or left, but we are, and we are on the ground or have automaticAirMotionStop activated
             localForceToApply.x = Mathf.Clamp(localVelocityOffset.x, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
         if (   (0 < localTargetVelocity.z && localVelocity.z < localTargetVelocity.z) // If we want to move forward and we are moving slower than we want
             || (localTargetVelocity.z < 0 && localTargetVelocity.z < localVelocity.z) // or if we want to move backward and we are moving slower than we want
-            || (localTargetVelocity.z == 0 && localVelocity.z != 0)) // or if we don't want to move forward or backward, but we are
+            || (localTargetVelocity.z == 0 && localVelocity.z != 0 && (IsInContactWithGround() || automaticAirMotionStop))) // or if we don't want to move forward or backward, but we are, and we are on the ground or have automaticAirMotionStop activated
             localForceToApply.z = Mathf.Clamp(localVelocityOffset.z, -maximumDeltaVelocity, maximumDeltaVelocity); // then we apply a force towards our target velocity.
 
         // We have to transform the local force vector to world space or the character would not move according to its own orientation.
