@@ -9,13 +9,17 @@ public class CurveCalculator : MonoBehaviour
 {
     public AnimationCurve SmoothingCurve;
 
-    public List<Transform> PointsToFitCurveTo = new List<Transform>();
+    [SerializeField]
+    List<Transform> PointsToFitCurveTo = new List<Transform>();
+
     float linearInterpolationLength;
     bool linearInterpolationLengthIsOutdated = true;
 
     public void AddCurvePoint(Transform curvePoint) => PointsToFitCurveTo.Add(curvePoint);
 
     public void RemoveCurvePoint(Transform curvePoint) => PointsToFitCurveTo.Remove(curvePoint);
+
+    public void SetCurvePoints(List<Transform> curvePoints) => PointsToFitCurveTo = curvePoints;
 
     public int GetNumberOfCurvePoints() => PointsToFitCurveTo.Count;
 
