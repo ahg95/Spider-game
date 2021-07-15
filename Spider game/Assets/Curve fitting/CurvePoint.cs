@@ -7,10 +7,5 @@ using UnityEngine;
 /// </summary>
 public class CurvePoint : MonoBehaviour
 {
-    public GameEvent CurvePointWasCreated;
 
-    private void OnEnable()
-    {
-        
-    }
 }
