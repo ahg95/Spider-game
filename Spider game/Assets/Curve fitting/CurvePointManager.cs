@@ -8,23 +8,26 @@ public class CurvePointManager : MonoBehaviour
     CurveCalculator curveCalculatorToManagePointsFor;
 
     [SerializeField]
-    Transform transformToLookInto;
+    Transform parentOfCurvePoints;
 
     private void OnEnable()
     {
-        if (!transformToLookInto)
-            transformToLookInto = transform;
+        if (!parentOfCurvePoints)
+            parentOfCurvePoints = transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+            Debug.Log("TEST");
+
         FindAllCurvePointsInChildrenAndUpdateCurveCalculator();
     }
 
     void FindAllCurvePointsInChildrenAndUpdateCurveCalculator()
     {
-        curveCalculatorToManagePointsFor.SetCurvePoints(GetAllCurvePointsInChildrenInOrderOfTransform(transformToLookInto));
+        curveCalculatorToManagePointsFor.SetCurvePoints(GetAllCurvePointsInChildrenInOrderOfTransform(parentOfCurvePoints));
     }
 
     List<Transform> GetAllCurvePointsInChildrenInOrderOfTransform(Transform parent)
