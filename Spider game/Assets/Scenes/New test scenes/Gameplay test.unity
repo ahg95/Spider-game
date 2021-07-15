@@ -846,8 +846,8 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 0
-  m_AngularYMotion: 2
+  m_AngularXMotion: 1
+  m_AngularYMotion: 0
   m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
@@ -860,11 +860,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: 0
+    limit: -15
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 0
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -931,12 +931,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515129775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ae5bcb7c83608449ad3767d9acf07ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationForceAmount: 10
+  torqueForceAmount: 0
+  maximumRotationSpeed: 0
 --- !u!1 &719648288
 GameObject:
   m_ObjectHideFlags: 0

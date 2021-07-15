@@ -5,9 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Rotator : MonoBehaviour
 {
-    public float rotationForceAmount;
+
+
+    [Header("Rotational forces")]
+
+    public float xTorque;
+    public float xMaximumSpeed;
+
+    public float yTorque;
+    public float yMaximumSpeed;
+
+    public float zTorque;
+    public float zMaximumSpeed;
 
     new Rigidbody rigidbody;
+
+    private void Reset()
+    {
+
+    }
 
     Rigidbody GetRigidbody()
     {
@@ -19,18 +35,6 @@ public class Rotator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetRigidbody().AddTorque(transform.up * rotationForceAmount);
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
