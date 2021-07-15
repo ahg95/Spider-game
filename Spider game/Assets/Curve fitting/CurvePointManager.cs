@@ -7,6 +7,15 @@ public class CurvePointManager : MonoBehaviour
     [SerializeField]
     CurveCalculator curveCalculatorToManagePointsFor;
 
+    [SerializeField]
+    Transform transformToLookInto;
+
+    private void OnEnable()
+    {
+        if (!transformToLookInto)
+            transformToLookInto = transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +24,7 @@ public class CurvePointManager : MonoBehaviour
 
     void FindAllCurvePointsInChildrenAndUpdateCurveCalculator()
     {
-        curveCalculatorToManagePointsFor.SetCurvePoints(GetAllCurvePointsInChildrenInOrderOfTransform(transform));
+        curveCalculatorToManagePointsFor.SetCurvePoints(GetAllCurvePointsInChildrenInOrderOfTransform(transformToLookInto));
     }
 
     List<Transform> GetAllCurvePointsInChildrenInOrderOfTransform(Transform parent)

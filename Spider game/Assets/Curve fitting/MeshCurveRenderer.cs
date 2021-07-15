@@ -52,7 +52,12 @@ public class MeshCurveRenderer : CurveRendererBase
             renderPositions.RemoveRange(nrOfPoints, renderPositions.Count - nrOfPoints);
     }
 
-    private void UpdateMeshFromRenderPositions()
+    protected override void RenderCurve()
+    {
+        UpdateMeshFromRenderPositions();
+    }
+
+    void UpdateMeshFromRenderPositions()
     {
         GetMesh().Clear();
 
@@ -204,11 +209,6 @@ public class MeshCurveRenderer : CurveRendererBase
         vertexIndex %= NumberOfVerticesPerRing;
 
         return (1 + ringIndex * NumberOfVerticesPerRing + vertexIndex);
-    }
-
-    protected override void RenderCurve()
-    {
-        UpdateMeshFromRenderPositions();
     }
 
     private void PrintTrianglePositionsInConsole()
