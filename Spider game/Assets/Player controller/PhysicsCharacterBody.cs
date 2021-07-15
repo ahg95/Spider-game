@@ -62,7 +62,6 @@ public class PhysicsCharacterBody : MonoBehaviour
         GetRigidbody().AddForce(jumpingForce, ForceMode.VelocityChange);
     }
 
-
     /// <summary>
     /// Applies the movement to this character according to the movementInput member.
     /// </summary>
