@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RopeGun : MonoBehaviour
 {
+    public GameEvent grappleDisconnected;
+
     public float shootingForce;
     public Transform muzzle;
     public ChainLinkSource chainLinkSource;
@@ -56,6 +58,12 @@ public class RopeGun : MonoBehaviour
         chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
 
         SwitchToState(RopeGunState.loaded);
+        grappleDisconnected.Raise();
+    }
+
+    private void ShootGrappler()
+    {
+        projectile.GetRigidbody()?.AddForce(muzzle.forward * shootingForce, ForceMode.VelocityChange);
     }
 
     void DestroyRope()
@@ -107,10 +115,7 @@ public class RopeGun : MonoBehaviour
         chainLinkSource.maximumPushOutSpeed = 0;
     }
 
-    private void ShootGrappler()
-    {
-        projectile.GetRigidbody()?.AddForce(muzzle.forward * shootingForce, ForceMode.VelocityChange);
-    }
+
 
     public void OnGrappleConnected()
     {
