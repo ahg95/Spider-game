@@ -936,8 +936,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae5bcb7c83608449ad3767d9acf07ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torqueForceAmount: 0
-  maximumRotationSpeed: 0
+  xTorque: 0
+  xMaximumSpeed: 0
+  yTorque: 0
+  yMaximumSpeed: 0
+  zTorque: 0
+  zMaximumSpeed: 0
 --- !u!1 &719648288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1276,7 @@ PrefabInstance:
       objectReference: {fileID: 379039452}
     - target: {fileID: 1790873911, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: shootingForce
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1790873911, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: grappleDisconnected
@@ -1280,12 +1284,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
     - target: {fileID: 1790873912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: friction
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1790873912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: chainLinkParent
       value: 
       objectReference: {fileID: 496068914}
+    - target: {fileID: 1790873912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: pushOutForceAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1790873912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: hookToConnectChainLinkTo
       value: 
