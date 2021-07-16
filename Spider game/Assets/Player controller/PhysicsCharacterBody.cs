@@ -89,6 +89,7 @@ public class PhysicsCharacterBody : MonoBehaviour
 
         // The following line prevents that the character moves faster diagonally
         Vector2 movement = TransformSquareDomainVectorToCircleDomain(movementInput);
+        //Vector2 movement = movementInput;
 
         /* The following vectors are created or transformed to the local space of this transform because it is necessary for the following if clauses. If the vectors were in world space, the individual components of the vectors would
          * not correspong to the actual axes on which the player is moving.
