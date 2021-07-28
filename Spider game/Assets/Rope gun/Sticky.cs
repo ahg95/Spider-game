@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider), typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class Sticky : MonoBehaviour
 {
     public GameEvent stickedToAnObject;
 
-    bool stickinessEnabled = false;
+    public bool stickOnTouch = false;
 
     bool isStickingToSomething = false;
 
@@ -31,34 +31,16 @@ public class Sticky : MonoBehaviour
         return fixedJoint;
     }
 
-    public void EnableStickiness() => stickinessEnabled = true;
+    public void EnableStickiness() => stickOnTouch = true;
 
     public void DisableStickiness()
     {
-        stickinessEnabled = false;
+        stickOnTouch = false;
         DestroyFixedJointIfExistent();
+        isStickingToSomething = false;
     }
 
-    void DestroyFixedJointIfExistent()
-    {
-        if (GetFixedJoint())
-            Destroy(GetFixedJoint());
-    }
-
-    bool StickinessIsEnabled() => stickinessEnabled;
-
-    bool IsStickingToSomething() => isStickingToSomething;
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (!IsStickingToSomething() && StickinessIsEnabled())
-        {
-            StickTo(collision.gameObject);
-            Debug.Log("Started sticking");
-        }
-    }
-
-    void StickTo(GameObject gameObjectToStickTo)
+    public void StickTo(GameObject gameObjectToStickTo)
     {
         Rigidbody rigidbodyToStickTo = gameObjectToStickTo.GetComponent<Rigidbody>(); // The gameObject might not have a Rigidbody attached. If it doesn't, the connectedBody of the FixedJoint will be null, which means that this object will stick in space.
 
@@ -67,8 +49,26 @@ public class Sticky : MonoBehaviour
         GetFixedJoint().connectedBody = rigidbodyToStickTo;
 
         isStickingToSomething = true;
-        stickedToAnObject.Raise();
+        stickedToAnObject?.Raise();
     }
+
+    void DestroyFixedJointIfExistent()
+    {
+        if (GetFixedJoint())
+            Destroy(GetFixedJoint());
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (StickOnTouchIsEnabled() && !IsStickingToSomething())
+            StickTo(collision.gameObject);
+    }
+
+    bool StickOnTouchIsEnabled() => stickOnTouch;
+
+    bool IsStickingToSomething() => isStickingToSomething;
+
+
 
     public void CreateFixedJointIfNotExistent()
     {
