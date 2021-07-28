@@ -13,18 +13,18 @@ public class PlayerController : MonoBehaviour
         // Rope gun input
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
-            ropeGun.StartPressingTrigger();
+            ropeGun?.StartPressingTrigger();
         else if (Input.GetKeyUp(KeyCode.Mouse1))
-            ropeGun.StopPressingTrigger();
+            ropeGun?.StopPressingTrigger();
 
         if (Input.GetKeyDown(KeyCode.R))
-            ropeGun.PressReloadButton();
+            ropeGun?.PressReloadButton();
 
         // Character movement input
 
         if (Input.GetKeyDown(KeyCode.Space))
-            characterBody.AttemptJump();
+            characterBody?.AttemptJump();
 
-        characterBody.SetMovementInput(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        characterBody?.SetMovementInput(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
     }
 }

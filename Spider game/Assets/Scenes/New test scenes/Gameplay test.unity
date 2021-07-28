@@ -471,6 +471,84 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135995864}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &169597745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 169597746}
+  - component: {fileID: 169597748}
+  - component: {fileID: 169597747}
+  m_Layer: 11
+  m_Name: Rope gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &169597746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169597745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1873779444}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &169597747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169597745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: f4a073eae43a72f4d8e5331240bcb196, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 169597748}
+        m_TargetAssemblyTypeName: RopeGun, Assembly-CSharp
+        m_MethodName: OnGrappleConnected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &169597748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169597745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec19a150fbf8cf4893bdc324538fc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grappleDisconnected: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
+  shootingForce: 50
+  muzzle: {fileID: 599397525}
+  chainLinkSource: {fileID: 3838967122460157887}
+  projectilePrefab: {fileID: 3220849627394484396, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
+  projectile: {fileID: 379039452}
 --- !u!1 &176290438
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,6 +3786,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &599397525 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 963194228, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+  m_PrefabInstance: {fileID: 1593940956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &719648288
 GameObject:
   m_ObjectHideFlags: 0
@@ -5885,6 +5968,10 @@ PrefabInstance:
       propertyPath: chainLinkSource
       value: 
       objectReference: {fileID: 3838967122460157887}
+    - target: {fileID: 1873779435, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: ropeGun
+      value: 
+      objectReference: {fileID: 169597748}
     - target: {fileID: 2454369354277557907, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5933,8 +6020,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: jumpHeight
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2425351673699367658, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+    - {fileID: 1790873911, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+    - {fileID: 1790873914, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
 --- !u!1 &1616364895
 GameObject:
@@ -7174,6 +7267,11 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 2585736452109968280, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
   m_PrefabInstance: {fileID: 1593940956}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1873779444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2454369354277557907, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+  m_PrefabInstance: {fileID: 1593940956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1888802457
 GameObject:
   m_ObjectHideFlags: 0
@@ -7549,6 +7647,10 @@ PrefabInstance:
       propertyPath: hookToConnectChainLinkTo
       value: 
       objectReference: {fileID: 64238275}
+    - target: {fileID: 3536549779503660438, guid: b7ef7055569e9934baf8d2bc893f79b4, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6864216578772611808, guid: b7ef7055569e9934baf8d2bc893f79b4, type: 3}
       propertyPath: m_RootOrder
       value: 2
