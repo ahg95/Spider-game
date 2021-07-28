@@ -9,8 +9,9 @@ public class RopeGun : MonoBehaviour
 
     public float shootingForce;
     public Transform muzzle;
-    public ChainLinkSource chainLinkSource;
     public Sticky projectilePrefab;
+
+    public ChainLinkSource chainLinkSource;
 
 
     [Header("Rope attaching")]
@@ -80,7 +81,7 @@ public class RopeGun : MonoBehaviour
                     AttachRopeToObjectAtPositionWithNormal(hitObject, hitInfo.point, hitInfo.normal);
                     InstantiateChainLinkSource();
 
-                    Debug.Log("Attached rope to surface.");
+                    SwitchToLoadedState();
                 }
             }
         }
@@ -105,7 +106,16 @@ public class RopeGun : MonoBehaviour
 
     private void AttachRopeToObjectAtPositionWithNormal(GameObject gameObject, Vector3 position, Vector3 direction)
     {
-        //throw new NotImplementedException();
+        chainLinkSource.transform.position = position;
+
+        Sticky sticky = chainLinkSource.GetComponent<Sticky>();
+
+        if (!sticky)
+            Debug.LogError("The ChainLinkSource has no sticky script attached.");
+
+        sticky.StickTo(gameObject);
+
+        // TODO: rotate it towards the diraction
     }
 
     void SwitchToLoadedState()
