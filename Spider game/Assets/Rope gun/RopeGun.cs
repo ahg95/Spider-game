@@ -37,6 +37,8 @@ public class RopeGun : MonoBehaviour
 
     }
 
+    // Buttons of the actual ropeGun
+
     public void StartPressingTrigger()
     {
         if (gunState == RopeGunState.loaded)
@@ -61,6 +63,13 @@ public class RopeGun : MonoBehaviour
         SwitchToState(RopeGunState.loaded);
         grappleDisconnected.Raise();
     }
+
+    public void PressAttachRopeToSurfaceButton()
+    {
+        Debug.Log("Attached rope to surface.");
+    }
+
+
 
     private void ShootGrappler()
     {
