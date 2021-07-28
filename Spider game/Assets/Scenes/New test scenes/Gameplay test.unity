@@ -549,6 +549,13 @@ MonoBehaviour:
   chainLinkSource: {fileID: 3838967122460157887}
   projectilePrefab: {fileID: 3220849627394484396, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
   projectile: {fileID: 379039452}
+  raycastObstacles:
+    serializedVersion: 2
+    m_Bits: 512
+  possibleObjectsToAttachRopeTo:
+    serializedVersion: 2
+    m_Bits: 512
+  maximumDistanceToSurfaceToAttachRopeTo: 2
 --- !u!1 &176290438
 GameObject:
   m_ObjectHideFlags: 0
