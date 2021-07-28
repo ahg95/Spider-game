@@ -5,25 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Rotator : MonoBehaviour
 {
-
-
-    [Header("Rotational forces")]
-
-    public float xTorque;
-    public float xMaximumSpeed;
-
-    public float yTorque;
-    public float yMaximumSpeed;
-
-    public float zTorque;
-    public float zMaximumSpeed;
+    public Vector3 rotationSpeed;
 
     new Rigidbody rigidbody;
-
-    private void Reset()
-    {
-
-    }
 
     Rigidbody GetRigidbody()
     {
@@ -35,6 +19,6 @@ public class Rotator : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        GetRigidbody().MoveRotation(transform.rotation * Quaternion.Euler(rotationSpeed * Time.fixedDeltaTime));
     }
 }
