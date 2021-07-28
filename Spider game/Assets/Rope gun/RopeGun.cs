@@ -11,16 +11,20 @@ public class RopeGun : MonoBehaviour
     public Transform muzzle;
     public Sticky projectilePrefab;
 
-    public ChainLinkSource chainLinkSource;
+    public Transform ropeParent;
+    public GameObject ropePrefab;
 
+    public ChainLinkSource chainLinkSourcePrefab;
+    public ChainLinkSource chainLinkSource;
 
     [Header("Rope attaching")]
     public LayerMask raycastObstacles;
     public LayerMask possibleObjectsToAttachRopeTo;
     public float maximumDistanceToSurfaceToAttachRopeTo;
 
+    GameObject currentRope;
     Sticky projectile;
-    RopeGunState gunState;
+    RopeGunState gunState = RopeGunState.undefinedState;
 
     enum RopeGunState
     {
@@ -28,6 +32,17 @@ public class RopeGun : MonoBehaviour
         loaded,
         grappleInAir,
         grappleConnected
+    }
+
+    void InitializeGun()
+    {
+        InstantiateRope();
+    }
+
+
+    void InstantiateRope()
+    {
+        currentRope = Instantiate(ropePrefab, ropeParent);
     }
 
     private void OnEnable()
