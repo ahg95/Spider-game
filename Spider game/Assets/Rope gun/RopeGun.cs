@@ -24,6 +24,7 @@ public class RopeGun : MonoBehaviour
     private void OnEnable()
     {
         SwitchToState(RopeGunState.loaded);
+        PressReloadButton(); // Makes sure that there is a grapple to shoot
     }
 
     private void Update()
@@ -73,7 +74,8 @@ public class RopeGun : MonoBehaviour
             Destroy(chainLinkSource.chainLinkParent.GetChild(i).gameObject);
         }
 
-        Destroy(projectile.gameObject);
+        if (projectile)
+            Destroy(projectile.gameObject);
     }
 
     void SwitchToState(RopeGunState state)

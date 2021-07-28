@@ -2223,6 +2223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grapple
       objectReference: {fileID: 0}
+    - target: {fileID: 3220849627394484407, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
 --- !u!114 &379039452 stripped
