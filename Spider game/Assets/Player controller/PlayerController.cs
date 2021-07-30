@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
             ropeGun?.PressReloadButton();
 
         if (Input.GetKeyDown(KeyCode.E))
-            ropeGun?.PressAttachRopeToSurfaceButton();
+            ropeGun?.PressAttachButton();
 
         // Character movement input
 

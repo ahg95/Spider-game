@@ -69,6 +69,18 @@ public class ChainLinkSource : MonoBehaviour
         ConnectSpringJointTohookToConnectChainLinkTo();
     }
 
+    public void LockRopeLength()
+    {
+        maximumPushOutSpeed = 0;
+        maximumPullInSpeed = 0;
+    }
+
+    public void UnlockRopeLength()
+    {
+        maximumPushOutSpeed = Mathf.Infinity;
+        maximumPullInSpeed = Mathf.Infinity;
+    }
+
     void SpawnAndAttachChainLinkToHook()
     {
         GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);

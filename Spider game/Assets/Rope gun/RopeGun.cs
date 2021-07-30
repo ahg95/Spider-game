@@ -5,44 +5,43 @@ using UnityEngine;
 
 public class RopeGun : MonoBehaviour
 {
-    public GameEvent grappleDisconnected;
+    [Header("General")]
+    public float shootingForceAmount;
 
-    public float shootingForce;
     public Transform muzzle;
-    public Sticky projectilePrefab;
+    [Tooltip("The rigidbody that the chainLinkSource should be connected to.")]
+    public Rigidbody rigidBodyToConnectedChainLinkSourceTo;
 
-    public Transform ropeParent;
+    [Header("Prefabs")]
     public GameObject ropePrefab;
-
+    public Sticky projectilePrefab;
     public ChainLinkSource chainLinkSourcePrefab;
-    public ChainLinkSource chainLinkSource;
 
     [Header("Rope attaching")]
     public LayerMask raycastObstacles;
     public LayerMask possibleObjectsToAttachRopeTo;
     public float maximumDistanceToSurfaceToAttachRopeTo;
 
-    GameObject currentRope;
+    [Header("Optional bookkeeping")]
+    public Transform ropeParent;
+    public Transform chainLinkSourceParent;
+    public Transform projectileParent;
+
+    [Header("Events")]
+    public GameEvent grappleDisconnected;
+
+    GameObject rope;
     Sticky projectile;
-    RopeGunState gunState = RopeGunState.undefinedState;
+    ChainLinkSource chainLinkSource;
+
+    RopeGunState gunState = RopeGunState.unloaded;
 
     enum RopeGunState
     {
-        undefinedState,
-        loaded,
-        grappleInAir,
-        grappleConnected
-    }
-
-    void InitializeGun()
-    {
-        InstantiateRope();
-    }
-
-
-    void InstantiateRope()
-    {
-        currentRope = Instantiate(ropePrefab, ropeParent);
+        unloaded, // The initial state of the gun. There is no projectile, no chainLinkSource, and no rope.
+        loaded, // The gun is ready to fire.
+        shot, // The projectile is shot out and flying in the air.
+        connected // The projectile has hit something.
     }
 
     private void OnEnable()
@@ -53,23 +52,15 @@ public class RopeGun : MonoBehaviour
     private void Update()
     {
         if (gunState == RopeGunState.loaded)
-            MoveProjectileToMuzzle();
+            MoveProjectileToMuzzleIfExistent();
     }
 
-    void MoveProjectileToMuzzle()
-    {
-        projectile.transform.position = muzzle.position;
-        projectile.transform.rotation = muzzle.rotation;
-    }
-
-    // Buttons of the actual ropeGun
+    // --- Buttons of the actual ropeGun that the player can press ---
 
     public void StartPressingTrigger()
     {
         if (gunState == RopeGunState.loaded)
-        {
-            SwitchToGrappleInAirState();
-        }
+            SwitchToShotState();
     }
 
     public void StopPressingTrigger()
@@ -79,12 +70,14 @@ public class RopeGun : MonoBehaviour
 
     public void PressReloadButton()
     {
-        SwitchToLoadedState();
+        if (gunState == RopeGunState.shot
+            || gunState == RopeGunState.connected)
+            SwitchToLoadedState();
     }
 
-    public void PressAttachRopeToSurfaceButton()
+    public void PressAttachButton()
     {
-        if (gunState == RopeGunState.grappleConnected)
+        if (gunState == RopeGunState.connected)
         {
             RaycastHit hitInfo;
             if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, maximumDistanceToSurfaceToAttachRopeTo, raycastObstacles))
@@ -94,17 +87,122 @@ public class RopeGun : MonoBehaviour
                 if (LayerMaskContainsLayer(possibleObjectsToAttachRopeTo, hitObject.layer))
                 {
                     AttachRopeToObjectAtPositionWithNormal(hitObject, hitInfo.point, hitInfo.normal);
-                    InstantiateChainLinkSource();
 
-                    SwitchToLoadedState();
+                    SwitchToUnloadedState();
                 }
             }
         }
     }
 
-    public void OnGrappleConnected()
+    // --- State transitions ---
+
+    void SwitchToUnloadedState()
     {
-        SwitchToGrappleConnectedState();
+        rope = null;
+        projectile = null;
+        chainLinkSource = null;
+
+        gunState = RopeGunState.unloaded;
+
+        // Automatic reloading
+        SwitchToLoadedState();
+    }
+
+    void SwitchToLoadedState()
+    {
+        if (gunState == RopeGunState.unloaded)
+        {
+            InstantiateAndConfigureRopeIfNotExistent();
+            InstantiateAndConfigureProjectileIfNotExistent();
+            InstantiateAndConfigureChainLinkSourceIfNotExistent();
+        }
+        else if (gunState == RopeGunState.shot)
+        {
+            DestroyChainLinksOfCurrentRopeIfExistent();
+            MoveProjectileToMuzzleIfExistent();
+            chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+        }
+        else if (gunState == RopeGunState.connected)
+        {
+            DestroyChainLinksOfCurrentRopeIfExistent();
+            MoveProjectileToMuzzleIfExistent();
+            chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+
+            grappleDisconnected.Raise();
+        }
+
+        chainLinkSource.LockRopeLength();
+        projectile.DisableStickiness();
+
+        gunState = RopeGunState.loaded;
+    }
+
+    void SwitchToShotState()
+    {
+        MoveProjectileToMuzzleIfExistent();
+        ShootProjectile();
+
+        chainLinkSource.UnlockRopeLength();
+        projectile.EnableStickiness();
+
+        gunState = RopeGunState.shot;
+    }
+
+    void SwitchToConnectedState()
+    {
+        chainLinkSource.LockRopeLength();
+
+        gunState = RopeGunState.connected;
+    }
+
+    // --- Other methods ---
+
+    void MoveProjectileToMuzzleIfExistent()
+    {
+        if (projectile)
+        {
+            projectile.transform.position = muzzle.position;
+            projectile.transform.rotation = muzzle.rotation;
+        }
+    }
+
+    void InstantiateAndConfigureRopeIfNotExistent()
+    {
+        if (!rope)
+        {
+            rope = Instantiate(ropePrefab, ropeParent);
+
+            if (chainLinkSource)
+                chainLinkSource.chainLinkParent = rope.transform;
+        }
+    }
+
+    void InstantiateAndConfigureProjectileIfNotExistent()
+    {
+        if (!projectile)
+        {
+            projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+            projectile.DisableStickiness();
+
+            if (chainLinkSource)
+                chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+        }
+
+    }
+
+    void InstantiateAndConfigureChainLinkSourceIfNotExistent()
+    {
+        if (!chainLinkSource)
+        {
+            chainLinkSource = Instantiate(chainLinkSourcePrefab, rigidBodyToConnectedChainLinkSourceTo.transform.position, Quaternion.identity, chainLinkSourceParent);
+            chainLinkSource.GetComponent<FixedJoint>().connectedBody = rigidBodyToConnectedChainLinkSourceTo;
+
+            if (rope)
+                chainLinkSource.chainLinkParent = rope.transform;
+
+            if (projectile)
+                chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+        }
     }
 
     private bool LayerMaskContainsLayer(LayerMask mask, int layer) => IntegerHasBitSetAtIndex(mask.value, layer);
@@ -112,12 +210,6 @@ public class RopeGun : MonoBehaviour
     // First, we shift the bit that we want to investigate to the rightmost position, which determines if the integer is even or odd. Then we set every other bit to '0' by doing a bitwise AND operation ('&') with the number one,
     // which has a '0' on all bits except for the rightmost. If this number is equal to one, only then the bit was set.
     private bool IntegerHasBitSetAtIndex(int integer, int index) => (((integer >> index) & 1) == 1);
-
-
-    private void InstantiateChainLinkSource()
-    {
-        //throw new NotImplementedException();
-    }
 
     private void AttachRopeToObjectAtPositionWithNormal(GameObject gameObject, Vector3 position, Vector3 direction)
     {
@@ -133,74 +225,25 @@ public class RopeGun : MonoBehaviour
         // TODO: rotate it towards the diraction
     }
 
-    void SwitchToLoadedState()
+    void DestroyChainLinksOfCurrentRopeIfExistent()
     {
-        if (gunState != RopeGunState.loaded)
+        if (rope)
         {
-            if (gunState == RopeGunState.grappleConnected)
-                grappleDisconnected.Raise();
-
-            DestroyRope();
-
-            projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
-            chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
-
-            projectile.DisableStickiness();
-            
-
-            chainLinkSource.maximumPullInSpeed = 0;
-            chainLinkSource.maximumPushOutSpeed = 0;
-
-
-            gunState = RopeGunState.loaded;
-        }
-    }
-
-    void DestroyRope()
-    {
-        for (int i = 0; i < chainLinkSource.chainLinkParent.childCount; i++)
-        {
-            Destroy(chainLinkSource.chainLinkParent.GetChild(i).gameObject);
-        }
-
-        if (projectile)
-            Destroy(projectile.gameObject);
-    }
-
-    void SwitchToGrappleInAirState()
-    {
-        if (gunState != RopeGunState.grappleInAir)
-        {
-            if (gunState == RopeGunState.loaded)
+            for (int i = 0; i < rope.transform.childCount; i++)
             {
-                MoveProjectileToMuzzle();
-                ShootGrappler();
+                Destroy(rope.transform.GetChild(i).gameObject);
             }
-
-
-            chainLinkSource.maximumPullInSpeed = Mathf.Infinity;
-            chainLinkSource.maximumPushOutSpeed = Mathf.Infinity;
-            projectile.EnableStickiness();
-
-
-            gunState = RopeGunState.grappleInAir;
         }
     }
 
-    private void ShootGrappler()
+    void ShootProjectile()
     {
-        projectile.GetRigidbody()?.AddForce(muzzle.forward * shootingForce, ForceMode.VelocityChange);
+        projectile.GetRigidbody()?.AddForce(muzzle.forward * shootingForceAmount, ForceMode.VelocityChange);
     }
 
-    void SwitchToGrappleConnectedState()
+    public void OnGrappleConnected()
     {
-        if (gunState != RopeGunState.grappleConnected)
-        {
-            chainLinkSource.maximumPullInSpeed = 0;
-            chainLinkSource.maximumPushOutSpeed = 0;
-
-
-            gunState = RopeGunState.grappleConnected;
-        }
+        if (gunState == RopeGunState.shot)
+            SwitchToConnectedState();
     }
 }
