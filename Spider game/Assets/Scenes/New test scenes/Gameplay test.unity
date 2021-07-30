@@ -7431,6 +7431,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1873779440}
     - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: rigidBodyToConnectChainLinkSourceTo
+      value: 
+      objectReference: {fileID: 1873779440}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: rigidBodyToConnectedChainLinkSourceTo
       value: 
       objectReference: {fileID: 1873779440}

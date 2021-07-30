@@ -9,8 +9,8 @@ public class RopeGun : MonoBehaviour
     public float shootingForceAmount;
 
     public Transform muzzle;
-    [Tooltip("The rigidbody that the chainLinkSource should be connected to.")]
-    public Rigidbody rigidBodyToConnectedChainLinkSourceTo;
+    [Tooltip("The specified rigidbody and the source of the rope will be connected by a fixed joint.")]
+    public Rigidbody rigidBodyToConnectChainLinkSourceTo;
 
     [Header("Prefabs")]
     public GameObject ropePrefab;
@@ -118,15 +118,11 @@ public class RopeGun : MonoBehaviour
         }
         else if (gunState == RopeGunState.shot)
         {
-            DestroyChainLinksOfCurrentRopeIfExistent();
-            MoveProjectileToMuzzleIfExistent();
-            chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+            chainLinkSource.PullInRopeInstantly();
         }
         else if (gunState == RopeGunState.connected)
         {
-            DestroyChainLinksOfCurrentRopeIfExistent();
-            MoveProjectileToMuzzleIfExistent();
-            chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+            chainLinkSource.PullInRopeInstantly();
 
             grappleDisconnected.Raise();
         }
@@ -194,8 +190,8 @@ public class RopeGun : MonoBehaviour
     {
         if (!chainLinkSource)
         {
-            chainLinkSource = Instantiate(chainLinkSourcePrefab, rigidBodyToConnectedChainLinkSourceTo.transform.position, Quaternion.identity, chainLinkSourceParent);
-            chainLinkSource.GetComponent<FixedJoint>().connectedBody = rigidBodyToConnectedChainLinkSourceTo;
+            chainLinkSource = Instantiate(chainLinkSourcePrefab, rigidBodyToConnectChainLinkSourceTo.transform.position, Quaternion.identity, chainLinkSourceParent);
+            chainLinkSource.GetComponent<FixedJoint>().connectedBody = rigidBodyToConnectChainLinkSourceTo;
 
             if (rope)
                 chainLinkSource.chainLinkParent = rope.transform;
@@ -223,17 +219,6 @@ public class RopeGun : MonoBehaviour
         sticky.StickTo(gameObject);
 
         // TODO: rotate it towards the diraction
-    }
-
-    void DestroyChainLinksOfCurrentRopeIfExistent()
-    {
-        if (rope)
-        {
-            for (int i = 0; i < rope.transform.childCount; i++)
-            {
-                Destroy(rope.transform.GetChild(i).gameObject);
-            }
-        }
     }
 
     void ShootProjectile()

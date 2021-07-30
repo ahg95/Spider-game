@@ -12,6 +12,7 @@ public class ChainLinkSource : MonoBehaviour
     public ChainLink chainLinkPrefab;
     public Transform chainLinkParent;
 
+
     [Range(0, 1)]
     public float friction;
     public float pushOutForceAmount;
@@ -36,7 +37,7 @@ public class ChainLinkSource : MonoBehaviour
     {
         positionAfterPreviousFixedUpdate = transform.position;
         positionAfterPreviousLateUpdate = transform.position;
-        ConnectSpringJointTohookToConnectChainLinkTo();
+        ConnectSpringJointTohookToConnectChainLinkToIfExistent();
     }
 
     // Update is called once per frame
@@ -66,7 +67,20 @@ public class ChainLinkSource : MonoBehaviour
     public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
     {
         hookToConnectChainLinkTo = hook;
-        ConnectSpringJointTohookToConnectChainLinkTo();
+        ConnectSpringJointTohookToConnectChainLinkToIfExistent();
+    }
+
+    public void PullInRopeInstantly()
+    {
+        while (hookToConnectChainLinkTo.GetComponent<ChainLink>())
+            ShortenRopeByOneLink();
+
+        hookToConnectChainLinkTo.transform.position = transform.position;
+    }
+
+    public void SetChainLinkParent(Transform parent)
+    {
+        chainLinkParent = parent;
     }
 
     public void LockRopeLength()
@@ -89,7 +103,7 @@ public class ChainLinkSource : MonoBehaviour
 
         hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
 
-        ConnectSpringJointTohookToConnectChainLinkTo();
+        ConnectSpringJointTohookToConnectChainLinkToIfExistent();
     }
 
     void ShortenRopeByOneLink()
@@ -104,7 +118,7 @@ public class ChainLinkSource : MonoBehaviour
 
             Destroy(objectToDestroy);
 
-            ConnectSpringJointTohookToConnectChainLinkTo();
+            ConnectSpringJointTohookToConnectChainLinkToIfExistent();
         }
     }
 
@@ -133,7 +147,11 @@ public class ChainLinkSource : MonoBehaviour
         GetSpringJoint().maxDistance = distanceToHook + maximumPushOutSpeed * Time.fixedDeltaTime;
     }
 
-    void ConnectSpringJointTohookToConnectChainLinkTo() => GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+    void ConnectSpringJointTohookToConnectChainLinkToIfExistent()
+    {
+        if (hookToConnectChainLinkTo)
+            GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+    }
 
     Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
 
