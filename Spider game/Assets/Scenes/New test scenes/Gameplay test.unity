@@ -9635,6 +9635,22 @@ PrefabInstance:
       propertyPath: ropeParent
       value: 
       objectReference: {fileID: 1165298144}
+    - target: {fileID: 1427783912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: uptakingRopeForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427783912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: expellingRopeForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427783912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: maximumRopeUptakingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427783912, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: maximumRopeExpellingSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2454369354277557907, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_RootOrder
       value: 0

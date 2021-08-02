@@ -22,6 +22,13 @@ public class RopeGun : MonoBehaviour
     public LayerMask possibleObjectsToAttachRopeTo;
     public float maximumDistanceToSurfaceToAttachRopeTo;
 
+    [Header("Uptaking and expelling")]
+    public float maximumRopeExpellingSpeed;
+    public float expellingRopeForce;
+    [Space(10)]
+    public float maximumRopeUptakingSpeed;
+    public float uptakingRopeForce;
+
     [Header("Optional bookkeeping")]
     public Transform ropeParent;
     public Transform chainLinkSourceParent;
@@ -29,6 +36,8 @@ public class RopeGun : MonoBehaviour
 
     [Header("Events")]
     public GameEvent grappleDisconnected;
+
+
 
     GameObject rope;
     Sticky projectile;
@@ -139,6 +148,46 @@ public class RopeGun : MonoBehaviour
                     SwitchToUnloadedState();
                 }
             }
+        }
+    }
+
+    public void StartPressingExpellRopeButton()
+    {
+        if (gunState == RopeGunState.connected)
+        {
+            chainLinkSource.maximumPushOutSpeed = maximumRopeExpellingSpeed;
+            chainLinkSource.maximumPullInSpeed = 0;
+
+            chainLinkSource.pushOutForceAmount = expellingRopeForce;
+        }
+    }
+
+    public void StopPressingExpellRopeButton()
+    {
+        if (gunState == RopeGunState.connected)
+        {
+            chainLinkSource.LockRopeLength();
+            chainLinkSource.pushOutForceAmount = 0;
+        }
+    }
+
+    public void StartPressingTakeUpRopeButton()
+    {
+        if (gunState == RopeGunState.connected)
+        {
+            chainLinkSource.maximumPushOutSpeed = 0;
+            chainLinkSource.maximumPullInSpeed = maximumRopeUptakingSpeed;
+
+            chainLinkSource.pushOutForceAmount = -uptakingRopeForce;
+        }
+    }
+
+    public void StopPressingTakeUpRopeButton()
+    {
+        if (gunState == RopeGunState.connected)
+        {
+            chainLinkSource.LockRopeLength();
+            chainLinkSource.pushOutForceAmount = 0;
         }
     }
 

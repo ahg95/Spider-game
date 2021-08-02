@@ -23,6 +23,16 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
             ropeGun?.PressAttachButton();
 
+        if (Input.GetKeyDown(KeyCode.C))
+            ropeGun?.StartPressingExpellRopeButton();
+        else if (Input.GetKeyUp(KeyCode.C))
+            ropeGun?.StopPressingExpellRopeButton();
+
+        if (Input.GetKeyDown(KeyCode.V))
+            ropeGun?.StartPressingTakeUpRopeButton();
+        else if (Input.GetKeyUp(KeyCode.V))
+            ropeGun?.StopPressingTakeUpRopeButton();
+
         // Character movement input
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -32,8 +42,7 @@ public class PlayerInputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
             characterBody?.SetAsSprinting();
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
             characterBody?.SetAsNotSprinting();
     }
 }
