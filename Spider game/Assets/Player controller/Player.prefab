@@ -113,12 +113,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec19a150fbf8cf4893bdc324538fc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grappleDisconnected: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
-  shootingForce: 50
+  shootingForceAmount: 0
   muzzle: {fileID: 963194228}
-  chainLinkSource: {fileID: 0}
+  rigidBodyToConnectChainLinkSourceTo: {fileID: 0}
+  ropePrefab: {fileID: 0}
   projectilePrefab: {fileID: 3220849627394484396, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
-  projectile: {fileID: 0}
+  chainLinkSourcePrefab: {fileID: 0}
+  raycastObstacles:
+    serializedVersion: 2
+    m_Bits: 0
+  possibleObjectsToAttachRopeTo:
+    serializedVersion: 2
+    m_Bits: 0
+  maximumDistanceToSurfaceToAttachRopeTo: 0
+  ropeParent: {fileID: 0}
+  chainLinkSourceParent: {fileID: 0}
+  projectileParent: {fileID: 0}
+  grappleDisconnected: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
 --- !u!114 &1790873914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +331,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3415693457182217628}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a360231a3616d014981ab49d264a7ecf, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

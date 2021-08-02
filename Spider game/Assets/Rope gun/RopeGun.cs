@@ -94,6 +94,13 @@ public class RopeGun : MonoBehaviour
         }
     }
 
+    // --- Resetting the gun ---
+
+    public void Reset()
+    {
+
+    }
+
     // --- State transitions ---
 
     void SwitchToUnloadedState()

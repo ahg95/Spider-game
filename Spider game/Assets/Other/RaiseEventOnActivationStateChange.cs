@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /// <summary>
 /// Raises the respective <c>gameEvent</c> on enabling or disabling and, if specified, writes this gameObject into the respective <c>gameVariable</c>.
 /// </summary>
-public class RaiseOnActivationStateChange : MonoBehaviour
+public class RaiseEventOnActivationStateChange : MonoBehaviour
 {
     [Header("On Enable")]
     [SerializeField]

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     public RopeGun ropeGun;
     public PhysicsCharacterBody characterBody;
