@@ -9,7 +9,6 @@ public class CurvePointManager : MonoBehaviour
 {
     bool debug;
 
-
     [SerializeField]
     [Tooltip("The CurveCalculator for which the CurvePoints should be managed for.")]
     CurveCalculator curveCalculatorToManagePointsFor;
@@ -30,7 +29,6 @@ public class CurvePointManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
             debug = !debug;
     }
-
 
     /// <summary>
     /// Recursively finds all <see cref="Transform"/>s in the child hierarchy of <paramref name="parent"/> that have a <see cref="CurvePoint"/> component attached to them, in order. The search is a depth-first search.
