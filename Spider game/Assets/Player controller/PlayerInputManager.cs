@@ -23,14 +23,14 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
             ropeGun?.PressAttachButton();
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
             ropeGun?.StartPressingExpellRopeButton();
-        else if (Input.GetKeyUp(KeyCode.C))
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
             ropeGun?.StopPressingExpellRopeButton();
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
             ropeGun?.StartPressingTakeUpRopeButton();
-        else if (Input.GetKeyUp(KeyCode.V))
+        else if (Input.GetKeyUp(KeyCode.Mouse1))
             ropeGun?.StopPressingTakeUpRopeButton();
 
         // Character movement input

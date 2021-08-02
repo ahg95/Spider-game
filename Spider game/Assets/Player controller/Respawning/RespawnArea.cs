@@ -24,12 +24,7 @@ public class RespawnArea : MonoBehaviour
     {
         RespawnTrigger respawnTrigger = other.GetComponent<RespawnTrigger>();
 
-        Debug.Log("Intruded area.");
-
         if (respawnTrigger)
-        {
             respawnTrigger.SetRespawnPoint(respawnPoint);
-            Debug.Log("Activated spawn area.");
-        }
     }
 }

@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highVelocityCollisionOccured: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
-  minimumRelativeVelocity: 10
+  minimumRelativeVelocity: 20
 --- !u!114 &1609999746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +560,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: uptakingRopeForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: expellingRopeForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: shootingForceAmount
       value: 50
       objectReference: {fileID: 0}
@@ -567,6 +575,14 @@ PrefabInstance:
       propertyPath: chainLinkSourcePrefab
       value: 
       objectReference: {fileID: 2544006029041961075, guid: b7ef7055569e9934baf8d2bc893f79b4, type: 3}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: maximumRopeUptakingSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: maximumRopeExpellingSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: rigidBodyConnectedToChainLinkSource
       value: 
