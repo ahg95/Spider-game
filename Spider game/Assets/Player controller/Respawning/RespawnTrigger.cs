@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class RespawnTrigger : MonoBehaviour
 {
-    [Tooltip("The Transform that should be moved to the respawn point when Respawn() is called. If none is specified, this is the transform that this component is attached to.")]
-    public Transform transformToRespawn;
+    [Tooltip("This should be the prefab that should be spawned when this GameObject is destroyed.")]
+    public GameObject respawnPrefab;
 
     Transform respawnPoint;
 
@@ -30,13 +30,10 @@ public class RespawnTrigger : MonoBehaviour
 
     public void RespawnIfPossible()
     {
+        Destroy(gameObject);
+
         if (respawnPoint)
-        {
-            if (transformToRespawn)
-                transformToRespawn.position = respawnPoint.position;
-            else
-                transform.position = respawnPoint.position;
-        }
+            Instantiate(respawnPrefab, respawnPoint.position, respawnPoint.rotation);
     }
 
     void DestroyCurrentRespawnPointIfItWasInstantiated()

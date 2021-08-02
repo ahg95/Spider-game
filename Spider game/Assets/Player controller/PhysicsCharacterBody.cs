@@ -6,8 +6,12 @@ using UnityEngine;
 public class PhysicsCharacterBody : MonoBehaviour
 {
     [Header("Ground movement")]
-    public float groundMaximumSpeed;
-    public float groundAcceleration;
+    public float walkingMaximumSpeed;
+    public float walkingAcceleration;
+
+    [Space(10)]
+    public float sprintingMaximumSpeed;
+    public float sprintingAcceleration;
 
     [Header("Air movement")]
     public float airMaximumSpeed;
@@ -24,6 +28,7 @@ public class PhysicsCharacterBody : MonoBehaviour
     public Transform groundCheckOrigin;
 
     Vector2 movementInput;
+    bool isSprinting = false;
 
     new Rigidbody rigidbody;
 
@@ -50,7 +55,7 @@ public class PhysicsCharacterBody : MonoBehaviour
 
     public void DeactivateAutomaticAirMotionStop() => automaticAirMotionStop = false;
 
-    public void AttemptJump()
+    public void JumpIfGrounded()
     {
         if (IsInContactWithGround())
             Jump();
@@ -59,6 +64,16 @@ public class PhysicsCharacterBody : MonoBehaviour
     public void SetMovementInput(Vector2 input)
     {
         movementInput = input;
+    }
+
+    public void SetAsSprinting()
+    {
+        isSprinting = true;
+    }
+
+    public void SetAsNotSprinting()
+    {
+        isSprinting = false;
     }
 
     void Jump()
@@ -77,9 +92,17 @@ public class PhysicsCharacterBody : MonoBehaviour
         float maximumDeltaVelocity;
 
         if (IsInContactWithGround())
-        {
-            maximumSpeed = groundMaximumSpeed;
-            maximumDeltaVelocity = groundAcceleration * Time.fixedDeltaTime;
+        { 
+            if (isSprinting)
+            {
+                maximumSpeed = sprintingMaximumSpeed;
+                maximumDeltaVelocity = sprintingAcceleration * Time.fixedDeltaTime;
+            }
+            else
+            {
+                maximumSpeed = walkingMaximumSpeed;
+                maximumDeltaVelocity = walkingAcceleration * Time.fixedDeltaTime;
+            }
         }
         else
         {

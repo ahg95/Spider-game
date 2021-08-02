@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  - component: {fileID: 1790873911}
-  - component: {fileID: 1790873914}
   m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -101,63 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensititvity: 1000
   transformToRotateHorizontally: {fileID: 2454369354277557907}
---- !u!114 &1790873911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eec19a150fbf8cf4893bdc324538fc2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootingForceAmount: 0
-  muzzle: {fileID: 963194228}
-  rigidBodyToConnectChainLinkSourceTo: {fileID: 0}
-  ropePrefab: {fileID: 0}
-  projectilePrefab: {fileID: 3220849627394484396, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
-  chainLinkSourcePrefab: {fileID: 0}
-  raycastObstacles:
-    serializedVersion: 2
-    m_Bits: 0
-  possibleObjectsToAttachRopeTo:
-    serializedVersion: 2
-    m_Bits: 0
-  maximumDistanceToSurfaceToAttachRopeTo: 0
-  ropeParent: {fileID: 0}
-  chainLinkSourceParent: {fileID: 0}
-  projectileParent: {fileID: 0}
-  grappleDisconnected: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
---- !u!114 &1790873914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: f4a073eae43a72f4d8e5331240bcb196, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1790873911}
-        m_TargetAssemblyTypeName: RopeGun, Assembly-CSharp
-        m_MethodName: OnGrappleConnected
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1824113506
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +145,93 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6696902490578507135, guid: b738a4f900dab9e4894b74f11d8c3e96, type: 3}
   projectileAccelerationForce: 1000
   shootCooldownTime: 0.3333
+--- !u!1 &2052566084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052566085}
+  - component: {fileID: 2052566086}
+  - component: {fileID: 2052566087}
+  - component: {fileID: 2052566088}
+  m_Layer: 11
+  m_Name: Respawn trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2052566085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052566084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2454369354277557907}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2052566086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052566084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3293194020c394a4e8a09b725bd362ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPrefab: {fileID: 0}
+--- !u!114 &2052566087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052566084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2052566086}
+        m_TargetAssemblyTypeName: RespawnTrigger, Assembly-CSharp
+        m_MethodName: RespawnIfPossible
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!135 &2052566088
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052566084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2050589583050215384
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +279,9 @@ GameObject:
   - component: {fileID: 6025585511429867172}
   - component: {fileID: 1873779436}
   - component: {fileID: 1873779437}
-  - component: {fileID: 2425351673699367658}
+  - component: {fileID: 3227014488554807971}
+  - component: {fileID: 1609999746}
+  - component: {fileID: 1609999747}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -272,6 +302,8 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   - {fileID: 729994906096328846}
+  - {fileID: 1427783918}
+  - {fileID: 2052566085}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -366,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3255a902fb1b0f46ad303cf7da0887f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ropeGun: {fileID: 1790873911}
+  ropeGun: {fileID: 1427783912}
   characterBody: {fileID: 6025585511429867172}
 --- !u!114 &6025585511429867172
 MonoBehaviour:
@@ -380,12 +412,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f369abede6a2955439cafba45f1482de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMaximumSpeed: 5
-  groundAcceleration: 100
+  walkingMaximumSpeed: 5
+  walkingAcceleration: 100
+  sprintingMaximumSpeed: 7
+  sprintingAcceleration: 100
   airMaximumSpeed: 3
   airAcceleration: 20
   automaticAirMotionStop: 1
-  jumpHeight: 1.25
+  jumpHeight: 1.5
   groundCheckRadius: 0.4
   groundObjectLayers:
     serializedVersion: 2
@@ -447,18 +481,171 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!138 &2425351673699367658
-FixedJoint:
+--- !u!114 &3227014488554807971
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3415693457182217628}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9cd4c2b2803bc4692a505bb2d07d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highVelocityCollisionOccured: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
+  minimumRelativeVelocity: 10
+--- !u!114 &1609999746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415693457182217628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1609999747}
+        m_TargetAssemblyTypeName: RespawnTrigger, Assembly-CSharp
+        m_MethodName: RespawnIfPossible
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1609999747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415693457182217628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3293194020c394a4e8a09b725bd362ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPrefab: {fileID: 3415693457182217628}
+--- !u!1001 &8868387781417114715
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2454369354277557907}
+    m_Modifications:
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: muzzle
+      value: 
+      objectReference: {fileID: 963194228}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: ropeParent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: ropePrefab
+      value: 
+      objectReference: {fileID: 8691312756685919538, guid: f1447c1dd05a78348b8323e25166ddf5, type: 3}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: chainLinkSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: shootingForceAmount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: chainLinkSourcePrefab
+      value: 
+      objectReference: {fileID: 2544006029041961075, guid: b7ef7055569e9934baf8d2bc893f79b4, type: 3}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: rigidBodyConnectedToChainLinkSource
+      value: 
+      objectReference: {fileID: 2585736452109968280}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: rigidBodyToConnectChainLinkSourceTo
+      value: 
+      objectReference: {fileID: 2585736452109968280}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: rigidBodyToConnectedChainLinkSourceTo
+      value: 
+      objectReference: {fileID: 2585736452109968280}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940918, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_Name
+      value: Rope gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940918, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+--- !u!4 &1427783918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+  m_PrefabInstance: {fileID: 8868387781417114715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427783912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+  m_PrefabInstance: {fileID: 8868387781417114715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec19a150fbf8cf4893bdc324538fc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
