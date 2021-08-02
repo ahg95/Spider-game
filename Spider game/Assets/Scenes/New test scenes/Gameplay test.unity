@@ -9681,7 +9681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3227014488554807971, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: minimumRelativeVelocity
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3415693457182217628, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_Name

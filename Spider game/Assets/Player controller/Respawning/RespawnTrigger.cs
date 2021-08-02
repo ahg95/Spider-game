@@ -30,10 +30,10 @@ public class RespawnTrigger : MonoBehaviour
 
     public void RespawnIfPossible()
     {
-        Destroy(gameObject);
-
         if (respawnPoint)
             Instantiate(respawnPrefab, respawnPoint.position, respawnPoint.rotation);
+
+        Destroy(gameObject);
     }
 
     void DestroyCurrentRespawnPointIfItWasInstantiated()
