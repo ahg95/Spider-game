@@ -30,6 +30,7 @@ public class RespawnTrigger : MonoBehaviour
 
     public void RespawnIfPossible()
     {
+        // Instantiation has to happen before destruction because otherwise all components of the player are disabled, and I don't completely understand why.
         if (respawnPoint)
             Instantiate(respawnPrefab, respawnPoint.position, respawnPoint.rotation);
 
