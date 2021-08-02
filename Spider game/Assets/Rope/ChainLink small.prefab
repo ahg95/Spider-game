@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7061715689586702715}
   - component: {fileID: 4001393874297986907}
   - component: {fileID: 5879515822351633608}
-  - component: {fileID: 9055587155117284729}
+  - component: {fileID: 717892164943573870}
   m_Layer: 8
   m_Name: ChainLink small
   m_TagString: Untagged
@@ -271,7 +271,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &9055587155117284729
+--- !u!114 &717892164943573870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,10 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be765cf0a855da43a98269ca4ec9c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wasEnabled: {fileID: 11400000, guid: bbf89f0fe23ef7544a5760dc3cb9a6db, type: 2}
-  setOnEnable: {fileID: 11400000, guid: 90c737a729206b84f99504f719b155f9, type: 2}
-  wasDisabled: {fileID: 11400000, guid: af2d056af04e13046a289a522bdd8725, type: 2}
-  setOnDisable: {fileID: 11400000, guid: 90c737a729206b84f99504f719b155f9, type: 2}
+  eventToRaiseOnEnable: {fileID: 11400000, guid: df4dea365b748054e9c0ee4cc506d047, type: 2}
+  variableToOverwriteWithThisGameObjectOnEnable: {fileID: 0}
+  eventToRaiseOnDisable: {fileID: 11400000, guid: df4dea365b748054e9c0ee4cc506d047, type: 2}
+  variableToOverwriteWithThisGameObjectOnDisable: {fileID: 0}
 --- !u!1 &5346193304607099243
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8691312756685919543}
   - component: {fileID: 8691312756685919536}
   - component: {fileID: 8691312756685919547}
-  - component: {fileID: 8691312756685919546}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -87,7 +86,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curveCalculatorToManagePointsFor: {fileID: 8691312756685919541}
-  gameObjectToSearchForCurvePoints: {fileID: 11400000, guid: 90c737a729206b84f99504f719b155f9, type: 2}
 --- !u!23 &8691312756685919540
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -165,41 +163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: bbf89f0fe23ef7544a5760dc3cb9a6db, type: 2}
+  GameEvent: {fileID: 11400000, guid: df4dea365b748054e9c0ee4cc506d047, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8691312756685919542}
         m_TargetAssemblyTypeName: CurvePointManager, Assembly-CSharp
-        m_MethodName: SearchAndAddCurvePoints
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8691312756685919546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8691312756685919538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: af2d056af04e13046a289a522bdd8725, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8691312756685919542}
-        m_TargetAssemblyTypeName: CurvePointManager, Assembly-CSharp
-        m_MethodName: SearchAndRemoveCurvePoints
+        m_MethodName: FindActiveCurvePointsInChildHierarchyAndSetCurveCalculatorToUseThem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

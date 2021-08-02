@@ -11,46 +11,36 @@ public class CurvePointManager : MonoBehaviour
     [Tooltip("The CurveCalculator for which the CurvePoints should be managed for.")]
     CurveCalculator curveCalculatorToManagePointsFor;
 
-    [SerializeField]
-    [Tooltip("The parent of the child hierarchy that will be searched for CurvePoints.")]
-    GameObjectVariable gameObjectToSearchForCurvePoints;
-
-    public void SearchAndRemoveCurvePoints()
+    public void FindActiveCurvePointsInChildHierarchyAndSetCurveCalculatorToUseThem()
     {
-        List<Transform> curvePoints = GetAllCurvePointsInChildrenInOrderOfTransform(gameObjectToSearchForCurvePoints.RuntimeValue.transform);
+        List<Transform> allActiveCurvePointsInChildHierarchy = GetAllActiveCurvePointsInChildrenInOrderOfTransform(transform);
 
-        foreach (Transform curvePoint in curvePoints)
-            curveCalculatorToManagePointsFor.RemoveCurvePoint(curvePoint);
-    }
-
-    public void SearchAndAddCurvePoints()
-    {
-        List<Transform> curvePoints = GetAllCurvePointsInChildrenInOrderOfTransform(gameObjectToSearchForCurvePoints.RuntimeValue.transform);
-
-        foreach (Transform curvePoint in curvePoints)
-            curveCalculatorToManagePointsFor.AddCurvePoint(curvePoint);
+        curveCalculatorToManagePointsFor.SetCurvePoints(allActiveCurvePointsInChildHierarchy);
     }
 
     /// <summary>
-    /// Recursively finds all <see cref="Transform"/>s in the child hierarchy of <see cref="gameObjectToSearchForCurvePoints"/> that have a <see cref="CurvePoint"/> component attached to them.
+    /// Recursively finds all <see cref="Transform"/>s in the child hierarchy of <paramref name="parent"/> that have a <see cref="CurvePoint"/> component attached to them, in order. The search is a depth-first search.
     /// </summary>
     /// <param name="parent"></param>
     /// <returns></returns>
-    List<Transform> GetAllCurvePointsInChildrenInOrderOfTransform(Transform parent)
+    List<Transform> GetAllActiveCurvePointsInChildrenInOrderOfTransform(Transform parent)
     {
-        List<Transform> allCurvePointsInChildren = new List<Transform>();
+        List<Transform> allActiveCurvePointsInChildren = new List<Transform>();
 
         for (int i = 0; i < parent.childCount; i++)
         {
             Transform child = parent.GetChild(i);
 
-            if (child.GetComponent<CurvePoint>())
-                allCurvePointsInChildren.Add(child);
+            if (child.gameObject.activeInHierarchy)
+            {
+                if (child.GetComponent<CurvePoint>())
+                    allActiveCurvePointsInChildren.Add(child);
 
-            if (0 < child.childCount)
-                allCurvePointsInChildren.AddRange(GetAllCurvePointsInChildrenInOrderOfTransform(child));
+                if (0 < child.childCount)
+                    allActiveCurvePointsInChildren.AddRange(GetAllActiveCurvePointsInChildrenInOrderOfTransform(child));
+            }
         }
 
-        return allCurvePointsInChildren;
+        return allActiveCurvePointsInChildren;
     }
 }

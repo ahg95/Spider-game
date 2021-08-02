@@ -35,13 +35,10 @@ public class CurveCalculator : MonoBehaviour
 
     void CalculateLinearInterpolationLength()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-            Debug.Log("Test");
-
         linearInterpolationLength = 0;
-        for (int i = 0; i < PointsToFitCurveTo.Count - 1; i++)
+        for (int i = 0; i < GetNumberOfCurvePoints() - 1; i++)
         {
-            linearInterpolationLength += (PointsToFitCurveTo[i + 1].position - PointsToFitCurveTo[i].position).magnitude;
+            linearInterpolationLength += (GetPointToFitCurveTo(i + 1) - GetPointToFitCurveTo(i)).magnitude;
         }
     }
 
