@@ -46,13 +46,61 @@ public class RopeGun : MonoBehaviour
 
     private void OnEnable()
     {
+        EnableInstantiatedObjectsIfExistent();
+
         SwitchToLoadedState();
+    }
+
+    private void OnDisable()
+    {
+        DisableInstantiatedObjectsIfExistent();
+    }
+
+    private void OnDestroy()
+    {
+        DestroyInstantiatedObjectsIfExistent();
     }
 
     private void Update()
     {
         if (gunState == RopeGunState.loaded)
             MoveProjectileToMuzzleIfExistent();
+    }
+
+    void EnableInstantiatedObjectsIfExistent()
+    {
+        if (rope)
+            rope.SetActive(true);
+
+        if (projectile)
+            projectile.gameObject.SetActive(true);
+
+        if (chainLinkSource)
+            projectile.gameObject.SetActive(true);
+    }
+
+    void DisableInstantiatedObjectsIfExistent()
+    {
+        if (rope)
+            rope.SetActive(false);
+
+        if (projectile)
+            projectile.gameObject.SetActive(false);
+
+        if (chainLinkSource)
+            projectile.gameObject.SetActive(false);
+    }
+
+    void DestroyInstantiatedObjectsIfExistent()
+    {
+        if (rope)
+            Destroy(rope);
+
+        if (projectile)
+            Destroy(projectile.gameObject);
+
+        if (chainLinkSource)
+            Destroy(chainLinkSource.gameObject);
     }
 
     // --- Buttons of the actual ropeGun that the player can press ---

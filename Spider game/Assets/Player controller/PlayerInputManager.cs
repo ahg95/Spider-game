@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     public RopeGun ropeGun;
     public PhysicsCharacterBody characterBody;
@@ -26,8 +26,14 @@ public class PlayerController : MonoBehaviour
         // Character movement input
 
         if (Input.GetKeyDown(KeyCode.Space))
-            characterBody?.AttemptJump();
+            characterBody?.JumpIfGrounded();
 
         characterBody?.SetMovementInput(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            characterBody?.SetAsSprinting();
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+            characterBody?.SetAsNotSprinting();
     }
 }
