@@ -12,7 +12,6 @@ public class ChainLinkSource : MonoBehaviour
     public ChainLink chainLinkPrefab;
     public Transform chainLinkParent;
 
-
     [Range(0, 1)]
     public float friction;
     public float pushOutForceAmount;
@@ -20,6 +19,7 @@ public class ChainLinkSource : MonoBehaviour
     public float maximumPullInSpeed;
 
     SpringJoint joint;
+    new Rigidbody rigidbody;
 
     Vector3 positionAfterPreviousFixedUpdate;
 
@@ -31,6 +31,13 @@ public class ChainLinkSource : MonoBehaviour
         if (joint == null)
             joint = GetComponent<SpringJoint>();
         return joint;
+    }
+
+    private Rigidbody GetRigidbody()
+    {
+        if (rigidbody == null)
+            rigidbody = GetComponent<Rigidbody>();
+        return rigidbody;
     }
 
     private void OnEnable()
@@ -137,6 +144,8 @@ public class ChainLinkSource : MonoBehaviour
     {
         Vector3 pushOutForceDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
         hookToConnectChainLinkTo.GetRigidbody().AddForce(pushOutForceDirection * pushOutForceAmount);
+        GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
+
     }
 
     void UpdateSpringJointValues()
