@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
     {
         // Rope gun input
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
             ropeGun?.StartPressingTrigger();
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
             ropeGun?.StopPressingTrigger();
 
         if (Input.GetKeyDown(KeyCode.R))
