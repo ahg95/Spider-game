@@ -140,4 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stickedToAnObject: {fileID: 11400000, guid: f4a073eae43a72f4d8e5331240bcb196, type: 2}
+  layersToStickTo:
+    serializedVersion: 2
+    m_Bits: 513
   stickOnTouch: 0
