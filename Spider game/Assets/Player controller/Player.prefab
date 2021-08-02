@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  - component: {fileID: 963194230}
   - component: {fileID: 1790873911}
-  - component: {fileID: 1790873913}
   - component: {fileID: 1790873914}
   m_Layer: 11
   m_Name: Main Camera
@@ -103,19 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensititvity: 1000
   transformToRotateHorizontally: {fileID: 2454369354277557907}
---- !u!114 &963194230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c8bb1b5a3f789449f28672beba25bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shooter: {fileID: 1824113508}
 --- !u!114 &1790873911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,24 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec19a150fbf8cf4893bdc324538fc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingForce: 30
+  grappleDisconnected: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
+  shootingForce: 50
   muzzle: {fileID: 963194228}
-  chainLinkSource: {fileID: 1790873912}
+  chainLinkSource: {fileID: 0}
   projectilePrefab: {fileID: 3220849627394484396, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
   projectile: {fileID: 0}
---- !u!114 &1790873913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3255a902fb1b0f46ad303cf7da0887f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ropeGun: {fileID: 1790873911}
 --- !u!114 &1790873914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,9 +236,11 @@ GameObject:
   - component: {fileID: 3189380115493427780}
   - component: {fileID: 64355146124623536}
   - component: {fileID: 2585736452109968280}
+  - component: {fileID: 1873779435}
   - component: {fileID: 6025585511429867172}
-  - component: {fileID: 1790873915}
-  - component: {fileID: 1790873912}
+  - component: {fileID: 1873779436}
+  - component: {fileID: 1873779437}
+  - component: {fileID: 2425351673699367658}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -368,6 +343,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1873779435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415693457182217628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3255a902fb1b0f46ad303cf7da0887f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ropeGun: {fileID: 1790873911}
+  characterBody: {fileID: 6025585511429867172}
 --- !u!114 &6025585511429867172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,38 +369,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f369abede6a2955439cafba45f1482de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  jumpHeight: 1
+  groundMaximumSpeed: 5
+  groundAcceleration: 100
+  airMaximumSpeed: 3
+  airAcceleration: 20
+  automaticAirMotionStop: 1
+  jumpHeight: 1.25
   groundCheckRadius: 0.4
   groundObjectLayers:
     serializedVersion: 2
     m_Bits: 512
   groundCheckOrigin: {fileID: 729994906096328846}
---- !u!145 &1790873915
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415693457182217628}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_Spring: 3.4028233e+38
-  m_Damper: 0
-  m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 1.00000005e-20
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!114 &1790873912
+--- !u!114 &1873779436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -420,13 +389,65 @@ MonoBehaviour:
   m_GameObject: {fileID: 3415693457182217628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ccae67d579ea04e93fb2eaf048781a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hookToConnectChainLinkTo: {fileID: 0}
-  chainLinkPrefab: {fileID: 7061715689586702715, guid: 163f67b42ca078649a2505ca0b8da1ac, type: 3}
-  chainLinkParent: {fileID: 0}
-  friction: 0
-  pushOutForceAmount: 0
-  maximumPushOutSpeed: 0
-  maximumPullInSpeed: 0
+  GameEvent: {fileID: 11400000, guid: 35477ad6d52a242498e08e7a04dfbf5f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6025585511429867172}
+        m_TargetAssemblyTypeName: PhysicsCharacterBody, Assembly-CSharp
+        m_MethodName: ActivateAutomaticAirMotionStop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1873779437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415693457182217628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: f4a073eae43a72f4d8e5331240bcb196, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6025585511429867172}
+        m_TargetAssemblyTypeName: PhysicsCharacterBody, Assembly-CSharp
+        m_MethodName: DeactivateAutomaticAirMotionStop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!138 &2425351673699367658
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415693457182217628}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1

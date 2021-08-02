@@ -10,33 +10,33 @@ public class RaiseOnActivationStateChange : MonoBehaviour
 {
     [Header("On Enable")]
     [SerializeField]
-    GameEvent wasEnabled;
+    GameEvent eventToRaiseOnEnable;
 
     [SerializeField]
-    GameObjectVariable setOnEnable;
+    GameObjectVariable variableToOverwriteWithThisGameObjectOnEnable;
 
     [Header("On Disable")]
     [SerializeField]
-    GameEvent wasDisabled;
+    GameEvent eventToRaiseOnDisable;
 
     [SerializeField]
-    GameObjectVariable setOnDisable;
+    GameObjectVariable variableToOverwriteWithThisGameObjectOnDisable;
 
     private void OnEnable()
     {
-        if (setOnEnable)
-            setOnEnable.RuntimeValue = gameObject;
+        if (variableToOverwriteWithThisGameObjectOnEnable)
+            variableToOverwriteWithThisGameObjectOnEnable.RuntimeValue = gameObject;
 
-        if (wasEnabled != null)
-            wasEnabled.Raise();
+        if (eventToRaiseOnEnable != null)
+            eventToRaiseOnEnable.Raise();
     }
 
     private void OnDisable()
     {
-        if (setOnDisable)
-            setOnDisable.RuntimeValue = gameObject;
+        if (variableToOverwriteWithThisGameObjectOnDisable)
+            variableToOverwriteWithThisGameObjectOnDisable.RuntimeValue = gameObject;
 
-        if (wasDisabled != null)
-            wasDisabled.Raise();
+        if (eventToRaiseOnDisable != null)
+            eventToRaiseOnDisable.Raise();
     }
 }
