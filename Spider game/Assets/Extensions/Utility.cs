@@ -40,6 +40,52 @@ namespace AnsgarsAssets {
              */
             return ((integer >> index) & 1) == 1;
         }
+
+        /// <summary>
+        /// Imagine the given vector would lie inside a square with its center at (0,0). Now imagine a circle at the same position that perfectly fits into this square.
+        /// This function returns a scaled-down version of the given vector that transforms it from the square domain to the circle domain.
+        /// It can be used to transform playor input from a square domain to a circle domain to prevent strafing diagonally to move faster.
+        /// </summary>
+        /// <param name="squareDomainVector"></param>
+        /// <returns></returns>
+        public static Vector2 TransformSquareDomainVectorToCircleDomain(Vector2 squareDomainVector)
+        {
+            Vector2 circleDomainVector = squareDomainVector;
+
+            float transformationDividend = ProjectVectorOntoUnitSquareBounds(squareDomainVector).magnitude;
+
+            if (transformationDividend != 0)
+                circleDomainVector = squareDomainVector / transformationDividend;
+
+            return circleDomainVector;
+        }
+
+        /// <summary>
+        /// Imagine a square with the bounds (-1, -1), (-1, 1), (1, -1), and (1, 1), and some two dimensional vector. This function returns a vector with the same direction, but which lies on the bounds of this square.
+        /// </summary>
+        /// <param name="vectorToProject"></param>
+        /// <returns></returns>
+        public static Vector2 ProjectVectorOntoUnitSquareBounds(Vector2 vectorToProject)
+        {
+            Vector2 projectedVector = Vector2.zero;
+
+            if (vectorToProject != Vector2.zero)
+            {
+                float xAbs = Mathf.Abs(vectorToProject.x);
+                float yAbs = Mathf.Abs(vectorToProject.y);
+
+                // First we determine if the vectorToProject is further away from the unit square in the x dimension or in the y dimension. If we divide the vector by the distance in that dimension, we have projected the vector to the square bounds.
+                if (xAbs <= yAbs && yAbs != 0)
+                    projectedVector = vectorToProject / yAbs;
+                else // Don't need to check here if xAbs != 0 since either 1) yAbs is 0 but not both are zero, meaning that xAbs is not zero, or 2) zAbs was smaller than xAbs which means that it has to be greater than zero
+                    projectedVector = vectorToProject / xAbs;
+            }
+
+            return projectedVector;
+        }
+
+
+
     }
 }
 
