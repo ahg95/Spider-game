@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highVelocityCollisionOccured: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
-  minimumRelativeVelocity: 20
+  minimumRelativeVelocity: 15
 --- !u!114 &1609999746
 MonoBehaviour:
   m_ObjectHideFlags: 0
