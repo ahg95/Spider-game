@@ -9651,9 +9651,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1427783917, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609999746, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1824113506, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873779436, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2052566084, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_Layer
@@ -9714,6 +9726,10 @@ PrefabInstance:
     - target: {fileID: 3415693457182217628, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: airAcceleration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6025585511429867172, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: groundObjectLayers.m_Bits
@@ -14252,6 +14268,10 @@ PrefabInstance:
     - target: {fileID: 4449056934127485560, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
       propertyPath: m_Name
       value: Respawn area
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449056934127485560, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449056934127485563, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
       propertyPath: m_RootOrder
