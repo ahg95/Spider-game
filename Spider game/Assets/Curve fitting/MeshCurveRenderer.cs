@@ -72,6 +72,8 @@ public class MeshCurveRenderer : CurveRendererBase
 
         GetMesh().triangles = CalculateTriangles();
 
+        GetMesh().RecalculateNormals();
+
         GetMesh().Optimize();
     }
 
