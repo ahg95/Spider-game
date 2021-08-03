@@ -50,10 +50,11 @@ public class ChainLinkSource : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (hookToConnectChainLinkTo != null) {
-            if (2 <= Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position))
+        if (hookToConnectChainLinkTo) {
+
+            if (0 < maximumPushOutSpeed && 2 <= Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position))
                 SpawnAndAttachChainLinkToHook();
-            else if (Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position) <= 1)
+            else if (0 < maximumPullInSpeed && Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position) <= 1)
                 ShortenRopeByOneLink();
 
             ApplyFrictionToHookToConnectChainLinkTo();
