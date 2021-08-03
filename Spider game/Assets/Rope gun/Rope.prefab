@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curveCalculator: {fileID: 8691312756685919541}
-  DistanceBetweenRenderPoints: 1
-  NumberOfVerticesPerRing: 6
+  DistanceBetweenRenderPoints: 0.25
+  NumberOfVerticesPerRing: 8
   RingRadius: 0.25
 --- !u!114 &8691312756685919547
 MonoBehaviour:
