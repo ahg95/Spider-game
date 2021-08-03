@@ -23,13 +23,6 @@ public class CurvePointManager : MonoBehaviour
         curveCalculatorToManagePointsFor.SetCurvePoints(allActiveCurvePointsInChildHierarchy);
     }
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-            debug = !debug;
-    }
-
     /// <summary>
     /// Recursively finds all <see cref="Transform"/>s in the child hierarchy of <paramref name="parent"/> that have a <see cref="CurvePoint"/> component attached to them, in order. The search is a depth-first search.
     /// </summary>

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3220849627394484392}
   - component: {fileID: 3220849627394484393}
   - component: {fileID: 3220849627394484396}
-  m_Layer: 10
+  m_Layer: 7
   m_Name: Grapple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,4 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stickedToAnObject: {fileID: 11400000, guid: f4a073eae43a72f4d8e5331240bcb196, type: 2}
+  layersToStickTo:
+    serializedVersion: 2
+    m_Bits: 513
   stickOnTouch: 0

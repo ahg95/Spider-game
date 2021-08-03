@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1155841960098023546}
   - component: {fileID: 5446602025644905073}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Position To Link To Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7061715689586702715}
   - component: {fileID: 4001393874297986907}
   - component: {fileID: 5879515822351633608}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: ChainLink small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 315558281225875943}
   - component: {fileID: 8524129547845748873}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Position To Link ChainLink to
   m_TagString: Untagged
   m_Icon: {fileID: 0}
