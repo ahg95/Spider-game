@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4001393874297986907}
   - component: {fileID: 5879515822351633608}
   m_Layer: 7
-  m_Name: ChainLink small
+  m_Name: Small chain link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
