@@ -9,7 +9,7 @@ namespace AnsgarsAssets
     public class RopeGun : MonoBehaviour
     {
         [Header("General")]
-        public float shootingForceAmount;
+        public float projectileVelocity;
 
         public Transform muzzle;
         [Tooltip("The specified rigidbody and the source of the rope will be connected by a fixed joint.")]
@@ -39,8 +39,6 @@ namespace AnsgarsAssets
 
         [Header("Events")]
         public GameEvent grappleDisconnected;
-
-
 
         GameObject rope;
         Sticky projectile;
@@ -77,6 +75,9 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.loaded)
                 MoveProjectileToMuzzleIfExistent();
+
+            // Commented out the following line because it led to the rope not keeping its length even when the rope length is locked
+            //MoveChainLinkSourceToMuzzleIfExistent();
         }
 
         void EnableInstantiatedObjectsIfExistent()
@@ -262,6 +263,14 @@ namespace AnsgarsAssets
             }
         }
 
+        void MoveChainLinkSourceToMuzzleIfExistent()
+        {
+            if (chainLinkSource) {
+                chainLinkSource.transform.position = muzzle.position;
+                chainLinkSource.transform.rotation = muzzle.rotation;
+            }
+        }
+
         void InstantiateAndConfigureRopeIfNotExistent()
         {
             if (!rope)
@@ -277,7 +286,7 @@ namespace AnsgarsAssets
         {
             if (!projectile)
             {
-                projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+                projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation, projectileParent);
                 projectile.DisableStickiness();
 
                 if (chainLinkSource)
@@ -290,7 +299,7 @@ namespace AnsgarsAssets
         {
             if (!chainLinkSource)
             {
-                chainLinkSource = Instantiate(chainLinkSourcePrefab, rigidBodyToConnectChainLinkSourceTo.transform.position, Quaternion.identity, chainLinkSourceParent);
+                chainLinkSource = Instantiate(chainLinkSourcePrefab, muzzle.position, muzzle.rotation, chainLinkSourceParent);
                 chainLinkSource.GetComponent<FixedJoint>().connectedBody = rigidBodyToConnectChainLinkSourceTo;
 
                 if (rope)
@@ -317,7 +326,7 @@ namespace AnsgarsAssets
 
         void ShootProjectile()
         {
-            projectile.GetRigidbody()?.AddForce(muzzle.forward * shootingForceAmount, ForceMode.VelocityChange);
+            projectile.GetRigidbody()?.AddForce(muzzle.forward * projectileVelocity, ForceMode.VelocityChange);
         }
 
         public void OnGrappleConnected()
