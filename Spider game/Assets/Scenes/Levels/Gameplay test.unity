@@ -14408,10 +14408,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Respawn area
       objectReference: {fileID: 0}
-    - target: {fileID: 4449056934127485560, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4449056934127485563, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -14455,18 +14451,6 @@ PrefabInstance:
     - target: {fileID: 4449056934127485563, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8353923587500987610, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8353923587500987610, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8353923587500987610, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8593c5a31bc9ea146b2f604ed6a466df, type: 3}
