@@ -94,6 +94,7 @@ namespace AnsgarsAssets
             float maximumSpeed;
             float maximumDeltaVelocity;
 
+            // Select the correct maximumSpeed and maximumDeltaVelocity numbers based on the current state of the character
             if (IsInContactWithGround())
             {
                 if (isSprinting)
@@ -113,22 +114,34 @@ namespace AnsgarsAssets
                 maximumDeltaVelocity = airAcceleration * Time.fixedDeltaTime;
             }
 
-            // Scale down the input vector such that its magnitude is capped at 1, which prevents speed strafing
-            Vector2 adjustedMovementInput = Utility.TransformSquareDomainVectorToCircleDomain(movementInput);
+            Vector3 forceToApply;
 
-            Vector3 targetVelocity = (transform.right * adjustedMovementInput.x + transform.forward * adjustedMovementInput.y) * maximumSpeed;
+            // If the character is in the air, and the character should not automatically stop in the air when no movement input is given, and no movement input is given ...
+            if (!IsInContactWithGround() && !automaticAirMotionStop && movementInput == Vector2.zero)
+                // ... then don't apply a force, which would stop the player otherwise
+                forceToApply = Vector3.zero;
+            else
+            {
+                // Scale down the input vector such that its magnitude is capped at 1, which prevents speed strafing
+                Vector2 adjustedMovementInput = Utility.TransformSquareDomainVectorToCircleDomain(movementInput);
 
-            Vector3 forceToApply = targetVelocity - GetRigidbody().velocity;
+                // Calculate which velocity the character intends to have
+                Vector3 targetVelocity = (transform.right * adjustedMovementInput.x + transform.forward * adjustedMovementInput.y) * maximumSpeed;
 
-            // If the character is in the air, and the force to apply would slow them down in the direction they want to go, then use the force to steer the character in that direction instead.
-            if (!IsInContactWithGround() && 90 < Vector3.Angle(targetVelocity, forceToApply))
-                forceToApply = Vector3.Project(GetRigidbody().velocity, targetVelocity.normalized) - GetRigidbody().velocity;
+                // We should apply a force that pushes the character from the current velocity towards the desired velocity
+                forceToApply = targetVelocity - GetRigidbody().velocity;
 
-            // Cap the amount of force depending on the specified acceleration
-            if (maximumDeltaVelocity < forceToApply.magnitude)
-                forceToApply = forceToApply.normalized * maximumDeltaVelocity;
+                // However, if the character is in the air, and the force to apply would slow them down in the direction they want to go, then use the force to steer the character in that direction instead.
+                if (!IsInContactWithGround() && 90 < Vector3.Angle(targetVelocity, forceToApply))
+                    forceToApply = Vector3.Project(GetRigidbody().velocity, targetVelocity.normalized) - GetRigidbody().velocity;
 
-            forceToApply.y = 0;
+                // To slowly transition from the current velocity to the desired velocity we cap the amount of force to apply
+                if (maximumDeltaVelocity < forceToApply.magnitude)
+                    forceToApply = forceToApply.normalized * maximumDeltaVelocity;
+
+                // The movementInput should have no influence on the vertical position of the character
+                forceToApply.y = 0;
+            }
 
             rigidbody.AddForce(forceToApply, ForceMode.VelocityChange);
         }
