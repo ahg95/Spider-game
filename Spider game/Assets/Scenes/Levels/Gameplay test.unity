@@ -2243,6 +2243,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347505007}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &431063032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8868387780125940918, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+  m_PrefabInstance: {fileID: 464453630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!138 &431063033
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431063032}
+  m_ConnectedBody: {fileID: 1593940966}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
+--- !u!114 &431063034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+  m_PrefabInstance: {fileID: 464453630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431063032}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec19a150fbf8cf4893bdc324538fc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &437880850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,10 +2377,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7387665756111160567, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_Mass
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387665756111160567, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: ropeParent
+      value: 
+      objectReference: {fileID: 1165298144}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: projectileParent
+      value: 
+      objectReference: {fileID: 1787541216}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: chainLinkSourceParent
+      value: 
+      objectReference: {fileID: 1826965981}
     - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2398,13 +2449,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rope gun
       objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940918, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
---- !u!54 &464453631 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7387665756111160567, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
-  m_PrefabInstance: {fileID: 464453630}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &481578864
 GameObject:
   m_ObjectHideFlags: 0
@@ -9942,6 +9992,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1873779435, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+      propertyPath: ropeGun
+      value: 
+      objectReference: {fileID: 431063034}
     - target: {fileID: 2454369354277557907, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -9992,26 +10046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
---- !u!1 &1593940957 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3415693457182217628, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
+--- !u!54 &1593940966 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2585736452109968280, guid: f2cbfa79d5a5d97498db362a2b4bf52a, type: 3}
   m_PrefabInstance: {fileID: 1593940956}
   m_PrefabAsset: {fileID: 0}
---- !u!138 &1593940958
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593940957}
-  m_ConnectedBody: {fileID: 464453631}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!43 &1612404512
 Mesh:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using AnsgarsAssets;
 
 namespace AnsgarsAssets
 {
-    public class RopeGun : MonoBehaviour
+    public class GrapplingGun : MonoBehaviour
     {
         [Header("General")]
         public float projectileVelocity;

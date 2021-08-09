@@ -5,7 +5,7 @@ using AnsgarsAssets;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public RopeGun ropeGun;
+    public GrapplingGun ropeGun;
     public PhysicsCharacterController characterBody;
 
     // Update is called once per frame
