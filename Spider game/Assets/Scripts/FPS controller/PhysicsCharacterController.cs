@@ -118,7 +118,7 @@ namespace AnsgarsAssets
 
             // If the character is in the air, and the character should not automatically stop in the air when no movement input is given, and no movement input is given ...
             if (!IsInContactWithGround() && !automaticAirMotionStop && movementInput == Vector2.zero)
-                // ... then don't apply a force, which would stop the player otherwise
+                // ... then don't apply a force, which would stop the player
                 forceToApply = Vector3.zero;
             else
             {
