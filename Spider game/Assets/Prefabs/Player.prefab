@@ -233,8 +233,6 @@ GameObject:
   - component: {fileID: 1873779436}
   - component: {fileID: 1873779437}
   - component: {fileID: 3227014488554807971}
-  - component: {fileID: 1609999746}
-  - component: {fileID: 1609999747}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -447,44 +445,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highVelocityCollisionOccured: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
   minimumRelativeVelocity: 15
---- !u!114 &1609999746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415693457182217628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1609999747}
-        m_TargetAssemblyTypeName: RespawnTrigger, Assembly-CSharp
-        m_MethodName: RespawnIfPossible
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1609999747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415693457182217628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3293194020c394a4e8a09b725bd362ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnPrefab: {fileID: 3415693457182217628}
