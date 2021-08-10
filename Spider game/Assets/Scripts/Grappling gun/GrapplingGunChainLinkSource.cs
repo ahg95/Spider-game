@@ -2,18 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ChainLinkSource))]
-public class GrapplingGunChainLinkSource : MonoBehaviour
+namespace AnsgarsAssets
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(ChainLinkSource), typeof(Sticky))]
+    public class GrapplingGunChainLinkSource : MonoBehaviour
     {
-        
-    }
+        ChainLinkSource chainLinkSource;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Sticky sticky;
+
+        new Rigidbody rigidbody;
+
+        public ChainLinkSource GetChainLinkSource()
+        {
+            if (!chainLinkSource)
+                chainLinkSource = GetComponent<ChainLinkSource>();
+
+            return chainLinkSource;
+        }
+
+        public Sticky GetSticky()
+        {
+            if (!sticky)
+                sticky = GetComponent<Sticky>();
+
+            return sticky;
+        }
+
+        public Rigidbody GetRigidbody()
+        {
+            if (!rigidbody)
+                rigidbody = GetComponent<Rigidbody>();
+
+            return rigidbody;
+        }
     }
 }
