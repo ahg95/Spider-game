@@ -8,7 +8,7 @@ namespace AnsgarsAssets
     /// <summary>
     /// A simple class that requires the components necessary for a gameObject to be a GrappleGunProjectile and allows easy access to these components.
     /// </summary>
-    [RequireComponent(typeof(ChainLinkHook), typeof(Sticky), typeof(ParentConstraint))]
+    [RequireComponent(typeof(ChainLinkHook), typeof(Sticky))]
     public class GrapplingGunProjectile : MonoBehaviour
     {
         ChainLinkHook chainLinkHook;

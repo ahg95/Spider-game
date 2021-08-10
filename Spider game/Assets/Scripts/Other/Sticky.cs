@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 
 namespace AnsgarsAssets
 {
-    [RequireComponent(typeof(DeactivatableFixedJoint), typeof(ParentConstraint))]
+    [RequireComponent(typeof(Rigidbody), typeof(DeactivatableFixedJoint), typeof(ParentConstraint))]
     public class Sticky : MonoBehaviour
     {
         public LayerMask layersToStickToOnTouch;
