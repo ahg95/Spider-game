@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3293194020c394a4e8a09b725bd362ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPrefab: {fileID: 0}
+  respawnPrefab: {fileID: 3415693457182217628}
 --- !u!114 &2052566087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 1873779436}
   - component: {fileID: 1873779437}
   - component: {fileID: 3227014488554807971}
+  - component: {fileID: 987942347}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -445,3 +446,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highVelocityCollisionOccured: {fileID: 11400000, guid: 250988dfcaeaf0d46805b3bc8b1d111f, type: 2}
   minimumRelativeVelocity: 15
+--- !u!138 &987942347
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415693457182217628}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
