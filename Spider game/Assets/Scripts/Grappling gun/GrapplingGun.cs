@@ -17,8 +17,8 @@ namespace AnsgarsAssets
 
         [Header("Prefabs")]
         public GameObject ropePrefab;
-        public Sticky projectilePrefab;
-        public ChainLinkSource chainLinkSourcePrefab;
+        public GrapplingGunProjectile projectilePrefab;
+        public GrapplingGunChainLinkSource chainLinkSourcePrefab;
 
         [Header("Rope attaching")]
         public LayerMask raycastObstacles;
@@ -41,8 +41,8 @@ namespace AnsgarsAssets
         public GameEvent grappleDisconnected;
 
         GameObject rope;
-        Sticky projectile;
-        ChainLinkSource chainLinkSource;
+        GrapplingGunProjectile projectile;
+        GrapplingGunChainLinkSource chainLinkSource;
 
         RopeGunState gunState = RopeGunState.unloaded;
 
@@ -159,10 +159,10 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.maximumPushOutSpeed = maximumRopeExpellingSpeed;
-                chainLinkSource.maximumPullInSpeed = 0;
+                chainLinkSource.GetChainLinkSource().maximumPushOutSpeed = maximumRopeExpellingSpeed;
+                chainLinkSource.GetChainLinkSource().maximumPullInSpeed = 0;
 
-                chainLinkSource.pushOutForceAmount = expellingRopeForce;
+                chainLinkSource.GetChainLinkSource().pushOutForceAmount = expellingRopeForce;
             }
         }
 
@@ -170,8 +170,8 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.LockRopeLength();
-                chainLinkSource.pushOutForceAmount = 0;
+                chainLinkSource.GetChainLinkSource().LockRopeLength();
+                chainLinkSource.GetChainLinkSource().pushOutForceAmount = 0;
             }
         }
 
@@ -179,10 +179,10 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.maximumPushOutSpeed = 0;
-                chainLinkSource.maximumPullInSpeed = maximumRopeUptakingSpeed;
+                chainLinkSource.GetChainLinkSource().maximumPushOutSpeed = 0;
+                chainLinkSource.GetChainLinkSource().maximumPullInSpeed = maximumRopeUptakingSpeed;
 
-                chainLinkSource.pushOutForceAmount = -uptakingRopeForce;
+                chainLinkSource.GetChainLinkSource().pushOutForceAmount = -uptakingRopeForce;
             }
         }
 
@@ -190,8 +190,8 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.LockRopeLength();
-                chainLinkSource.pushOutForceAmount = 0;
+                chainLinkSource.GetChainLinkSource().LockRopeLength();
+                chainLinkSource.GetChainLinkSource().pushOutForceAmount = 0;
             }
         }
 
@@ -219,17 +219,17 @@ namespace AnsgarsAssets
             }
             else if (gunState == RopeGunState.shot)
             {
-                chainLinkSource.PullInRopeInstantly();
+                chainLinkSource.GetChainLinkSource().PullInRopeInstantly();
             }
             else if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.PullInRopeInstantly();
+                chainLinkSource.GetChainLinkSource().PullInRopeInstantly();
 
                 grappleDisconnected.Raise();
             }
 
-            chainLinkSource.LockRopeLength();
-            projectile.DisableStickiness();
+            chainLinkSource.GetChainLinkSource().LockRopeLength();
+            projectile.GetSticky().DisableStickiness();
 
             gunState = RopeGunState.loaded;
         }
@@ -239,15 +239,15 @@ namespace AnsgarsAssets
             MoveProjectileToMuzzleIfExistent();
             ShootProjectile();
 
-            chainLinkSource.UnlockRopeLength();
-            projectile.EnableStickiness();
+            chainLinkSource.GetChainLinkSource().UnlockRopeLength();
+            projectile.GetSticky().EnableStickiness();
 
             gunState = RopeGunState.shot;
         }
 
         void SwitchToConnectedState()
         {
-            chainLinkSource.LockRopeLength();
+            chainLinkSource.GetChainLinkSource().LockRopeLength();
 
             gunState = RopeGunState.connected;
         }
@@ -278,7 +278,7 @@ namespace AnsgarsAssets
                 rope = Instantiate(ropePrefab, ropeParent);
 
                 if (chainLinkSource)
-                    chainLinkSource.chainLinkParent = rope.transform;
+                    chainLinkSource.GetChainLinkSource().chainLinkParent = rope.transform;
             }
         }
 
@@ -287,10 +287,10 @@ namespace AnsgarsAssets
             if (!projectile)
             {
                 projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation, projectileParent);
-                projectile.DisableStickiness();
+                projectile.GetSticky().DisableStickiness();
 
                 if (chainLinkSource)
-                    chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+                    chainLinkSource.GetChainLinkSource().SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
             }
 
         }
@@ -300,13 +300,14 @@ namespace AnsgarsAssets
             if (!chainLinkSource)
             {
                 chainLinkSource = Instantiate(chainLinkSourcePrefab, muzzle.position, muzzle.rotation, chainLinkSourceParent);
-                chainLinkSource.GetComponent<FixedJoint>().connectedBody = rigidBodyToConnectChainLinkSourceTo;
+                chainLinkSource.GetDeactivatableFixedJoint().Activate();
+                chainLinkSource.GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidBodyToConnectChainLinkSourceTo;
 
                 if (rope)
-                    chainLinkSource.chainLinkParent = rope.transform;
+                    chainLinkSource.GetChainLinkSource().chainLinkParent = rope.transform;
 
                 if (projectile)
-                    chainLinkSource.SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
+                    chainLinkSource.GetChainLinkSource().SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
             }
         }
 
@@ -326,7 +327,7 @@ namespace AnsgarsAssets
 
         void ShootProjectile()
         {
-            projectile.GetRigidbody()?.AddForce(muzzle.forward * projectileVelocity, ForceMode.VelocityChange);
+            projectile.GetRigidbody().AddForce(muzzle.forward * projectileVelocity, ForceMode.VelocityChange);
         }
 
         public void OnGrappleConnected()

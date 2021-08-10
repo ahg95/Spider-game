@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 8868387780125940915}
   - component: {fileID: 8868387780125940916}
   m_Layer: 7
-  m_Name: Rope gun
+  m_Name: GrapplingGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,8 +320,8 @@ MonoBehaviour:
   muzzle: {fileID: 7517466050065252032}
   rigidBodyToConnectChainLinkSourceTo: {fileID: 7387665756111160567}
   ropePrefab: {fileID: 8691312756685919538, guid: f1447c1dd05a78348b8323e25166ddf5, type: 3}
-  projectilePrefab: {fileID: 3220849627394484396, guid: 88c01e6effa19b048aaffbf2657f3ae8, type: 3}
-  chainLinkSourcePrefab: {fileID: 2544006029041961075, guid: b7ef7055569e9934baf8d2bc893f79b4, type: 3}
+  projectilePrefab: {fileID: 2490742331965455740, guid: a9ad490f49988fd4bb82fea128055734, type: 3}
+  chainLinkSourcePrefab: {fileID: 5785719453463356787, guid: aa4287faf5288a1419b817fd520a4657, type: 3}
   raycastObstacles:
     serializedVersion: 2
     m_Bits: 1

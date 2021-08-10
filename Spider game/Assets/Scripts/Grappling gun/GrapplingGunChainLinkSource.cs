@@ -9,6 +9,8 @@ namespace AnsgarsAssets
     {
         ChainLinkSource chainLinkSource;
 
+        DeactivatableFixedJoint deactivatableFixedJoint;
+
         Sticky sticky;
 
         new Rigidbody rigidbody;
@@ -19,6 +21,14 @@ namespace AnsgarsAssets
                 chainLinkSource = GetComponent<ChainLinkSource>();
 
             return chainLinkSource;
+        }
+
+        public DeactivatableFixedJoint GetDeactivatableFixedJoint()
+        {
+            if (!deactivatableFixedJoint)
+                deactivatableFixedJoint = GetComponent<DeactivatableFixedJoint>();
+
+            return deactivatableFixedJoint;
         }
 
         public Sticky GetSticky()
