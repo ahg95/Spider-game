@@ -1117,6 +1117,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: ropeParent
+      value: 
+      objectReference: {fileID: 1165298144}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: projectileParent
+      value: 
+      objectReference: {fileID: 1787541216}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: chainLinkSourceParent
+      value: 
+      objectReference: {fileID: 1826965981}
     - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -11258,7 +11270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1787541216}
   m_Layer: 0
-  m_Name: RopeGun grapplers
+  m_Name: GrapplingGun projectiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13123,7 +13135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826965981}
   m_Layer: 0
-  m_Name: ChainLinkSources
+  m_Name: GrapplingGun ChainLinkSources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

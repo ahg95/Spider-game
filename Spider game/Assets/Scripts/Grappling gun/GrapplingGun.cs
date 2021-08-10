@@ -223,6 +223,8 @@ namespace AnsgarsAssets
             chainLinkSource.GetParentConstraint().constraintActive = true;
             projectile.GetParentConstraint().constraintActive = true;
 
+            chainLinkSource.GetDeactivatableFixedJoint().Deactivate();
+
             chainLinkSource.GetChainLinkSource().LockRopeLength();
             projectile.GetSticky().DisableStickiness();
 
