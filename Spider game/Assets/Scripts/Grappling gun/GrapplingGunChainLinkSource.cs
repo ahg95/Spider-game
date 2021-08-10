@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace AnsgarsAssets
 {
-    [RequireComponent(typeof(ChainLinkSource), typeof(Sticky))]
+    /// <summary>
+    /// A ChainLinkSource with extra components that can be used by the grapplingGun.
+    /// The <see cref="ChainLinkSource"/> is needed for the rope functionality, the <see cref="DeactivatableFixedJoint"/> is needed to attach the <see cref="ChainLinkSource"/> to a surface, and the <see cref="ParentConstraint"/> is needed to keep the <see cref="ChainLinkSource"/> at the muzzle of the <see cref="GrapplingGun"/>.
+    /// </summary>
+    [RequireComponent(typeof(ChainLinkSource), typeof(DeactivatableFixedJoint), typeof(ParentConstraint))]
     public class GrapplingGunChainLinkSource : MonoBehaviour
     {
         ChainLinkSource chainLinkSource;
 
         DeactivatableFixedJoint deactivatableFixedJoint;
 
-        Sticky sticky;
-
-        new Rigidbody rigidbody;
+        ParentConstraint parentConstraint;
 
         public ChainLinkSource GetChainLinkSource()
         {
@@ -31,20 +34,12 @@ namespace AnsgarsAssets
             return deactivatableFixedJoint;
         }
 
-        public Sticky GetSticky()
+        public ParentConstraint GetParentConstraint()
         {
-            if (!sticky)
-                sticky = GetComponent<Sticky>();
+            if (!parentConstraint)
+                parentConstraint = GetComponent<ParentConstraint>();
 
-            return sticky;
-        }
-
-        public Rigidbody GetRigidbody()
-        {
-            if (!rigidbody)
-                rigidbody = GetComponent<Rigidbody>();
-
-            return rigidbody;
+            return parentConstraint;
         }
     }
 }

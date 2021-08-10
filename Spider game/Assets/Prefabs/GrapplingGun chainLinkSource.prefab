@@ -16,9 +16,8 @@ GameObject:
   - component: {fileID: 5785719453463356776}
   - component: {fileID: 5785719453463356791}
   - component: {fileID: 5785719453463356790}
-  - component: {fileID: 5785719453463356789}
-  - component: {fileID: 5785719453463356788}
   - component: {fileID: 5785719453463356787}
+  - component: {fileID: 7694833555260338513}
   m_Layer: 7
   m_Name: GrapplingGun chainLinkSource
   m_TagString: Untagged
@@ -173,7 +172,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db982b5f78042e4a950b358f211f7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1773428102 &5785719453463356789
+--- !u!114 &5785719453463356787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785719453463356786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e1af6132c640d479a0effe22237838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1773428102 &7694833555260338513
 ParentConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,32 +206,3 @@ ParentConstraint:
   m_IsContraintActive: 0
   m_IsLocked: 0
   m_Sources: []
---- !u!114 &5785719453463356788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5785719453463356786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cf502c6746440d44b9a246e2b74a0ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layersToStickToOnTouch:
-    serializedVersion: 2
-    m_Bits: 0
-  stickOnTouch: 0
-  stickedToAnObject: {fileID: 0}
---- !u!114 &5785719453463356787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5785719453463356786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e1af6132c640d479a0effe22237838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

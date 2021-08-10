@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AnsgarsAssets;
+using UnityEngine.Animations;
 
 namespace AnsgarsAssets
 {
@@ -69,15 +70,6 @@ namespace AnsgarsAssets
         private void OnDestroy()
         {
             DestroyInstantiatedObjectsIfExistent();
-        }
-
-        private void Update()
-        {
-            if (gunState == RopeGunState.loaded)
-                MoveProjectileToMuzzleIfExistent();
-
-            // Commented out the following line because it led to the rope not keeping its length even when the rope length is locked
-            //MoveChainLinkSourceToMuzzleIfExistent();
         }
 
         void EnableInstantiatedObjectsIfExistent()
@@ -228,6 +220,9 @@ namespace AnsgarsAssets
                 grappleDisconnected.Raise();
             }
 
+            chainLinkSource.GetParentConstraint().constraintActive = true;
+            projectile.GetParentConstraint().constraintActive = true;
+
             chainLinkSource.GetChainLinkSource().LockRopeLength();
             projectile.GetSticky().DisableStickiness();
 
@@ -236,8 +231,13 @@ namespace AnsgarsAssets
 
         void SwitchToShotState()
         {
-            MoveProjectileToMuzzleIfExistent();
             ShootProjectile();
+
+            chainLinkSource.GetParentConstraint().constraintActive = false;
+            projectile.GetParentConstraint().constraintActive = false;
+
+            chainLinkSource.GetDeactivatableFixedJoint().Activate();
+            chainLinkSource.GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidBodyToConnectChainLinkSourceTo;
 
             chainLinkSource.GetChainLinkSource().UnlockRopeLength();
             projectile.GetSticky().EnableStickiness();
@@ -253,23 +253,6 @@ namespace AnsgarsAssets
         }
 
         // --- Other methods ---
-
-        void MoveProjectileToMuzzleIfExistent()
-        {
-            if (projectile)
-            {
-                projectile.transform.position = muzzle.position;
-                projectile.transform.rotation = muzzle.rotation;
-            }
-        }
-
-        void MoveChainLinkSourceToMuzzleIfExistent()
-        {
-            if (chainLinkSource) {
-                chainLinkSource.transform.position = muzzle.position;
-                chainLinkSource.transform.rotation = muzzle.rotation;
-            }
-        }
 
         void InstantiateAndConfigureRopeIfNotExistent()
         {
@@ -289,10 +272,15 @@ namespace AnsgarsAssets
                 projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation, projectileParent);
                 projectile.GetSticky().DisableStickiness();
 
+                ConstraintSource source = new ConstraintSource();
+                source.sourceTransform = muzzle;
+                source.weight = 1;
+
+                projectile.GetParentConstraint().AddSource(source);
+
                 if (chainLinkSource)
                     chainLinkSource.GetChainLinkSource().SetHookToConnectChainLinkTo(projectile.GetComponent<ChainLinkHook>());
             }
-
         }
 
         void InstantiateAndConfigureChainLinkSourceIfNotExistent()
@@ -300,8 +288,12 @@ namespace AnsgarsAssets
             if (!chainLinkSource)
             {
                 chainLinkSource = Instantiate(chainLinkSourcePrefab, muzzle.position, muzzle.rotation, chainLinkSourceParent);
-                chainLinkSource.GetDeactivatableFixedJoint().Activate();
-                chainLinkSource.GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidBodyToConnectChainLinkSourceTo;
+
+                ConstraintSource source = new ConstraintSource();
+                source.sourceTransform = muzzle;
+                source.weight = 1;
+
+                chainLinkSource.GetParentConstraint().AddSource(source);
 
                 if (rope)
                     chainLinkSource.GetChainLinkSource().chainLinkParent = rope.transform;
@@ -315,12 +307,11 @@ namespace AnsgarsAssets
         {
             chainLinkSource.transform.position = position;
 
-            Sticky sticky = chainLinkSource.GetComponent<Sticky>();
+            chainLinkSource.GetDeactivatableFixedJoint().Activate();
 
-            if (!sticky)
-                Debug.LogError("The ChainLinkSource has no sticky script attached.");
+            Rigidbody rigidbodyToAttachTo = gameObject.GetComponent<Rigidbody>();
 
-            sticky.StickTo(gameObject);
+            chainLinkSource.GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidbodyToAttachTo;
 
             // TODO: rotate it towards the diraction
         }

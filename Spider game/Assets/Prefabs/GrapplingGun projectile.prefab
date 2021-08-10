@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1247276317425950}
   - component: {fileID: 6819175016138114301}
   - component: {fileID: 1258117913206642194}
-  - component: {fileID: 5532684968925358242}
   - component: {fileID: 5685209918706630596}
   - component: {fileID: 2490742331965455740}
+  - component: {fileID: 3124027579476484956}
   m_Layer: 7
   m_Name: GrapplingGun projectile
   m_TagString: Untagged
@@ -142,28 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db982b5f78042e4a950b358f211f7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1773428102 &5532684968925358242
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2635736370512762090}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffsets: []
-  m_RotationOffsets: []
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 0
-  m_IsLocked: 0
-  m_Sources: []
 --- !u!114 &5685209918706630596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,3 +171,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbef1e7539056a64b94128c02c3958d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1773428102 &3124027579476484956
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635736370512762090}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets: []
+  m_RotationOffsets: []
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources: []
