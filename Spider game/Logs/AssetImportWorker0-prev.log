@@ -176,3 +176,4 @@ Received Import Request.
   path: Assets/Prefabs/GrapplingGun.prefab
   artifactKey: Guid(a4232665eb2c6e042896c6b905722c9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Prefabs/GrapplingGun.prefab using Guid(a4232665eb2c6e042896c6b905722c9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '564b6771da2f785184133a92ab6231c2') in 0.026623 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
