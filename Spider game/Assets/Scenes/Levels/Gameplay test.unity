@@ -6077,6 +6077,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6860811063666839167, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: m_SlerpDrive.positionDamper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8078875654491333591, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: m_Name
       value: Player with Grappling gun
