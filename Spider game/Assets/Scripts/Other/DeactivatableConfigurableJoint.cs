@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeactivateableConfigurableJoint : MonoBehaviour
+public class DeactivatableConfigurableJoint : MonoBehaviour
 {
     public ConfigurableJoint jointToInstantiate;
 

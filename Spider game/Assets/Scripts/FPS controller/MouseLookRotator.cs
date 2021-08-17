@@ -12,7 +12,7 @@ public class MouseLookRotator : MonoBehaviour
 
     float localXRotation;
 
-    private void Start()
+    private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -27,7 +27,5 @@ public class MouseLookRotator : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensititvity * Time.deltaTime;
         localXRotation = Mathf.Clamp(localXRotation - mouseY, -90, 90);
         transform.localRotation = Quaternion.Euler(localXRotation, 0, 0);
-
-        //transform.Rotate(Vector3.right * -mouseY, Space.Self);
     }
 }

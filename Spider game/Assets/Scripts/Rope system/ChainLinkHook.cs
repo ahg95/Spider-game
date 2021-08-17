@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UnityEngine.Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class ChainLinkHook : MonoBehaviour
 {
     protected new UnityEngine.Rigidbody rigidbody;
