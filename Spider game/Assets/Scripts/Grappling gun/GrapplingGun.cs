@@ -310,7 +310,7 @@ namespace AnsgarsAssets
 
         private void AttachRopeToObjectAtPositionWithNormal(GameObject gameObject, Vector3 position, Vector3 direction)
         {
-            //chainLinkSource.transform.position = position;
+            chainLinkSource.transform.position = position;
 
             // TESTS
             chainLinkSource.GetComponent<Rigidbody>().MovePosition(position);
