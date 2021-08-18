@@ -53,6 +53,11 @@ namespace AnsgarsAssets
             // The gameObjectToStickTo might not have a Rigidbody attached. If it doesn't, the connectedBody of the FixedJoint will be null, which means that this object will stick in space.
             Rigidbody rigidbodyToStickTo = gameObjectToStickTo.GetComponent<Rigidbody>();
 
+            // The following lines are supposed to prevent that the forces of the impact are continuously applied to the objects.
+            // Setting these velocity values upon impact does apparently not influence the physics of the initial impact.
+            GetRigidbody().velocity = Vector3.zero;
+            GetRigidbody().angularVelocity = Vector3.zero;
+
             GetDeactivatableFixedJoint().Activate();
             GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidbodyToStickTo;
 

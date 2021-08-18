@@ -312,6 +312,12 @@ namespace AnsgarsAssets
         {
             chainLinkSource.transform.position = position;
 
+            // TESTS
+            chainLinkSource.GetComponent<Rigidbody>().MovePosition(position);
+
+            //chainLinkSource.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //chainLinkSource.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
             chainLinkSource.GetDeactivatableFixedJoint().Activate();
 
             Rigidbody rigidbodyToAttachTo = gameObject.GetComponent<Rigidbody>();
