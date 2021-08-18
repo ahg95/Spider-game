@@ -124,13 +124,17 @@ public class ChainLinkSource : MonoBehaviour
 
     void ApplyFrictionToHookToConnectChainLinkTo()
     {
-        // This function has a problem: it shows creeping behavour, meaning that even if the friction is 1, the hookToConnectChainLinkTo still moves slightly.
-        Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
+        // Only apply a friction if there is any
+        if (friction != 0)
+        {
+            // This function has a problem: it shows creeping behavour, meaning that even if the friction is 1, the hookToConnectChainLinkTo still moves slightly.
+            Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
 
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
+            hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
 
-        // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
-        hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
+            // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
+            hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
+        }
     }
 
     void ApplyPushOutForce()
