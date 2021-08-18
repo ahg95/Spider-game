@@ -43,10 +43,46 @@ PrefabInstance:
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 8994848259987057997}
+    - target: {fileID: 1932261191, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932261191, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932261191, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1932261192, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 6860811062261529690}
+    - target: {fileID: 1932261192, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932261192, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932261192, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932261192, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: m_SlerpDrive.positionDamper
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: maximumRopeUptakingSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868387780125940915, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
+      propertyPath: maximumRopeExpellingSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8868387780125940917, guid: a4232665eb2c6e042896c6b905722c9e, type: 3}
       propertyPath: m_RootOrder
       value: 1
