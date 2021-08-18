@@ -36,6 +36,6 @@ public class VariableLengthChainLink : ChainLink
         GetJoint().anchor = PositionToLinkToHook.position;
 
         // Lastly, we might as well move the chainLink manually instead of letting the physics engine do the work.
-        transform.position = AttachedToHook.GetPositionToLinkChainLinkTo() - GetPositionToLinkChainLinkToOffset();
+        //transform.position = AttachedToHook.GetPositionToLinkChainLinkTo() - GetPositionToLinkChainLinkToOffset();
     }
 }
