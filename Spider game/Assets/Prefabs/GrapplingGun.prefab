@@ -333,9 +333,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   maximumDistanceToSurfaceToAttachRopeTo: 2
-  maximumRopeExpellingSpeed: 3
+  maximumRopeExpellingSpeed: 1
   expellingRopeForce: 100
-  maximumRopeUptakingSpeed: 3
+  maximumRopeUptakingSpeed: 1
   uptakingRopeForce: 100
   ropeParent: {fileID: 0}
   chainLinkSourceParent: {fileID: 0}
@@ -381,7 +381,7 @@ ConfigurableJoint:
   m_Anchor: {x: -0.25, y: 0.25, z: -1}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.5, z: 0}
+  m_ConnectedAnchor: {x: -0.25, y: 0.25, z: -1}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -477,7 +477,7 @@ ConfigurableJoint:
   m_Anchor: {x: -0.25, y: 0.25, z: -1}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.25, y: 0.25, z: -1}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
