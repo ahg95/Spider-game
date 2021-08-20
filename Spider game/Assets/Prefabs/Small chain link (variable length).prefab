@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 4929892090836851521}
   - component: {fileID: 2483045004762466514}
   - component: {fileID: 8353526655127520286}
+  - component: {fileID: 3043980758485522167}
   m_Layer: 7
   m_Name: Small chain link (variable length)
   m_TagString: Untagged
@@ -422,6 +423,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PositionToLinkChainLinkTo: {fileID: 8614443455097386493}
   PositionToLinkToHook: {fileID: 7198951332693167200}
+--- !u!114 &3043980758485522167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3516768061022213282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234cb9d1cea89bd45b7d94bd4538c745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topSphere: {fileID: 1678853634748853991}
+  cylinder: {fileID: 5844369145285156361}
+  bottomSphere: {fileID: 197982651347458743}
 --- !u!1 &4169434162883693937
 GameObject:
   m_ObjectHideFlags: 0
