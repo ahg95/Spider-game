@@ -151,8 +151,8 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.GetChainLinkSource().maximumPushOutSpeed = maximumRopeExpellingSpeed;
-                chainLinkSource.GetChainLinkSource().maximumPullInSpeed = 0;
+                chainLinkSource.GetChainLinkSource().maximumExpellSpeed = maximumRopeExpellingSpeed;
+                chainLinkSource.GetChainLinkSource().maximumTakeUpSpeed = 0;
 
                 chainLinkSource.GetChainLinkSource().pushOutForceAmount = expellingRopeForce;
             }
@@ -171,8 +171,8 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.GetChainLinkSource().maximumPushOutSpeed = 0;
-                chainLinkSource.GetChainLinkSource().maximumPullInSpeed = maximumRopeUptakingSpeed;
+                chainLinkSource.GetChainLinkSource().maximumExpellSpeed = 0;
+                chainLinkSource.GetChainLinkSource().maximumTakeUpSpeed = maximumRopeUptakingSpeed;
 
                 chainLinkSource.GetChainLinkSource().pushOutForceAmount = -uptakingRopeForce;
             }
