@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChainLink: {fileID: 1945330174}
-  length: 1
+  length: 2
 --- !u!4 &648024145
 Transform:
   m_ObjectHideFlags: 0

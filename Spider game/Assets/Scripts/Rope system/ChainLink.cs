@@ -2,47 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Joint))]
-public class ChainLink : ChainLinkHook
+namespace AnsgarsAssets
 {
-    private Joint joint;
-
-    public ChainLinkHook AttachedToHook { get; private set; }
-
-    public Transform PositionToLinkToHook;
-
-    public Joint GetJoint()
+    [RequireComponent(typeof(Joint))]
+    public class ChainLink : ChainLinkHook
     {
-        if (joint == null)
-            joint = GetComponent<Joint>();
-        return joint;
-    }
+        private Joint joint;
 
-    public Vector3 GetPositionToLinkToHook() => PositionToLinkToHook.position;
+        public ChainLinkHook AttachedToHook { get; private set; }
 
-    public Vector3 GetPositionToLinkToHookOffset() => PositionToLinkToHook.position - transform.position;
+        public Transform PositionToLinkToHook;
 
-    public Vector3 GetLinkingPositionToHookPositionOffset() => GetPositionToLinkChainLinkTo() - GetPositionToLinkToHook();
+        public Joint GetJoint()
+        {
+            if (joint == null)
+                joint = GetComponent<Joint>();
+            return joint;
+        }
 
-    public void AttachToChainLinkHook(ChainLinkHook hookToAttachTo)
-    {
-        transform.rotation = hookToAttachTo.transform.rotation;
+        public Vector3 GetPositionToLinkToHook() => PositionToLinkToHook.position;
 
-        transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
+        public Vector3 GetPositionToLinkToHookOffset() => PositionToLinkToHook.position - transform.position;
 
-        GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
-        GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
+        public Vector3 GetLinkingPositionToHookPositionOffset() => GetPositionToLinkChainLinkTo() - GetPositionToLinkToHook();
 
-        AttachedToHook = hookToAttachTo;
-    }
+        public void AttachToChainLinkHook(ChainLinkHook hookToAttachTo)
+        {
+            transform.rotation = hookToAttachTo.transform.rotation;
 
-    public void AttachToChainLinkHookAndRotateTowards(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
-    {
-        AttachToChainLinkHook(hookToAttachTo);
+            transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
 
-        Vector3 targetDirection = positionToRotateChainLinkTowards - (hookToAttachTo.transform.position + hookToAttachTo.GetPositionToLinkChainLinkToOffset());
-        transform.rotation = Quaternion.FromToRotation(Vector3.down, targetDirection);
+            GetRigidbody().velocity = hookToAttachTo.GetRigidbody().velocity;
+            GetJoint().connectedBody = hookToAttachTo.GetRigidbody();
 
-        transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
+            AttachedToHook = hookToAttachTo;
+        }
+
+        public void AttachToChainLinkHookAndRotateTowards(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
+        {
+            AttachToChainLinkHook(hookToAttachTo);
+
+            Vector3 targetDirection = positionToRotateChainLinkTowards - (hookToAttachTo.transform.position + hookToAttachTo.GetPositionToLinkChainLinkToOffset());
+            transform.rotation = Quaternion.FromToRotation(Vector3.down, targetDirection);
+
+            transform.position = hookToAttachTo.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
+        }
     }
 }

@@ -40,7 +40,6 @@ public class CapsuleColliderRenderer : MonoBehaviour
         topSphere.localScale = Vector3.one * GetCapsuleCollider().radius * 2;
         bottomSphere.localScale = Vector3.one * GetCapsuleCollider().radius * 2;
 
-
         float scaleY = GetCapsuleCollider().height - 2 * GetCapsuleCollider().radius;
         // The default height of a cylinder is 2 units. Therefore, the cylinder also has to be scaled down in height by half.
         scaleY *= 0.5f;
