@@ -7,6 +7,8 @@ namespace AnsgarsAssets
     [RequireComponent(typeof(CapsuleCollider))]
     public class VariableLengthChainLink : ChainLink
     {
+        public float EffectiveLength { get; private set; }
+
         CapsuleCollider capsuleCollider;
 
         CapsuleCollider GetCapsuleCollider()
@@ -25,6 +27,9 @@ namespace AnsgarsAssets
         /// <param name="length"></param>
         public void SetEffectiveLength(float length)
         {
+            // The effectiveLength is useful to know for other scripts, so make it accessible for them:
+            EffectiveLength = length;
+
             // The effective length is the distance between the connection points of the ChainLink, and therefore the radius has to be
             // added twice to calculate the correct height.
             GetCapsuleCollider().height = length + GetCapsuleCollider().radius * 2;
