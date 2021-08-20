@@ -7,11 +7,17 @@ namespace AnsgarsAssets
     public class VariableLengthChainLinkTesting : MonoBehaviour
     {
         public VariableLengthChainLink ChainLink;
+        public ChainLinkHook hook;
 
         [Range(0.5f, 2)]
         public float length = 1f;
 
         float previousLengthValue;
+
+        private void Start()
+        {
+            ChainLink.AttachToChainLinkHook(hook);
+        }
 
         // Update is called once per frame
         void Update()

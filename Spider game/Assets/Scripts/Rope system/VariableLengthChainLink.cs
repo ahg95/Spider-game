@@ -33,12 +33,14 @@ namespace AnsgarsAssets
             PositionToLinkToHook.position = transform.position + transform.up * length / 2;
             PositionToLinkChainLinkTo.position = transform.position - transform.up * length / 2;
 
-            // In addition, we have to move the anchor position of the joint to the new positionToLinkToHook so that the physics engine
+            // We might as well move the chainLink manually instead of letting the physics engine do the work. If "Auto Configure Connected Anchor"
+            // is enabled for the ConfigurableJoint, then doing this step before setting the anchor is important because the connected anchor
+            // will have the same global position as the anchor after setting it.
+            transform.position = AttachedToHook.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
+
+            // Lastly, we have to move the anchor position of the joint to the new positionToLinkToHook so that the physics engine
             // connects the correct position.
             GetJoint().anchor = PositionToLinkToHook.localPosition;
-
-            // Lastly, we might as well move the chainLink manually instead of letting the physics engine do the work.
-            transform.position = AttachedToHook.GetPositionToLinkChainLinkTo() - GetPositionToLinkToHookOffset();
         }
     }
 }

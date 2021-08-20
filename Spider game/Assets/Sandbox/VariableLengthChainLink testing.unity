@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 43758894}
   - component: {fileID: 43758893}
   - component: {fileID: 43758892}
+  - component: {fileID: 43758897}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -236,6 +237,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &43758897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43758891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eff4283f4a0ccf44883287ee8178c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PositionToLinkChainLinkTo: {fileID: 43758896}
 --- !u!1 &648024143
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChainLink: {fileID: 1945330174}
+  hook: {fileID: 43758897}
   length: 2
 --- !u!4 &648024145
 Transform:
