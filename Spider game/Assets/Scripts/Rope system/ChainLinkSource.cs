@@ -11,9 +11,13 @@ namespace AnsgarsAssets
         [SerializeField]
         ChainLinkHook hookToConnectChainLinkTo;
 
-        public ChainLink chainLinkPrefab;
+        public VariableLengthChainLink chainLinkPrefab;
         public Transform chainLinkParent;
 
+        [Range(0.5f, 2)]
+        public float maximumChainLinkLength = 1;
+
+        [Header("Uptaking and Expelling")]
         [Range(0, 1)]
         public float friction;
         public float pushOutForceAmount;
