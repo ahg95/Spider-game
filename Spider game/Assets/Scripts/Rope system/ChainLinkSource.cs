@@ -150,6 +150,20 @@ namespace AnsgarsAssets
 
                 ApplyPushOutForce();
 
+
+                ChainLink chainLinkComponent = hookToConnectChainLinkTo.GetComponent<ChainLink>();
+                // If the hook is a chainLink then rotate it towards this chainLinkSource.
+                if (chainLinkComponent)
+                {
+                    Vector3 targetDirection = transform.position - chainLinkComponent.GetPositionToLinkToHook();
+                    chainLinkComponent.transform.rotation = Quaternion.FromToRotation(Vector3.down, targetDirection);
+
+                    // Move the chainLink to the connection point again since the previous rotation operation rotated around the origin
+                    // of the chainLink, and therefore might have disconnected them.
+                    hookToConnectChainLinkTo.transform.position = chainLinkComponent.AttachedToHook.GetPositionToLinkChainLinkTo() - chainLinkComponent.GetPositionToLinkToHookOffset();
+                }
+
+
                 // Before the physics engine does calculations, the SpringJoint values should be updated to limit the movement of the hookToConnectChainLinkTo
                 UpdateSpringJointValues();
             }
