@@ -5,24 +5,47 @@ using UnityEngine;
 
 namespace AnsgarsAssets
 {
+    /// <summary>
+    /// Spawns, deletes, and connects <see cref="ChainLink"/>s together to form a continuous chain. This component acts like
+    /// the hole in a ship where a chain is pulled in or pushed out to drop or lift an anchor.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody), typeof(SpringJoint))]
     public class ChainLinkSource : MonoBehaviour
     {
         [SerializeField]
+        [Tooltip("The object that the chain should be connected to.")]
         ChainLinkHook hookToConnectChainLinkTo;
 
-        public VariableLengthChainLink chainLinkPrefab;
-        public Transform chainLinkParent;
+        [SerializeField]
+        [Tooltip("The type of object that should be used as links in the chain.")]
+        VariableLengthChainLink chainLinkPrefab;
 
+        [SerializeField]
+        [Tooltip("How long each chain link is supposed to be. The effective length means how much the link adds to the length of the chain, being the distance between the link's connection points.")]
         [Range(0.5f, 2)]
-        public float maximumEffectiveChainLinkLength = 1;
+        float maximumEffectiveChainLinkLength = 1;
+
+
 
         [Header("Uptaking and Expelling")]
+
+        [Tooltip("Applies an outward force with the specified strength on the closest chain link. Negative values pull the chain in.")]
+        [Range(-100, 100)]
+        public float pushOutForceAmount;
+
+        [Tooltip("How quickly the chain may expell, specified in units per second.")]
+        [Range(0, 5)]
+        public float maximumExpellSpeed;
+
+        [Tooltip("How quickly the chain may be taken up, specified in units per second.")]
+        [Range(0, 5)]
+        public float maximumTakeUpSpeed;
         [Range(0, 1)]
         public float friction;
-        public float pushOutForceAmount;
-        public float maximumExpellSpeed;
-        public float maximumTakeUpSpeed;
+
+        [Header("Bookkeeping")]
+        [Tooltip("When links of the chain are spawned, they are spawned as children of the specified object.")]
+        public Transform chainLinkParent;
 
         SpringJoint joint;
         new Rigidbody rigidbody;
@@ -53,122 +76,116 @@ namespace AnsgarsAssets
         // Update is called once per frame
         void FixedUpdate()
         {
-            // Only spawn ChainLinks if there is something to connect them to
+            // Only adjust the rope if there is something to connect it to.
             if (hookToConnectChainLinkTo)
             {
-                if (0 < maximumExpellSpeed)
-                {
-                    // There should never be spawned more rope than can be expelled
-                    float maximumRopeToSpawn = maximumExpellSpeed * Time.fixedDeltaTime;
+                ExtendChainIfNecessary();
 
-                    // How much rope (in length) should be spawned. 
-                    float lengthToSpawnRopeFor = Mathf.Min(maximumRopeToSpawn, Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position));
-
-                    // As long as there is rope to spawn...
-                    while (0 < lengthToSpawnRopeFor)
-                    {
-
-                        //... make the first ChainLink as long as possible...
-
-                        if (previouslySpawnedChainLink && previouslySpawnedChainLink.EffectiveLength < maximumEffectiveChainLinkLength)
-                        {
-                            float lengthToAdd = Mathf.Min(lengthToSpawnRopeFor, maximumEffectiveChainLinkLength - previouslySpawnedChainLink.EffectiveLength);
-
-                            previouslySpawnedChainLink.SetEffectiveLength(lengthToAdd + previouslySpawnedChainLink.EffectiveLength);
-
-                            // Don't forget to substract the added length from the total length of rope to spawn.
-                            lengthToSpawnRopeFor -= lengthToAdd;
-                        }
-
-                        //... and if it's still not long enough...
-                        if (0 < lengthToSpawnRopeFor)
-                        {
-                            //... then spawn a new ChainLink.
-
-                            SpawnAndAttachChainLinkToHook();
-
-                            float spawnedChainLinkEffectiveLength = Mathf.Min(lengthToSpawnRopeFor, maximumEffectiveChainLinkLength);
-
-                            previouslySpawnedChainLink.SetEffectiveLength(spawnedChainLinkEffectiveLength);
-
-                            // Don't forget to take into account the rope that has just been spawned.
-                            lengthToSpawnRopeFor -= spawnedChainLinkEffectiveLength;
-                        }
-                    }
-                }
-
-                /*
-                if (0 < maximumTakeUpSpeed)
-                {
-                    // We don't want to remove more rope than is possible to take up in that time
-                    float maximumRopeToRemove = maximumTakeUpSpeed * Time.deltaTime;
-
-                    float ropeLengthThatHasBeenRemoved = 0;
-
-                    // Only remove anything if it is not already the end of the rope
-                    while (hookToConnectChainLinkTo.GetComponent<VariableLengthChainLink>() && ropeLengthThatHasBeenRemoved < maximumRopeToRemove)
-                    {
-                        // Only remove anything if the rope is actually further pulled in. This is the case if the hookToConnectChainLinkTo
-                        // lies behind the ropeDeletionBorder, which means that it doesn't lie on the forward side of the chainLinkSource
-                        Plane ropeDeletionBorder = new Plane(transform.forward, transform.position);
-
-                        if (ropeDeletionBorder.GetSide(hookChainLinkComponent.GetPositionToLinkChainLinkTo()))
-                        {
-                            float distanceToPositionToLinkToHook = Vector3.Distance(transform.position, hookChainLinkComponent.GetPositionToLinkToHook());
-
-                            float lengthToRemoveFromRope = Mathf.Min(maximumRopeToRemove, distanceToPositionToLinkToHook);
-
-                            // While there is still rope to remove ...
-                            while (0 < lengthToRemoveFromRope)
-                            {
-
-                            }
-                        }
-                    }
-
-                    
-                    if (hookChainLinkComponent)
-                    {
-
-
-
-                    }
-
-
-                }
-                */
-
-                // If in 
-                //if (0 < maximumExpellSpeed && 2 <= Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position))
-                //    SpawnAndAttachChainLinkToHook();
-                //else if (0 < maximumTakeUpSpeed && Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position) <= 1)
-                //    ShortenRopeByOneLink();
-
-
-                // Apply the forces as specified
                 ApplyFrictionToHookToConnectChainLinkTo();
 
                 ApplyPushOutForce();
 
-
-                ChainLink chainLinkComponent = hookToConnectChainLinkTo.GetComponent<ChainLink>();
-                // If the hook is a chainLink then rotate it towards this chainLinkSource.
-                if (chainLinkComponent)
-                {
-                    Vector3 targetDirection = transform.position - chainLinkComponent.GetPositionToLinkToHook();
-                    chainLinkComponent.transform.rotation = Quaternion.FromToRotation(Vector3.down, targetDirection);
-
-                    // Move the chainLink to the connection point again since the previous rotation operation rotated around the origin
-                    // of the chainLink, and therefore might have disconnected them.
-                    hookToConnectChainLinkTo.transform.position = chainLinkComponent.AttachedToHook.GetPositionToLinkChainLinkTo() - chainLinkComponent.GetPositionToLinkToHookOffset();
-                }
-
-
                 // Before the physics engine does calculations, the SpringJoint values should be updated to limit the movement of the hookToConnectChainLinkTo
                 UpdateSpringJointValues();
+
+                RotatePreviouslySpawnedChainLinkTowardsSourceIfPossible();
             }
 
             UpdatePositionAfterPreviousFixedUpdate();
+        }
+
+        void RotatePreviouslySpawnedChainLinkTowardsSourceIfPossible()
+        {
+            // It is only possible to rotate it if there is one
+            if (previouslySpawnedChainLink)
+            {
+                Vector3 alignmentWith = transform.position - previouslySpawnedChainLink.GetPositionToLinkToHook();
+
+                previouslySpawnedChainLink.GetRigidbody().MoveRotation(Quaternion.FromToRotation(Vector3.down, alignmentWith));
+
+                // Move the chainLink to the connection point again since the previous rotation operation rotated around the origin and not the connection point
+                Vector3 positionToMoveTo = previouslySpawnedChainLink.AttachedToHook.GetPositionToLinkChainLinkTo() - previouslySpawnedChainLink.GetPositionToLinkToHookOffset();
+
+                hookToConnectChainLinkTo.transform.position = positionToMoveTo;
+            }
+        }
+
+        private void ShortenChain()
+        {
+            /*
+if (0 < maximumTakeUpSpeed)
+{
+    // We don't want to remove more rope than is possible to take up in that time
+    float maximumRopeToRemove = maximumTakeUpSpeed * Time.deltaTime;
+
+    float ropeLengthThatHasBeenRemoved = 0;
+
+    // Only remove anything if it is not already the end of the rope
+    while (hookToConnectChainLinkTo.GetComponent<VariableLengthChainLink>() && ropeLengthThatHasBeenRemoved < maximumRopeToRemove)
+    {
+        // Only remove anything if the rope is actually further pulled in. This is the case if the hookToConnectChainLinkTo
+        // lies behind the ropeDeletionBorder, which means that it doesn't lie on the forward side of the chainLinkSource
+        Plane ropeDeletionBorder = new Plane(transform.forward, transform.position);
+
+        if (ropeDeletionBorder.GetSide(hookChainLinkComponent.GetPositionToLinkChainLinkTo()))
+        {
+            float distanceToPositionToLinkToHook = Vector3.Distance(transform.position, hookChainLinkComponent.GetPositionToLinkToHook());
+
+            float lengthToRemoveFromRope = Mathf.Min(maximumRopeToRemove, distanceToPositionToLinkToHook);
+
+            // While there is still rope to remove ...
+            while (0 < lengthToRemoveFromRope)
+            {
+
+            }
+        }
+    }
+
+
+}
+*/
+        }
+
+
+
+        void ExtendChainIfNecessary()
+        {
+            // The chain should never be extended more than is theoretically allowed.
+            float maximumExtensionAmount = maximumExpellSpeed * Time.fixedDeltaTime;
+
+            // How far away the chain is from the source.
+            float gapSize = Vector3.Distance(transform.position, hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
+
+            // How much the chain should be extended.
+            float extensionAmount = Mathf.Min(maximumExtensionAmount, gapSize);
+
+            // If the chain should be extended, then try to extend the previously spawned chainLink first.
+            if (0 < extensionAmount && previouslySpawnedChainLink && previouslySpawnedChainLink.CurrentEffectiveLength < maximumEffectiveChainLinkLength)
+            {
+                float chainLinkGrowPotential = maximumEffectiveChainLinkLength - previouslySpawnedChainLink.CurrentEffectiveLength;
+                float lengthToAdd = Mathf.Min(extensionAmount, chainLinkGrowPotential);
+
+                previouslySpawnedChainLink.AddEffectiveLength(lengthToAdd);
+
+                // The length we added to the chain should not be added again.
+                extensionAmount -= lengthToAdd;
+            }
+
+            // If the chain should be extended even more, ...
+            while (0 < extensionAmount)
+            {
+                //... then spawn new ChainLinks until it is extended enough.
+
+                SpawnAndAttachChainLinkToHook();
+                RotatePreviouslySpawnedChainLinkTowardsSourceIfPossible();
+
+                float spawnedChainLinkEffectiveLength = Mathf.Min(extensionAmount, maximumEffectiveChainLinkLength);
+
+                previouslySpawnedChainLink.SetEffectiveLength(spawnedChainLinkEffectiveLength);
+
+                // Don't forget to take into account the rope that has just been spawned.
+                extensionAmount -= spawnedChainLinkEffectiveLength;
+            }
         }
 
         public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
@@ -205,16 +222,12 @@ namespace AnsgarsAssets
         void SpawnAndAttachChainLinkToHook()
         {
             GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);
-
             previouslySpawnedChainLink = spawnedChainLink.GetComponent<VariableLengthChainLink>();
 
-            previouslySpawnedChainLink.AttachToChainLinkHookAndRotateTowards(hookToConnectChainLinkTo, transform.position);
+            previouslySpawnedChainLink.AttachToChainLinkHook(hookToConnectChainLinkTo);
 
             hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
-
             ConnectSpringJointTohookToConnectChainLinkToIfExistent();
-
-
         }
 
         void ShortenRopeByOneLink()
@@ -331,6 +344,5 @@ namespace AnsgarsAssets
             GetSpringJoint().connectedAnchor = Vector3.zero;
         }
     }
-
 }
 

@@ -7,7 +7,7 @@ namespace AnsgarsAssets
     [RequireComponent(typeof(CapsuleCollider))]
     public class VariableLengthChainLink : ChainLink
     {
-        public float EffectiveLength { get; private set; }
+        public float CurrentEffectiveLength { get; private set; }
 
         CapsuleCollider capsuleCollider;
 
@@ -28,7 +28,7 @@ namespace AnsgarsAssets
         public void SetEffectiveLength(float length)
         {
             // The effectiveLength is useful to know for other scripts, so make it accessible for them:
-            EffectiveLength = length;
+            CurrentEffectiveLength = length;
 
             // The effective length is the distance between the connection points of the ChainLink, and therefore the radius has to be
             // added twice to calculate the correct height.
@@ -46,6 +46,11 @@ namespace AnsgarsAssets
             // Lastly, we have to move the anchor position of the joint to the new positionToLinkToHook so that the physics engine
             // connects the correct position.
             GetJoint().anchor = PositionToLinkToHook.localPosition;
+        }
+
+        public void AddEffectiveLength(float lengthToAdd)
+        {
+            SetEffectiveLength(CurrentEffectiveLength + lengthToAdd);
         }
     }
 }

@@ -228,7 +228,11 @@ namespace AnsgarsAssets
             // Unlocking the rope length before the projectile is shot prevents the projectile from being stopped by the SpringJoint
             // used in the chainLinkSource. The projectile and the chainLinkSource are hold at the muzzle by the parent constraints,
             // and therefore unlocking the rope length has no unexpected consequence.
-            chainLinkSource.GetChainLinkSource().UnlockRopeLength();
+
+            chainLinkSource.enabled = false;
+            //chainLinkSource.GetChainLinkSource().UnlockRopeLength();
+
+
             projectile.GetSticky().DisableStickiness();
 
             gunState = RopeGunState.loaded;
@@ -244,6 +248,7 @@ namespace AnsgarsAssets
             chainLinkSource.GetDeactivatableFixedJoint().Activate();
             chainLinkSource.GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidBodyToConnectChainLinkSourceTo;
 
+            chainLinkSource.enabled = true;
             chainLinkSource.GetChainLinkSource().UnlockRopeLength();
             projectile.GetSticky().EnableStickiness();
 
@@ -329,11 +334,11 @@ namespace AnsgarsAssets
 
         void ShootProjectile()
         {
-            Debug.Break();
-
             projectile.GetRigidbody().angularVelocity = Vector3.zero;
             projectile.GetRigidbody().velocity = Vector3.zero;
             projectile.GetRigidbody().AddForce(muzzle.forward * projectileVelocity, ForceMode.VelocityChange);
+
+            Debug.Break();
         }
 
         public void OnGrappleConnected()

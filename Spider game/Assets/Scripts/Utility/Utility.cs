@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -84,8 +85,32 @@ namespace AnsgarsAssets {
             return projectedVector;
         }
 
+        /// <summary>
+        /// Rotates the <see cref="Transform"/> towards a given point, where <paramref name="localAxis"/> defines which axis to rotate towards the point, and where <paramref name="aroundPoint"/> defines the origin of the rotation.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="localAxis">A vector in the local space of the transform to rotate that will be rotated towards <paramref name="towardsPoint"/>.</param>
+        /// <param name="towardsPoint">The point that the <paramref name="localAxis"/> of the <see cref="Transform"/> should point at after rotation. </param>
+        /// <param name="aroundPoint">The point that the <see cref="Transform"/> should be rotated around.</param>
+        public static void RotateLocalAxisTowardsPointAroundPoint(this Transform transform, Vector3 localAxis, Vector3 towardsPoint, Vector3 aroundPoint)
+        {
+            Vector3 targetDirection = transform.position - aroundPoint;
+            transform.rotation = Quaternion.FromToRotation(localAxis, targetDirection);
+            throw new NotImplementedException();
+        }
 
+        /// <summary>
+        /// This function is more performant when checking for distances than using Vector3.Distance().
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="max"></param>
+        public static bool PointsAreCloserThanDistance(Vector3 a, Vector3 b, float distance)
+        {
+            bool pointsAreCloserThanDistance = (a - b).sqrMagnitude < distance * distance;
 
+            return pointsAreCloserThanDistance;
+        }
     }
 }
 
