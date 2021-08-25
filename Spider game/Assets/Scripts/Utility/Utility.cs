@@ -111,6 +111,13 @@ namespace AnsgarsAssets {
 
             return pointsAreCloserThanDistance;
         }
+
+        public static bool PointsAreFurtherApartThanDistance(Vector3 a, Vector3 b, float distance)
+        {
+            bool pointsAreFurtherApartThanDistance = distance * distance < (a - b).sqrMagnitude;
+
+            return pointsAreFurtherApartThanDistance;
+        }
     }
 }
 

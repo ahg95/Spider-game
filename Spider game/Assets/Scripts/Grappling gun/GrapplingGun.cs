@@ -211,11 +211,11 @@ namespace AnsgarsAssets
             }
             else if (gunState == RopeGunState.shot)
             {
-                chainLinkSource.GetChainLinkSource().PullInRopeInstantly();
+                chainLinkSource.GetChainLinkSource().DestroyChainAndResetHookPosition();
             }
             else if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.GetChainLinkSource().PullInRopeInstantly();
+                chainLinkSource.GetChainLinkSource().DestroyChainAndResetHookPosition();
 
                 grappleDisconnected.Raise();
             }
