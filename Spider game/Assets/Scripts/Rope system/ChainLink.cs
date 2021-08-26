@@ -21,6 +21,11 @@ namespace AnsgarsAssets
             return joint;
         }
 
+        public Vector3 GetPositionToLinkToHookLocal()
+        {
+            return transform.InverseTransformPoint(GetPositionToLinkToHook());
+        }
+
         public Vector3 GetPositionToLinkToHook() => PositionToLinkToHook.position;
 
         public Vector3 GetPositionToLinkToHookOffset() => PositionToLinkToHook.position - transform.position;

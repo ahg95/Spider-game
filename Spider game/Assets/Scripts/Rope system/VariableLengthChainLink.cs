@@ -27,6 +27,10 @@ namespace AnsgarsAssets
         /// <param name="length"></param>
         public void SetEffectiveLength(float length)
         {
+            // Setting the effectiveLength smaller than 0 makes no sense, and therefore prevent it.
+            if (length < 0)
+                length = 0;
+
             // The effectiveLength is useful to know for other scripts, so make it accessible for them:
             CurrentEffectiveLength = length;
 
@@ -51,6 +55,11 @@ namespace AnsgarsAssets
         public void AddEffectiveLength(float lengthToAdd)
         {
             SetEffectiveLength(CurrentEffectiveLength + lengthToAdd);
+        }
+
+        public void SubstractEffectiveLength(float lengthToSubstract)
+        {
+            SetEffectiveLength(CurrentEffectiveLength - lengthToSubstract);
         }
     }
 }

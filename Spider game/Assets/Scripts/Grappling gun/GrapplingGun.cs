@@ -338,7 +338,7 @@ namespace AnsgarsAssets
             projectile.GetRigidbody().velocity = Vector3.zero;
             projectile.GetRigidbody().AddForce(muzzle.forward * projectileVelocity, ForceMode.VelocityChange);
 
-            Debug.Break();
+            //Debug.Break();
         }
 
         public void OnGrappleConnected()

@@ -15,11 +15,11 @@ C:/Users/Ansgar/Desktop/Ansgars Dokumente/Spider game/Spider game
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-49760
+52199
 Successfully changed project path to: C:/Users/Ansgar/Desktop/Ansgars Dokumente/Spider game/Spider game
 C:/Users/Ansgar/Desktop/Ansgars Dokumente/Spider game/Spider game
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 39.14 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 40.99 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.17f1 (03b40fe07a36)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/Resources/UnitySubsystems
@@ -35,89 +35,89 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56976
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56148
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.004208 seconds.
+Registered in 0.003465 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 41.04 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 36.29 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.556 seconds
+- Completed reload, in  1.435 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1557ms)
-		BeginReloadAssembly (89ms)
+	ReloadAssembly (1435ms)
+		BeginReloadAssembly (86ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (529ms)
-			LoadAssemblies (86ms)
+		EndReloadAssembly (471ms)
+			LoadAssemblies (82ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (209ms)
+			SetupTypeCache (194ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (35ms)
-			SetupLoadedEditorAssemblies (221ms)
+			RebuildScriptCaches (34ms)
+			SetupLoadedEditorAssemblies (187ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (8ms)
+				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (41ms)
-				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (131ms)
-				ProcessInitializeOnLoadMethodAttributes (38ms)
+				RefreshPlugins (36ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (108ms)
+				ProcessInitializeOnLoadMethodAttributes (33ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.005722 seconds.
+Registered in 0.005837 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.58 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.45 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.723 seconds
+- Completed reload, in  1.510 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1723ms)
-		BeginReloadAssembly (233ms)
+	ReloadAssembly (1511ms)
+		BeginReloadAssembly (198ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (6ms)
+			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (27ms)
-		EndReloadAssembly (1400ms)
-			LoadAssemblies (149ms)
+			CreateAndSetChildDomain (26ms)
+		EndReloadAssembly (1237ms)
+			LoadAssemblies (118ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (513ms)
+			SetupTypeCache (332ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (64ms)
-			SetupLoadedEditorAssemblies (587ms)
+			RebuildScriptCaches (49ms)
+			SetupLoadedEditorAssemblies (645ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (1ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (79ms)
-				ProcessInitializeOnLoadAttributes (480ms)
-				ProcessInitializeOnLoadMethodAttributes (6ms)
-				AfterProcessingInitializeOnLoad (13ms)
+				BeforeProcessingInitializeOnLoad (67ms)
+				ProcessInitializeOnLoadAttributes (554ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (12ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
-Refreshing native plugins compatible for Editor in 0.48 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 0.50 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1847 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 84.8 MB.
 System memory in use after: 84.9 MB.
 
 Unloading 76 unused Assets to reduce memory usage. Loaded Objects now: 2293.
-Total: 4.083100 ms (FindLiveObjects: 0.178700 ms CreateObjectMapping: 0.079000 ms MarkObjects: 3.662200 ms  DeleteObjects: 0.161500 ms)
+Total: 4.116600 ms (FindLiveObjects: 0.174400 ms CreateObjectMapping: 0.077600 ms MarkObjects: 3.704900 ms  DeleteObjects: 0.158200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -133,134 +133,512 @@ AssetImportParameters requested are different than current active one (requested
 Received Import Request.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea152380a6a000e1a6a539edbd3b7e6e') in 0.031372 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48d7d819e5ffc13414d33a9160276bcd') in 0.036793 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 48.818885 seconds.
-  path: Assets/Scripts/Rope system/ChainLinkSource.cs
-  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26fd0619bfa9cd332f10246c9bdd409f') in 0.005660 seconds 
+  Time since last request: 0.000300 seconds.
+  path: Assets/Scripts/Curve fitting
+  artifactKey: Guid(41a20b2a2ee3bbb4aa9e0e79f7e0fa00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Curve fitting using Guid(41a20b2a2ee3bbb4aa9e0e79f7e0fa00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9ec193a6991246236378a5a7474e80f') in 0.007193 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.529906 seconds.
+  Time since last request: 15.248679 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a92d306593585bcc69ef76df9f87b4a9') in 0.004242 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47304203b19570fd083c451ee45a1405') in 0.004806 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 24.037705 seconds.
+  Time since last request: 177.437523 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3b5dc2b02172fbe12c2e5c5148dec32') in 0.004422 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba9dddbacbffcf287fa88c930e8be024') in 0.004240 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 14.535565 seconds.
+  Time since last request: 45.313649 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51eaba9d639c9737d27a89d6cd217d27') in 0.003925 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a983ec6e3a39ba1f3088b585e1d47191') in 0.003713 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.766946 seconds.
+  Time since last request: 217.132045 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '023feded7c36c410cb111788404a73f6') in 0.003287 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76d3a648a5c47f023706ad7ac6be294d') in 0.003802 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.636529 seconds.
+  Time since last request: 20.274726 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00a3d459610d6d9724272395710347cf') in 0.004783 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cda61207c051e3bddadf916c450f3a4') in 0.003990 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.101792 seconds.
+  Time since last request: 47.874610 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1c12cf28e552a974d3bfb5c8961ffba') in 0.008698 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b00401e126c21baabf1f90b8709b660d') in 0.004578 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.756112 seconds.
+  Time since last request: 46.497776 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd84a8c6c91b4269cf43091fa2cf96c52') in 0.003366 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ec1cce5c2483d8ae8c69359ecb94377') in 0.003767 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 54.028261 seconds.
+  Time since last request: 111.691689 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95aedac1538152bf7eb84bb9926f2752') in 0.003550 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fb069382288bc87362983af9d956d2e') in 0.004319 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 38.135939 seconds.
+  Time since last request: 42.012624 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2579d73fed6bd033c5106a6602ac5429') in 0.003301 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd212e64adbbd12fc3c0c2dbd0ff1229') in 0.003358 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.842310 seconds.
+  Time since last request: 4.543595 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b0afe88c20c4acaabd4d8e36578a457') in 0.003445 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86991a3b3098eec91f1bed32eec91acb') in 0.005124 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 979.925783 seconds.
+  Time since last request: 48.167719 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65c6f011a08841b7591218a172395be9') in 0.003866 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3bfeacac3ea3a2eaa4cab5006108fb42') in 0.003544 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 73.535433 seconds.
+  Time since last request: 203.786053 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '580c7ca919fd6362a7694faa8dc6a366') in 0.003667 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c35ae1eb92dcd56005dd9b9f3774c99a') in 0.003862 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 22.129821 seconds.
+  Time since last request: 7.823037 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd045d0e0864b15a679c7f3ee07e5196b') in 0.003483 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efb56fcce78ddad93e030de4ca20b20c') in 0.003688 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 57.861219 seconds.
+  Time since last request: 41.031650 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f5fcb78194cf5066da92646a28a81d1') in 0.003761 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64c00dfa8677a8a6ecb8df56fac556ed') in 0.004768 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 42.534450 seconds.
+  Time since last request: 9.331751 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a385ab0caa265db98d600c7a172b9838') in 0.003675 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4f32151210b0cf49ce8ad9a7ec9cc0d') in 0.003502 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 28.168346 seconds.
+  Time since last request: 37.106332 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd11a509bde3f59cf057b22b98aba2d28') in 0.003501 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '288ca491108efd26fbcefbd99d9b367d') in 0.003243 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 23.242431 seconds.
+  Time since last request: 15.221509 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f30de60829eff3026c773495a1d2998') in 0.003638 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '321460f90444b797dbbb11c67e6151df') in 0.003958 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 60.610183 seconds.
+  Time since last request: 13.062264 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad247fe498a18acf44fb11ae61a1d9c3') in 0.004124 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d24dad76bfc58e6c5e9cb373dfc3309') in 0.004988 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 105.234316 seconds.
+  Time since last request: 25.651805 seconds.
   path: Assets/Scripts/Rope system/ChainLinkSource.cs
   artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ae9d7524f37e3e0dd08f2e4afb8f4d2') in 0.003919 seconds 
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e116a55697d9f73ef87b98bf8543b8cc') in 0.003137 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 68.390833 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '355cede5099c406a551621fd716696f9') in 0.003659 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 52.260699 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7549c124b942ce055be64d1e7f1dc335') in 0.004135 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.464504 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c3dd2c6ab2ff0d760599bc61417c1a7') in 0.003564 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 414.154418 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3183eb825915371e8b693114b1fa603e') in 0.003677 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 29.666723 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd3b64efd5382107408689410bcc4a4d') in 0.003660 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.652414 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52bf9cb5e74149e40362cfa347fb0b4f') in 0.003879 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 32.528251 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6ad36ce00819089c275bbdf76711033') in 0.004177 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 106.393805 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48fa2c510279863e31888499fdfc6754') in 0.004389 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.706594 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e36067f843bf706616604c7b019ef816') in 0.003263 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.369148 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5a0d0f88a54d915d93b8375cf42e202') in 0.004219 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 102.681246 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cfe4cec4d52985e11b16f974b34c7f7e') in 0.003857 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 27.611193 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c46178fe56d42033339168eb52075c74') in 0.004677 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.838279 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a43757af86a6ab4f7fc1b568041c201') in 0.003905 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 20.011018 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '001fa79419b8041a6c8a86d2c0a30ff7') in 0.003720 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 51.417426 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d492eae43dd00465fdac86b8e1f5908') in 0.003741 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 17.662112 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec8c487fdcd107959fa9d3046d6b7eae') in 0.004544 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 34.357625 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f30d26d1c0d0d791212b619a72c6d8f') in 0.003687 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 75.642328 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecd5a03e6e6cb7af721521ec66c366cd') in 0.003940 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 17.500807 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef90eb2534724478799a2b655a213edf') in 0.004618 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 37.068625 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2979295423f054ee3651010e1c670f45') in 0.003874 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 48.311640 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '860abc3e688ad5092dc6479d1f6de590') in 0.003823 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 132.981957 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a4f307969f6099af43b58e3f5ceeb56') in 0.003647 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.122890 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b03c5a588fb50176af0210977f6eefd3') in 0.004288 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 44.106502 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9db8e0d9b5d8564f6dc9fa3712b52ee0') in 0.003678 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 27.230934 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2da4b858a6de39fb082b76cf0d322039') in 0.003662 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 124.208085 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd81cafc12fba1583dd95dcfe22bc2c8f') in 0.004289 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 29.746088 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce06006676efa5c675949a7afdaf6948') in 0.003883 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 49.638810 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '213c89f7af2f43da8b2e19681a2a1723') in 0.003624 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 38.741788 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '067321cb302a28e27afd1334557470a2') in 0.003438 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 107.413536 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8185984f5d66f4f8b3ff311ea2ed7332') in 0.006272 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 81.202141 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dbd78560d25dcacbef5b7b227971073') in 0.004150 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 439.584427 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cd479655c92f9813715237eff4711fe') in 0.004740 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 23.767509 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dbd53b9703a1723e11948cecaf4ad0d5') in 0.003948 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 49.477151 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '011d1213a618d341cb9b7d615856a6d3') in 0.004278 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.683447 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32e4e18f3af7399ff4a3216b43ffa956') in 0.003757 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.730365 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83016edccbd03107358d737dbb7d62e8') in 0.004335 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 27.432061 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc9be4fae4148bb40e9e1498fe6e52c7') in 0.003295 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.605888 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f682b1042072d9ada262aff057e0da24') in 0.009488 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.076048 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7cad104d9484b964a1039a06470f2213') in 0.004192 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.910138 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e47e0650a4aef37d884aceb667995815') in 0.004047 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 38.069887 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '319fed36a3c3ae2feb79fe27f7a8c885') in 0.004620 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 58.290910 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c5f465bc1790df0a7579120dbd9040a') in 0.003403 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 116.960533 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91e64c4d0744ac621f97fba62d083421') in 0.003312 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 56.338600 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d2f2b63862b61835fc3cc4bf6b34493') in 0.004548 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 63.051261 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd001f0121530f9e8af73f9c463f6bab1') in 0.004175 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.868356 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30955cd53d15f045fbb5188cf1823dc1') in 0.003713 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 18.124433 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0663b6be0aa3b9589c39c05b6258933d') in 0.003877 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3010.701451 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8ab746aae44afaf781162d9bc2fec9c') in 0.004894 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.546681 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd80ec5cefec5f679cbbd6ab1e75c7cef') in 0.003519 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.575353 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be8944cf6b34669b434eaf310ebfd94a') in 0.004356 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 14.007288 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbba579dea62ca96004c21a603436e2d') in 0.004093 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.254709 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19e39d9c8d80b8007af58aee02632cf4') in 0.003551 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 33.564213 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba6071a9994fe6d9ab0b5216bcb61a0f') in 0.003464 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.598381 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b6981f38757c16a86e91155961c5f44') in 0.004310 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 82.544413 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ffde7788fa176c474bfa2717f00f495') in 0.004248 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 47.205712 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '563260d39c019e9e84814a15b395a99b') in 0.003273 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.560656 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b1085cb79fd6654e93f64cad45e7035') in 0.003759 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.583655 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91940fa063eb581a1e0c0812f0a18d03') in 0.004014 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 55.190625 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0385098f0d1bfc3ae60642beac87c8c') in 0.003888 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 39.673427 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71383184c0b1e56f1ea508191ff3087b') in 0.004355 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.698161 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8ac6cf1e59f392e47b7884dd37aa1d6') in 0.007968 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.563149 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d7474743dfc16ca8056174417eb4a6b') in 0.003764 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 32.022631 seconds.
+  path: Assets/Scripts/Rope system/ChainLinkSource.cs
+  artifactKey: Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Rope system/ChainLinkSource.cs using Guid(77ccae67d579ea04e93fb2eaf048781a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b474ac9e10bd9584654135612d503ca7') in 0.004007 seconds 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.005424 seconds.
+Registered in 0.007521 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.46 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Warning: Annotation not found!
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -272,27 +650,27 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 [Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.295 seconds
+- Completed reload, in  1.321 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1295ms)
-		BeginReloadAssembly (168ms)
+	ReloadAssembly (1321ms)
+		BeginReloadAssembly (195ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (8ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (45ms)
-		EndReloadAssembly (1046ms)
-			LoadAssemblies (139ms)
+			CreateAndSetChildDomain (54ms)
+		EndReloadAssembly (1031ms)
+			LoadAssemblies (152ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (340ms)
+			SetupTypeCache (334ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (43ms)
-			SetupLoadedEditorAssemblies (440ms)
+			RebuildScriptCaches (42ms)
+			SetupLoadedEditorAssemblies (435ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (61ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (57ms)
 				ProcessInitializeOnLoadAttributes (355ms)
 				ProcessInitializeOnLoadMethodAttributes (5ms)
 				AfterProcessingInitializeOnLoad (12ms)
@@ -307,7 +685,272 @@ System memory in use before: 82.5 MB.
 System memory in use after: 82.6 MB.
 
 Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2296.
-Total: 3.910600 ms (FindLiveObjects: 0.152200 ms CreateObjectMapping: 0.094100 ms MarkObjects: 3.630600 ms  DeleteObjects: 0.032200 ms)
+Total: 3.649200 ms (FindLiveObjects: 0.169000 ms CreateObjectMapping: 0.084900 ms MarkObjects: 3.359400 ms  DeleteObjects: 0.035000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 170.459339 seconds.
+  path: Assets/Prefabs/GrapplingGun chainLinkSource.prefab
+  artifactKey: Guid(aa4287faf5288a1419b817fd520a4657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/GrapplingGun chainLinkSource.prefab using Guid(aa4287faf5288a1419b817fd520a4657) Importer(815301076,1909f56bfc062723c751e8b465ee728b) A SpringJoint used by a ChainLinkSource has unexpected values.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogWarning (object)
+AnsgarsAssets.ChainLinkSource:ValidateSpringJointValues () (at Assets/Scripts/Rope system/ChainLinkSource.cs:376)
+AnsgarsAssets.ChainLinkSource:OnValidate () (at Assets/Scripts/Rope system/ChainLinkSource.cs:357)
+
+(Filename: Assets/Scripts/Rope system/ChainLinkSource.cs Line: 376)
+
+ -> (artifact id: '8993a93c1cce3377a6088fb39e47b5ed') in 0.103828 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.646065 seconds.
+  path: Assets/Prefabs/GrapplingGun chainLinkSource.prefab
+  artifactKey: Guid(aa4287faf5288a1419b817fd520a4657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/GrapplingGun chainLinkSource.prefab using Guid(aa4287faf5288a1419b817fd520a4657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6026ad458884b5f0b21223c801461a3d') in 0.014566 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 48.554774 seconds.
+  path: Assets/Sandbox/ChainLinkSource test.unity
+  artifactKey: Guid(5feeaaa4ac8509f448f6e257fe63a988) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/ChainLinkSource test.unity using Guid(5feeaaa4ac8509f448f6e257fe63a988) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6554233259e904b7110a383b3cc89c6c') in 0.009948 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.966484 seconds.
+  path: Assets/Sandbox/Jitter test scene.unity
+  artifactKey: Guid(814e373c387ad9448a731cac0b89078a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/Jitter test scene.unity using Guid(814e373c387ad9448a731cac0b89078a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97e3cc0e7015737f8ad71157298de3b0') in 0.009205 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.951546 seconds.
+  path: Assets/Sandbox/RopeGun test.unity
+  artifactKey: Guid(2bd83640cd467a84cb97e43d671f2e51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/RopeGun test.unity using Guid(2bd83640cd467a84cb97e43d671f2e51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de04802ced070ca8db9543e2a332cae4') in 0.009148 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.830399 seconds.
+  path: Assets/Sandbox/Sticky testscene.unity
+  artifactKey: Guid(a8205a7878dad844e9fe2572684ccbbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/Sticky testscene.unity using Guid(a8205a7878dad844e9fe2572684ccbbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca38c33ce1a1ffff8fe6860cba10a014') in 0.009035 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.519906 seconds.
+  path: Assets/Sandbox/Rope connectiong test.unity
+  artifactKey: Guid(0c605f9be3611c84c835686510aa9509) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/Rope connectiong test.unity using Guid(0c605f9be3611c84c835686510aa9509) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '159394daab6d075ad73108385d571c86') in 0.009349 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 18.573183 seconds.
+  path: Assets/Sandbox/Joint Anchor Test.unity
+  artifactKey: Guid(ddd2c46fb336c2143baaa977217ae2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/Joint Anchor Test.unity using Guid(ddd2c46fb336c2143baaa977217ae2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6f93b5e3e77bad0cc2d58978e79c286') in 0.010661 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005322 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.47 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool) (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs:575)
+UnityEditor.ProBuilder.HierarchyListener:.cctor () (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/HierarchyListener.cs:21)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.336 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1337ms)
+		BeginReloadAssembly (171ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (43ms)
+		EndReloadAssembly (1090ms)
+			LoadAssemblies (122ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (377ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (448ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (62ms)
+				ProcessInitializeOnLoadAttributes (361ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.51 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 86.3 MB.
+System memory in use after: 86.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2309.
+Total: 4.327200 ms (FindLiveObjects: 0.265900 ms CreateObjectMapping: 0.171400 ms MarkObjects: 3.871300 ms  DeleteObjects: 0.017700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 153.536939 seconds.
+  path: Assets/Scenes/Levels/Gameplay test.unity
+  artifactKey: Guid(ca342563bfe16c04c83f08366cd16161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Levels/Gameplay test.unity using Guid(ca342563bfe16c04c83f08366cd16161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d10477fd259f0eba032989a794a5a10') in 0.017690 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008280 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool) (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs:575)
+UnityEditor.ProBuilder.HierarchyListener:.cctor () (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/HierarchyListener.cs:21)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.328 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1328ms)
+		BeginReloadAssembly (176ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (45ms)
+		EndReloadAssembly (1064ms)
+			LoadAssemblies (124ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (363ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (45ms)
+			SetupLoadedEditorAssemblies (437ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (58ms)
+				ProcessInitializeOnLoadAttributes (355ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 86.3 MB.
+System memory in use after: 86.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2312.
+Total: 4.158200 ms (FindLiveObjects: 0.202700 ms CreateObjectMapping: 0.157000 ms MarkObjects: 3.781800 ms  DeleteObjects: 0.015500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 66.631977 seconds.
+  path: Assets/Sandbox/VariableLengthChainLink testing.unity
+  artifactKey: Guid(00f85cf644132f74d84afa50e10310e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sandbox/VariableLengthChainLink testing.unity using Guid(00f85cf644132f74d84afa50e10310e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd303f144c629730d1c8881994da7c9cd') in 0.015840 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005516 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.45 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool) (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs:575)
+UnityEditor.ProBuilder.HierarchyListener:.cctor () (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/HierarchyListener.cs:21)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.318 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1318ms)
+		BeginReloadAssembly (168ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (41ms)
+		EndReloadAssembly (1065ms)
+			LoadAssemblies (128ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (355ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (446ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (60ms)
+				ProcessInitializeOnLoadAttributes (362ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.53 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 86.3 MB.
+System memory in use after: 86.5 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2315.
+Total: 4.293200 ms (FindLiveObjects: 0.211400 ms CreateObjectMapping: 0.148800 ms MarkObjects: 3.915300 ms  DeleteObjects: 0.016500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -322,10 +965,10 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.005306 seconds.
+Registered in 0.010492 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.56 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Warning: Annotation not found!
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -337,42 +980,42 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 [Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.310 seconds
+- Completed reload, in  2.049 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1310ms)
-		BeginReloadAssembly (171ms)
+	ReloadAssembly (2050ms)
+		BeginReloadAssembly (227ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (7ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (45ms)
-		EndReloadAssembly (1053ms)
-			LoadAssemblies (124ms)
+			CreateAndSetChildDomain (61ms)
+		EndReloadAssembly (1654ms)
+			LoadAssemblies (199ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (344ms)
+			SetupTypeCache (518ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (43ms)
-			SetupLoadedEditorAssemblies (450ms)
+			RebuildScriptCaches (70ms)
+			SetupLoadedEditorAssemblies (713ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
+				InitializePlatformSupportModulesInManaged (9ms)
+				SetLoadedEditorAssemblies (1ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (59ms)
-				ProcessInitializeOnLoadAttributes (367ms)
-				ProcessInitializeOnLoadMethodAttributes (5ms)
-				AfterProcessingInitializeOnLoad (12ms)
+				BeforeProcessingInitializeOnLoad (86ms)
+				ProcessInitializeOnLoadAttributes (591ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (18ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
+			AwakeInstancesAfterBackupRestoration (13ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.53 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.79 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 82.5 MB.
-System memory in use after: 82.6 MB.
+System memory in use before: 86.4 MB.
+System memory in use after: 86.5 MB.
 
-Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2299.
-Total: 4.095300 ms (FindLiveObjects: 0.221000 ms CreateObjectMapping: 0.077800 ms MarkObjects: 3.779900 ms  DeleteObjects: 0.015300 ms)
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2318.
+Total: 6.171800 ms (FindLiveObjects: 0.289600 ms CreateObjectMapping: 0.393500 ms MarkObjects: 5.456300 ms  DeleteObjects: 0.030400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -385,8 +1028,132 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
-Received Import Request.
-  Time since last request: 1731.376902 seconds.
-  path: Assets/Documentation/Documentation.docx
-  artifactKey: Guid(c1f540ede7349334ca1670a115e0b3c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Documentation/Documentation.docx using Guid(c1f540ede7349334ca1670a115e0b3c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8151e0d330eeba7a8a282e6f793e853') in 0.029301 seconds 
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005198 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.48 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool) (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs:575)
+UnityEditor.ProBuilder.HierarchyListener:.cctor () (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/HierarchyListener.cs:21)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.348 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1348ms)
+		BeginReloadAssembly (191ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (48ms)
+		EndReloadAssembly (1074ms)
+			LoadAssemblies (134ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (343ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (46ms)
+			SetupLoadedEditorAssemblies (471ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (60ms)
+				ProcessInitializeOnLoadAttributes (387ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.45 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 86.4 MB.
+System memory in use after: 86.5 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2321.
+Total: 3.982100 ms (FindLiveObjects: 0.223500 ms CreateObjectMapping: 0.074700 ms MarkObjects: 3.663500 ms  DeleteObjects: 0.019100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005283 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.49 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool) (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs:575)
+UnityEditor.ProBuilder.HierarchyListener:.cctor () (at Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/HierarchyListener.cs:21)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/EditorUtility.cs line 575]
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.284 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1284ms)
+		BeginReloadAssembly (161ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (41ms)
+		EndReloadAssembly (1040ms)
+			LoadAssemblies (123ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (325ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (450ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (62ms)
+				ProcessInitializeOnLoadAttributes (363ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 86.4 MB.
+System memory in use after: 86.5 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2324.
+Total: 4.565000 ms (FindLiveObjects: 0.260800 ms CreateObjectMapping: 0.178500 ms MarkObjects: 4.103600 ms  DeleteObjects: 0.020500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

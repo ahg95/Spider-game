@@ -26,7 +26,6 @@ namespace AnsgarsAssets
         float maximumEffectiveChainLinkLength = 1;
 
 
-
         [Header("Uptaking and Expelling")]
 
         [Tooltip("Applies an outward force with the specified strength on the closest chain link. Negative values pull the chain in.")]
@@ -42,6 +41,7 @@ namespace AnsgarsAssets
         public float maximumTakeUpSpeed;
         [Range(0, 1)]
         public float friction;
+
 
         [Header("Bookkeeping")]
         [Tooltip("When links of the chain are spawned, they are spawned as children of the specified object.")]
@@ -70,7 +70,7 @@ namespace AnsgarsAssets
         private void OnEnable()
         {
             positionAfterPreviousFixedUpdate = transform.position;
-            ConnectSpringJointTohookToConnectChainLinkTo();
+            ConnectSpringJointToChainBeginning();
         }
 
         // Update is called once per frame
@@ -83,11 +83,11 @@ namespace AnsgarsAssets
                 {
                     float lengthToAddToChain = CalculateLengthToAddToChain();
 
-                    LengthenChainBy(lengthToAddToChain);
+                    AddLengthToChain(lengthToAddToChain);
                 }
                 else if (ChainShouldBeShortened())
                 {
-                    float lengthToRemoveFromChain = CalculateLengthToRemoveFromChain();
+                    float lengthToRemoveFromChain = CalculateAmountToShortenChain();
 
                     ShortenChainBy(lengthToRemoveFromChain);
                 }
@@ -96,87 +96,28 @@ namespace AnsgarsAssets
 
                 ApplyFrictionToHookToConnectChainLinkTo();
 
-
-
-                // Before the physics engine does calculations, the SpringJoint values should be updated to limit the movement of the hookToConnectChainLinkTo
+                // Enforce the maximum takeUp and expell speeds by updating the springJointValues
                 UpdateSpringJointValues();
-
-                RotatePreviouslySpawnedChainLinkTowardsSourceIfPossible();
             }
 
             UpdatePositionAfterPreviousFixedUpdate();
         }
 
-        void ShortenChainBy(float amount)
-        {
-            while (0 < amount)
-            {
-                if (firstChainLink.CurrentEffectiveLength < amount)
-                {
-                    RemoveFirstChainLink();
-                }
-            }
-
-        }
-
-        void RemoveFirstChainLink()
-        {
-            GameObject toBeDestroyed = firstChainLink.gameObject;
-
-            firstChainLink = firstChainLink.AttachedToHook.GetComponent<VariableLengthChainLink>();
-
-            Destroy(toBeDestroyed);
-        }
-
         bool ChainShouldBeLengthened()
         {
-            bool chainShouldBeLengthened = false;
-
-            if (0 < maximumExpellSpeed && hookToConnectChainLinkTo)
-            {
-                // Make sure you mean the forward direction!
-                Plane frontPlane = new Plane(transform.forward, transform.position);
-
-                // If the hookToConnectChainLinkTo lies in front of the source, then the chain should be lengthened.
-                chainShouldBeLengthened = frontPlane.GetSide(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
-            }
-
-            return chainShouldBeLengthened;
-        }
-
-        bool ChainShouldBeShortened()
-        {
-            bool chainShouldBeShortened = false;
-
-            // If there was no chainLink in the chain but just the hook then there would be nothing to shorten
-            if (0 < maximumTakeUpSpeed && firstChainLink)
-            {
-                Plane frontPlane = new Plane(transform.forward, transform.position);
-
-                // The chain should only be shortened if the hook lies behind the source.
-                chainShouldBeShortened = !frontPlane.GetSide(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
-            }
-
-            return chainShouldBeShortened;
+            return 0 < maximumExpellSpeed && hookToConnectChainLinkTo && PointLiesInForwardDirection(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
         }
 
         float CalculateLengthToAddToChain()
         {
+            // Do not ad more length to the chain than is theoretically possible under the current maximumExpellSpeed and the passed time.
             float maximumLengthToAdd = Time.fixedDeltaTime * maximumExpellSpeed;
             float gapSize = Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position);
 
             return Mathf.Min(maximumLengthToAdd, gapSize);
         }
 
-        float CalculateLengthToRemoveFromChain()
-        {
-            float maximumLengthToRemove = Time.fixedDeltaTime * maximumTakeUpSpeed;
-            float lengthInside = Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position);
-
-            return Mathf.Min(maximumLengthToRemove, lengthInside);
-        }
-
-        void LengthenChainBy(float amount)
+        void AddLengthToChain(float amount)
         {
             amount = TryLengtheningFirstChainLinkBy(amount);
 
@@ -187,15 +128,122 @@ namespace AnsgarsAssets
                 firstChainLink.SetEffectiveLength(0);
                 amount = TryLengtheningFirstChainLinkBy(amount);
 
-                // Orient it towards the source since a new CHainLink must have come from the source
+                // Orient it towards the source since a new ChainLink must have come from the source
                 firstChainLink.OrientHookPositionTowards(transform.position);
 
                 // And copy the velocity. You can play around with this one and see what gives the best results.
                 firstChainLink.ApplyForcesOfAttachedToHook();
                 //firstChainLink.CopyVelocityOfAttachedToHook();
             }
+
+            ConnectSpringJointToChainBeginning();
         }
 
+        bool ChainShouldBeShortened()
+        {
+            return 0 < maximumTakeUpSpeed && firstChainLink && !PointLiesInForwardDirection(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
+        }
+
+        float CalculateAmountToShortenChain()
+        {
+            // Likewise to calculating the length to add to the chain, the chain should not be shortened more than what is possible under the
+            // current maximumTakeUpSpeed and the passed time.
+            float maximumLengthToRemove = Time.fixedDeltaTime * maximumTakeUpSpeed;
+            float lengthInside = Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position);
+
+            return Mathf.Min(maximumLengthToRemove, lengthInside);
+        }
+
+        void ShortenChainBy(float amount)
+        {
+            while (0 < amount)
+            {
+                if (firstChainLink.CurrentEffectiveLength <= amount)
+                {
+                    amount -= firstChainLink.CurrentEffectiveLength;
+                    RemoveFirstChainLink();
+                }
+                else
+                {
+                    firstChainLink.SubstractEffectiveLength(amount);
+                    // There is no amount to remove anymore and therefore exit the while loop
+                    break;
+                }
+            }
+
+            ConnectSpringJointToChainBeginning();
+        }
+
+        void ApplyPushOutForce()
+        {
+            if (hookToConnectChainLinkTo && pushOutForceAmount != 0) {
+
+                Vector3 pushOutForceDirection;
+
+                // If the rope is pulled in, it should be pulled towards the source.
+                if (pushOutForceAmount < 0)
+                {
+                    if (Utility.PointsAreFurtherApartThanDistance(hookToConnectChainLinkTo.transform.position, transform.position, 0))
+                        pushOutForceDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
+                    else
+                        pushOutForceDirection = -transform.forward;
+                } else // Otherwise it should be expelled out forward.
+                    pushOutForceDirection = transform.forward;
+
+                hookToConnectChainLinkTo.GetRigidbody().AddForceAtPosition(pushOutForceDirection * pushOutForceAmount, hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
+                // There is a counter impulse in the opposite direction.
+                GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
+            }
+        }
+
+        void ApplyFrictionToHookToConnectChainLinkTo()
+        {
+            // Only apply a friction if there is any
+            if (hookToConnectChainLinkTo && friction != 0)
+            {
+                // This function has a problem: it shows creeping behavour, meaning that even if the friction is 1, the hookToConnectChainLinkTo still moves slightly.
+                Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
+
+                hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
+
+                // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
+                hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
+            }
+        }
+
+        /// <summary>
+        /// Updates the minDistance and maxDistance values of the attached <see cref="SpringJoint"/> based on the current maximum takeUp and expell speeds.
+        /// </summary>
+        void UpdateSpringJointValues()
+        {
+            //TODO: figure out where it is best to attach the SpringJoint to
+
+            // The distanceToHook is calculated to its origin instead of to its positionToLinkChainLinkTo because the Springjoint connects with the origin,
+            // and not the positionToLinkChainLinkTo.
+            float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+
+            GetSpringJoint().minDistance = distanceToHook - maximumTakeUpSpeed * Time.fixedDeltaTime;
+            GetSpringJoint().maxDistance = distanceToHook + maximumExpellSpeed * Time.fixedDeltaTime;
+        }
+
+        void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
+
+
+
+
+
+        // <<<<< ABSTRACTTION LEVEL DOWN >>>>>
+
+        /// <summary>
+        /// Returns wether or not a given point is located at the forward side of this <see cref="ChainLinkSource"/> or not.
+        /// </summary>
+        /// <returns></returns>
+        bool PointLiesInForwardDirection(Vector3 position)
+        {
+            Plane frontPlane = new Plane(transform.forward, transform.position);
+
+            return frontPlane.GetSide(position);
+        }
 
         /// <summary>
         /// Attempts to lengthen the first chainLink by the specified amount under the constraint of the maximumEffectiveChainLinkLength.
@@ -216,34 +264,69 @@ namespace AnsgarsAssets
             return amount;
         }
 
-        void RotatePreviouslySpawnedChainLinkTowardsSourceIfPossible()
+        void AddChainLink()
         {
-            // It is only possible to rotate it if there is one
+            // Spawn a new ChainLink
+            GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);
+
+            // Retrieve the component
+            firstChainLink = spawnedChainLink.GetComponent<VariableLengthChainLink>();
+
+            // Connect the spawned ChainLink to the chain.
+            firstChainLink.AttachToChainLinkHook(hookToConnectChainLinkTo);
+
+            // New ChainLinks should now connect to the just spawned ChainLink.
+            hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
+        }
+
+        void ConnectSpringJointToChainBeginning()
+        {
+            GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+
             if (firstChainLink)
             {
-                Vector3 alignmentWith = transform.position - firstChainLink.GetPositionToLinkToHook();
-
-                firstChainLink.GetRigidbody().MoveRotation(Quaternion.FromToRotation(Vector3.down, alignmentWith));
-
-                // Move the chainLink to the connection point again since the previous rotation operation rotated around the origin and not the connection point
-                Vector3 positionToMoveTo = firstChainLink.AttachedToHook.GetPositionToLinkChainLinkTo() - firstChainLink.GetPositionToLinkToHookOffset();
-
-                hookToConnectChainLinkTo.transform.position = positionToMoveTo;
+                GetSpringJoint().connectedAnchor = firstChainLink.GetPositionToLinkToHookLocal();
+            } else if (hookToConnectChainLinkTo)
+            {
+                GetSpringJoint().connectedAnchor = Vector3.zero;
             }
+        }
+
+        void RemoveFirstChainLink()
+        {
+            GameObject toBeDestroyed = firstChainLink.gameObject;
+
+            hookToConnectChainLinkTo = firstChainLink.AttachedToHook;
+            firstChainLink = hookToConnectChainLinkTo.GetComponent<VariableLengthChainLink>();
+            
+            Destroy(toBeDestroyed);
+        }
+
+        Vector3 GetVelocity() => GetMovementSincePreviousFixedUpdate() / Time.fixedDeltaTime;
+
+        Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
+
+
+
+        // <<<<< REFERENCED OUTSIDE >>>>>
+
+        public void DestroyChainAndResetHookPosition()
+        {
+            if (hookToConnectChainLinkTo)
+            {
+                while (firstChainLink)
+                    RemoveFirstChainLink();
+
+                hookToConnectChainLinkTo.transform.position = transform.position;
+            }
+
+            ConnectSpringJointToChainBeginning();
         }
 
         public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
         {
             hookToConnectChainLinkTo = hook;
-            ConnectSpringJointTohookToConnectChainLinkTo();
-        }
-
-        public void DestroyChainAndResetHookPosition()
-        {
-            while (hookToConnectChainLinkTo.GetComponent<ChainLink>())
-                ShortenRopeByOneLink();
-
-            hookToConnectChainLinkTo.transform.position = transform.position;
+            ConnectSpringJointToChainBeginning();
         }
 
         public void SetChainLinkParent(Transform parent)
@@ -263,99 +346,9 @@ namespace AnsgarsAssets
             maximumTakeUpSpeed = Mathf.Infinity;
         }
 
-        void AddChainLink()
-        {
-            // Spawn a new ChainLink
-            GameObject spawnedChainLink = Instantiate(chainLinkPrefab.gameObject, chainLinkParent);
-
-            // Retrieve the component
-            firstChainLink = spawnedChainLink.GetComponent<VariableLengthChainLink>();
-
-            // Connect the spawned ChainLink to the chain.
-            firstChainLink.AttachToChainLinkHook(hookToConnectChainLinkTo);
-
-            // New ChainLinks should now connect to the just spawned ChainLink.
-            hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
-
-            // Now the joints of this source have to be connected to the newly spawned ChainLink
-            ConnectSpringJointTohookToConnectChainLinkTo();
-        }
-
-        void ConnectSpringJointTohookToConnectChainLinkTo()
-        {
-            if (hookToConnectChainLinkTo)
-            {
-                GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
-            }
-        }
-
-        void ShortenRopeByOneLink()
-        {
-            GameObject objectToDestroy = hookToConnectChainLinkTo.gameObject;
-
-            ChainLink attachedChainLink = objectToDestroy.GetComponent<ChainLink>();
-
-            if (attachedChainLink != null)
-            {
-                hookToConnectChainLinkTo = attachedChainLink.AttachedToHook;
-
-                Destroy(objectToDestroy);
-
-                ConnectSpringJointTohookToConnectChainLinkTo();
-            }
-        }
-
-        void ApplyFrictionToHookToConnectChainLinkTo()
-        {
-            // Only apply a friction if there is any
-            if (friction != 0)
-            {
-                // This function has a problem: it shows creeping behavour, meaning that even if the friction is 1, the hookToConnectChainLinkTo still moves slightly.
-                Vector3 currentHookVelocity = hookToConnectChainLinkTo.GetRigidbody().velocity;
-
-                hookToConnectChainLinkTo.GetRigidbody().AddForce(-currentHookVelocity * friction, ForceMode.VelocityChange);
-
-                // Because there is a friction, the chainLinkHook that this source is connected to should also move some amount when this source is moved.
-                hookToConnectChainLinkTo.GetRigidbody().AddForce(GetVelocity() * friction, ForceMode.VelocityChange);
-            }
-        }
-
-        void ApplyPushOutForce()
-        {
-            Vector3 pushOutForceDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
-            hookToConnectChainLinkTo.GetRigidbody().AddForce(pushOutForceDirection * pushOutForceAmount);
-            GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
-
-        }
-
-        void UpdateSpringJointValues()
-        {
-            // The distanceToHook is calculated to its origin instead of to its positionToLinkChainLinkTo because the Springjoint connects with the origin,
-            // and not the positionToLinkChainLinkTo.
-            float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
-
-            GetSpringJoint().minDistance = distanceToHook - maximumTakeUpSpeed * Time.fixedDeltaTime;
-            GetSpringJoint().maxDistance = distanceToHook + maximumExpellSpeed * Time.fixedDeltaTime;
-        }
 
 
-
-        Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
-
-        void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
-
-        Vector3 GetVelocity() => GetMovementSincePreviousFixedUpdate() / Time.fixedDeltaTime;
-
-        float CalculateCurrentPushOutSpeed()
-        {
-            float pushOutSpeed;
-
-            Vector3 hookDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
-
-            pushOutSpeed = Vector3Utility.GetProjectionFactor(hookDirection, hookToConnectChainLinkTo.GetRigidbody().velocity - GetVelocity());
-
-            return pushOutSpeed;
-        }
+        // <<<<< VALIDATION >>>>>
 
         private void OnValidate()
         {
