@@ -132,7 +132,7 @@ namespace AnsgarsAssets
                 firstChainLink.OrientHookPositionTowards(transform.position);
 
                 // And copy the velocity. You can play around with this one and see what gives the best results.
-                firstChainLink.ApplyForcesOfAttachedToHook();
+                //firstChainLink.ApplyForcesOfAttachedToHook();
                 //firstChainLink.CopyVelocityOfAttachedToHook();
             }
 
@@ -254,7 +254,9 @@ namespace AnsgarsAssets
         {
             if (firstChainLink)
             {
-                float effectiveLengthToAdd = Mathf.Min(maximumEffectiveChainLinkLength, amount);
+                float growPotential = maximumEffectiveChainLinkLength - firstChainLink.CurrentEffectiveLength;
+
+                float effectiveLengthToAdd = Mathf.Min(growPotential, amount);
 
                 firstChainLink.AddEffectiveLength(effectiveLengthToAdd);
 
@@ -281,8 +283,12 @@ namespace AnsgarsAssets
 
         void ConnectSpringJointToChainBeginning()
         {
-            GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+            float connectionPointDistance = 0.1f;
 
+
+
+            // Previous idea: also adjust the position of the connectedAnchor to be at the end of the first ChainLink.
+            /*
             if (firstChainLink)
             {
                 GetSpringJoint().connectedAnchor = firstChainLink.GetPositionToLinkToHookLocal();
@@ -290,6 +296,9 @@ namespace AnsgarsAssets
             {
                 GetSpringJoint().connectedAnchor = Vector3.zero;
             }
+            */
+
+            GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
         }
 
         void RemoveFirstChainLink()
