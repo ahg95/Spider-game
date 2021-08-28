@@ -154,7 +154,7 @@ namespace AnsgarsAssets
 
         void ShortenChainBy(float amount)
         {
-            while (0 < amount)
+            while (0 < amount && firstChainLink)
             {
                 if (firstChainLink.CurrentEffectiveLength <= amount)
                 {
@@ -277,41 +277,34 @@ namespace AnsgarsAssets
             Destroy(toBeDestroyed);
         }
 
-
-
         float ConnectSpringJointToChainAtLength(float length)
         {
             float springJointWasConnectedAtLength = 0;
 
             if (firstChainLink)
             {
-                VariableLengthChainLink currentChainLink = firstChainLink;
                 float currentChainLinkDistance = 0;
+                VariableLengthChainLink currentChainLink = firstChainLink;
+                VariableLengthChainLink nextChainLink = currentChainLink.AttachedToHook.GetComponent<VariableLengthChainLink>();
 
-                while (currentChainLink && currentChainLinkDistance + currentChainLink.CurrentEffectiveLength < length)
+                while (currentChainLinkDistance + currentChainLink.CurrentEffectiveLength < length && nextChainLink)
                 {
-                    VariableLengthChainLink nextChainLink = currentChainLink.AttachedToHook.GetComponent<VariableLengthChainLink>();
-
-                    if (!nextChainLink)
-                    {
-                        GetSpringJoint().connectedBody = currentChainLink.AttachedToHook.GetRigidbody();
-                        GetSpringJoint().connectedAnchor = currentChainLink.AttachedToHook.GetPositionToLinkChainLinkToLocal();
-                        springJointWasConnectedAtLength = currentChainLinkDistance + currentChainLink.CurrentEffectiveLength;
-                    }
-                    else
-                    {
-                        currentChainLinkDistance += currentChainLink.CurrentEffectiveLength;
-                        currentChainLink = nextChainLink;
-                    }
+                    currentChainLinkDistance += currentChainLink.CurrentEffectiveLength;
+                    currentChainLink = nextChainLink;
+                    nextChainLink = currentChainLink.AttachedToHook.GetComponent<VariableLengthChainLink>();
                 }
 
-                if (currentChainLink)
+                if (currentChainLinkDistance + currentChainLink.CurrentEffectiveLength < length)
+                {
+                    GetSpringJoint().connectedBody = currentChainLink.AttachedToHook.GetRigidbody();
+                    GetSpringJoint().connectedAnchor = currentChainLink.AttachedToHook.GetPositionToLinkChainLinkToLocal();
+                    springJointWasConnectedAtLength = currentChainLinkDistance + currentChainLink.CurrentEffectiveLength;
+                } else
                 {
                     GetSpringJoint().connectedBody = currentChainLink.GetRigidbody();
                     GetSpringJoint().connectedAnchor = currentChainLink.GetPositionAtLengthLocal(length - currentChainLinkDistance);
                     springJointWasConnectedAtLength = length;
                 }
-
             }
             else if (hookToConnectChainLinkTo)
             {
