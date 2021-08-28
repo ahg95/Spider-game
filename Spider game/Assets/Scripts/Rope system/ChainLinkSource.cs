@@ -70,7 +70,6 @@ namespace AnsgarsAssets
         private void OnEnable()
         {
             positionAfterPreviousFixedUpdate = transform.position;
-            ConnectSpringJointToChainBeginning();
         }
 
         // Update is called once per frame
@@ -84,20 +83,21 @@ namespace AnsgarsAssets
                     float lengthToAddToChain = CalculateLengthToAddToChain();
 
                     AddLengthToChain(lengthToAddToChain);
+
+                    ConfigureSpringJoint();
                 }
                 else if (ChainShouldBeShortened())
                 {
                     float lengthToRemoveFromChain = CalculateAmountToShortenChain();
 
                     ShortenChainBy(lengthToRemoveFromChain);
+
+                    ConfigureSpringJoint();
                 }
 
                 ApplyPushOutForce();
 
                 ApplyFrictionToHookToConnectChainLinkTo();
-
-                // Enforce the maximum takeUp and expell speeds by updating the springJointValues
-                UpdateSpringJointValues();
             }
 
             UpdatePositionAfterPreviousFixedUpdate();
@@ -132,11 +132,9 @@ namespace AnsgarsAssets
                 firstChainLink.OrientHookPositionTowards(transform.position);
 
                 // And copy the velocity. You can play around with this one and see what gives the best results.
-                //firstChainLink.ApplyForcesOfAttachedToHook();
+                firstChainLink.ApplyForcesOfAttachedToHook();
                 //firstChainLink.CopyVelocityOfAttachedToHook();
             }
-
-            ConnectSpringJointToChainBeginning();
         }
 
         bool ChainShouldBeShortened()
@@ -163,15 +161,12 @@ namespace AnsgarsAssets
                     amount -= firstChainLink.CurrentEffectiveLength;
                     RemoveFirstChainLink();
                 }
-                else
-                {
+                else {
                     firstChainLink.SubstractEffectiveLength(amount);
                     // There is no amount to remove anymore and therefore exit the while loop
                     break;
                 }
             }
-
-            ConnectSpringJointToChainBeginning();
         }
 
         void ApplyPushOutForce()
@@ -211,32 +206,15 @@ namespace AnsgarsAssets
             }
         }
 
-        /// <summary>
-        /// Updates the minDistance and maxDistance values of the attached <see cref="SpringJoint"/> based on the current maximum takeUp and expell speeds.
-        /// </summary>
-        void UpdateSpringJointValues()
+        void ConfigureSpringJoint()
         {
-            // The distanceToHook is calculated to its origin instead of to its positionToLinkChainLinkTo because the Springjoint connects with the origin,
-            // and not the positionToLinkChainLinkTo.
-            //float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+            float chainLengthAtWhichToPositionAnchor = maximumTakeUpSpeed * Time.fixedDeltaTime;
 
-            float distanceToAnchor = 0;
-
-            if (GetSpringJoint().connectedBody)
-            {
-                Transform connectedTransform = GetSpringJoint().connectedBody.transform;
-                Vector3 anchorWorldSpacePosition = connectedTransform.TransformPoint(GetSpringJoint().connectedAnchor);
-
-                distanceToAnchor = Vector3.Distance(transform.position, anchorWorldSpacePosition);
-            }
-
-            GetSpringJoint().minDistance = distanceToAnchor - maximumTakeUpSpeed * Time.fixedDeltaTime;
-            GetSpringJoint().maxDistance = distanceToAnchor + maximumExpellSpeed * Time.fixedDeltaTime;
+            ConnectSpringJointToChainAtLength(chainLengthAtWhichToPositionAnchor);
+            UpdateSpringJointDistanceValuesBasedOnAnchorPositionInChain(chainLengthAtWhichToPositionAnchor);
         }
 
         void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
-
-
 
 
 
@@ -289,26 +267,6 @@ namespace AnsgarsAssets
             hookToConnectChainLinkTo = spawnedChainLink.GetComponent<ChainLinkHook>();
         }
 
-        void ConnectSpringJointToChainBeginning()
-        {
-            if (firstChainLink && firstChainLink.CurrentEffectiveLength < 0.01)
-                GetSpringJoint().connectedBody = firstChainLink.AttachedToHook.GetRigidbody();
-            else
-                GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
-
-            // Previous idea: also adjust the position of the connectedAnchor to be at the end of the first ChainLink.
-            /*
-            if (firstChainLink)
-            {
-                GetSpringJoint().connectedAnchor = firstChainLink.GetPositionToLinkToHookLocal();
-            } else if (hookToConnectChainLinkTo)
-            {
-                GetSpringJoint().connectedAnchor = Vector3.zero;
-            }
-            */
-
-        }
-
         void RemoveFirstChainLink()
         {
             GameObject toBeDestroyed = firstChainLink.gameObject;
@@ -319,10 +277,61 @@ namespace AnsgarsAssets
             Destroy(toBeDestroyed);
         }
 
+
+
+        float ConnectSpringJointToChainAtLength(float length)
+        {
+            float springJointWasConnectedAtLength = 0;
+
+            if (firstChainLink)
+            {
+                VariableLengthChainLink currentChainLink = firstChainLink;
+                float currentChainLinkDistance = 0;
+
+                while (currentChainLink && currentChainLinkDistance + currentChainLink.CurrentEffectiveLength < length)
+                {
+                    VariableLengthChainLink nextChainLink = currentChainLink.AttachedToHook.GetComponent<VariableLengthChainLink>();
+
+                    if (!nextChainLink)
+                    {
+                        GetSpringJoint().connectedBody = currentChainLink.AttachedToHook.GetRigidbody();
+                        GetSpringJoint().connectedAnchor = currentChainLink.AttachedToHook.GetPositionToLinkChainLinkToLocal();
+                        springJointWasConnectedAtLength = currentChainLinkDistance + currentChainLink.CurrentEffectiveLength;
+                    }
+                    else
+                    {
+                        currentChainLinkDistance += currentChainLink.CurrentEffectiveLength;
+                        currentChainLink = nextChainLink;
+                    }
+                }
+
+                if (currentChainLink)
+                {
+                    GetSpringJoint().connectedBody = currentChainLink.GetRigidbody();
+                    GetSpringJoint().connectedAnchor = currentChainLink.GetPositionAtLengthLocal(length - currentChainLinkDistance);
+                    springJointWasConnectedAtLength = length;
+                }
+
+            }
+            else if (hookToConnectChainLinkTo)
+            {
+                GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
+                GetSpringJoint().connectedAnchor = hookToConnectChainLinkTo.GetPositionToLinkChainLinkToLocal();
+            }
+
+            return springJointWasConnectedAtLength;
+        }
+
+        void UpdateSpringJointDistanceValuesBasedOnAnchorPositionInChain(float distanceOfAnchorFromChainBeginning)
+        {
+            GetSpringJoint().minDistance = distanceOfAnchorFromChainBeginning - maximumTakeUpSpeed * Time.fixedDeltaTime;
+            GetSpringJoint().maxDistance = distanceOfAnchorFromChainBeginning + maximumExpellSpeed * Time.fixedDeltaTime;
+        }
+
+
         Vector3 GetVelocity() => GetMovementSincePreviousFixedUpdate() / Time.fixedDeltaTime;
 
         Vector3 GetMovementSincePreviousFixedUpdate() => transform.position - positionAfterPreviousFixedUpdate;
-
 
 
         // <<<<< REFERENCED OUTSIDE >>>>>
@@ -336,14 +345,11 @@ namespace AnsgarsAssets
 
                 hookToConnectChainLinkTo.transform.position = transform.position;
             }
-
-            ConnectSpringJointToChainBeginning();
         }
 
         public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
         {
             hookToConnectChainLinkTo = hook;
-            ConnectSpringJointToChainBeginning();
         }
 
         public void SetChainLinkParent(Transform parent)

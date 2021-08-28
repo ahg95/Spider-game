@@ -26,6 +26,8 @@ namespace AnsgarsAssets
 
         public Vector3 GetPositionToLinkChainLinkTo() => PositionToLinkChainLinkTo.position;
 
+        public Vector3 GetPositionToLinkChainLinkToLocal() => transform.InverseTransformPoint(GetPositionToLinkChainLinkTo());
+
         public Vector3 GetPositionToLinkChainLinkToOffset() => PositionToLinkChainLinkTo.position - transform.position;
     }
 }

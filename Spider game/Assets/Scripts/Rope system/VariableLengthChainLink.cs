@@ -61,5 +61,24 @@ namespace AnsgarsAssets
         {
             SetEffectiveLength(CurrentEffectiveLength - lengthToSubstract);
         }
+
+        public Vector3 GetPositionAtLength(float length)
+        {
+            Vector3 positionAtLength = transform.position;
+
+            if (CurrentEffectiveLength != 0)
+            {
+                length = Mathf.Clamp(length, 0, CurrentEffectiveLength);
+
+                positionAtLength = GetPositionToLinkChainLinkTo() - GetLinkingPositionToHookPositionOffset() * length / CurrentEffectiveLength;
+            }
+
+            return positionAtLength;
+        }
+
+        public Vector3 GetPositionAtLengthLocal(float length)
+        {
+            return transform.InverseTransformPoint(GetPositionAtLength(length));
+        }
     }
 }
