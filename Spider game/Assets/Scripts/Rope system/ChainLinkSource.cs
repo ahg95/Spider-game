@@ -110,7 +110,7 @@ namespace AnsgarsAssets
 
         float CalculateLengthToAddToChain()
         {
-            // Do not ad more length to the chain than is theoretically possible under the current maximumExpellSpeed and the passed time.
+            // Do not add more length to the chain than is theoretically possible under the current maximumExpellSpeed and the passed time.
             float maximumLengthToAdd = Time.fixedDeltaTime * maximumExpellSpeed;
             float gapSize = Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position);
 
@@ -216,14 +216,22 @@ namespace AnsgarsAssets
         /// </summary>
         void UpdateSpringJointValues()
         {
-            //TODO: figure out where it is best to attach the SpringJoint to
-
             // The distanceToHook is calculated to its origin instead of to its positionToLinkChainLinkTo because the Springjoint connects with the origin,
             // and not the positionToLinkChainLinkTo.
-            float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
+            //float distanceToHook = (hookToConnectChainLinkTo.transform.position - transform.position).magnitude;
 
-            GetSpringJoint().minDistance = distanceToHook - maximumTakeUpSpeed * Time.fixedDeltaTime;
-            GetSpringJoint().maxDistance = distanceToHook + maximumExpellSpeed * Time.fixedDeltaTime;
+            float distanceToAnchor = 0;
+
+            if (GetSpringJoint().connectedBody)
+            {
+                Transform connectedTransform = GetSpringJoint().connectedBody.transform;
+                Vector3 anchorWorldSpacePosition = connectedTransform.TransformPoint(GetSpringJoint().connectedAnchor);
+
+                distanceToAnchor = Vector3.Distance(transform.position, anchorWorldSpacePosition);
+            }
+
+            GetSpringJoint().minDistance = distanceToAnchor - maximumTakeUpSpeed * Time.fixedDeltaTime;
+            GetSpringJoint().maxDistance = distanceToAnchor + maximumExpellSpeed * Time.fixedDeltaTime;
         }
 
         void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
@@ -283,9 +291,10 @@ namespace AnsgarsAssets
 
         void ConnectSpringJointToChainBeginning()
         {
-            float connectionPointDistance = 0.1f;
-
-
+            if (firstChainLink && firstChainLink.CurrentEffectiveLength < 0.01)
+                GetSpringJoint().connectedBody = firstChainLink.AttachedToHook.GetRigidbody();
+            else
+                GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
 
             // Previous idea: also adjust the position of the connectedAnchor to be at the end of the first ChainLink.
             /*
@@ -298,7 +307,6 @@ namespace AnsgarsAssets
             }
             */
 
-            GetSpringJoint().connectedBody = hookToConnectChainLinkTo.GetRigidbody();
         }
 
         void RemoveFirstChainLink()
