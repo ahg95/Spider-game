@@ -236,8 +236,6 @@ namespace AnsgarsAssets
 
         void SwitchToShotState()
         {
-            ShootProjectile();
-
             chainLinkSource.GetParentConstraint().constraintActive = false;
             projectile.GetParentConstraint().constraintActive = false;
 
@@ -253,6 +251,8 @@ namespace AnsgarsAssets
             chainLinkSource.GetChainLinkSource().maximumExpellSpeed = Mathf.Infinity;
 
             projectile.GetSticky().EnableStickiness();
+
+            ShootProjectile();
 
             gunState = RopeGunState.shot;
         }
@@ -347,5 +347,4 @@ namespace AnsgarsAssets
                 SwitchToConnectedState();
         }
     }
-
 }

@@ -5163,7 +5163,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19774
+  m_Name: pb_Mesh27680
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6086,6 +6086,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1787541216}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: uptakingRopeForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: expellingRopeForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: projectileVelocity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: chainLinkSourceParent
       value: 
       objectReference: {fileID: 1826965981}
@@ -6823,7 +6835,7 @@ GameObject:
   - component: {fileID: 1284747544}
   - component: {fileID: 1284747543}
   - component: {fileID: 1284747542}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7823,7 +7835,7 @@ GameObject:
   - component: {fileID: 1500356392}
   - component: {fileID: 1500356391}
   - component: {fileID: 1500356390}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14436,7 +14448,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19688
+  m_Name: pb_Mesh27596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
