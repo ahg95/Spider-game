@@ -60,7 +60,7 @@ namespace AnsgarsAssets
             return joint;
         }
 
-        private Rigidbody GetRigidbody()
+        public Rigidbody GetRigidbody()
         {
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
@@ -70,6 +70,7 @@ namespace AnsgarsAssets
         private void OnEnable()
         {
             positionAfterPreviousFixedUpdate = transform.position;
+            ConfigureSpringJoint();
         }
 
         // Update is called once per frame
@@ -132,7 +133,7 @@ namespace AnsgarsAssets
                 firstChainLink.OrientHookPositionTowards(transform.position);
 
                 // And copy the velocity. You can play around with this one and see what gives the best results.
-                firstChainLink.ApplyForcesOfAttachedToHook();
+                //firstChainLink.ApplyForcesOfAttachedToHook();
                 //firstChainLink.CopyVelocityOfAttachedToHook();
             }
         }
@@ -187,7 +188,8 @@ namespace AnsgarsAssets
 
                 hookToConnectChainLinkTo.GetRigidbody().AddForceAtPosition(pushOutForceDirection * pushOutForceAmount, hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
                 // There is a counter impulse in the opposite direction.
-                GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
+                // COMMENTED OUT FOR DEBUGGING
+                //GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
             }
         }
 
@@ -317,7 +319,8 @@ namespace AnsgarsAssets
 
         void UpdateSpringJointDistanceValuesBasedOnAnchorPositionInChain(float distanceOfAnchorFromChainBeginning)
         {
-            GetSpringJoint().minDistance = distanceOfAnchorFromChainBeginning - maximumTakeUpSpeed * Time.fixedDeltaTime;
+            float minDistance = distanceOfAnchorFromChainBeginning - maximumTakeUpSpeed * Time.fixedDeltaTime;
+            GetSpringJoint().minDistance = Mathf.Max(0, minDistance);
             GetSpringJoint().maxDistance = distanceOfAnchorFromChainBeginning + maximumExpellSpeed * Time.fixedDeltaTime;
         }
 
@@ -338,6 +341,8 @@ namespace AnsgarsAssets
 
                 hookToConnectChainLinkTo.transform.position = transform.position;
             }
+
+            ConfigureSpringJoint();
         }
 
         public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
@@ -356,8 +361,13 @@ namespace AnsgarsAssets
             maximumTakeUpSpeed = 0;
         }
 
+        /// <summary>
+        /// This method shows some problems when played. Ignore it for now since it is not needed for the GrapplingGun.
+        /// </summary>
         public void UnlockRopeLength()
         {
+            Debug.LogWarning("UnlockRopeLength has been called, but it is error-prone!");
+
             maximumExpellSpeed = Mathf.Infinity;
             maximumTakeUpSpeed = Mathf.Infinity;
         }
@@ -387,9 +397,6 @@ namespace AnsgarsAssets
                 Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
 
             if (GetSpringJoint().anchor != Vector3.zero)
-                Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
-
-            if (GetSpringJoint().connectedAnchor != Vector3.zero)
                 Debug.LogWarning("A SpringJoint used by a ChainLinkSource has unexpected values.");
         }
 

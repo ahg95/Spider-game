@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6672671091670085346}
   - component: {fileID: 6297708643269699371}
   - component: {fileID: 8173162839621505135}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7845846012306017783}
   - component: {fileID: 1094791561664092596}
   - component: {fileID: 967517673612041487}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 2483045004762466514}
   - component: {fileID: 8353526655127520286}
   - component: {fileID: 3043980758485522167}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Small chain link (variable length)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8614443455097386493}
   - component: {fileID: 407147587337178259}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Position To Link ChainLink to
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7198951332693167200}
   - component: {fileID: 4069995761203336811}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Position To Link To Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 2541038986377751392}
   - component: {fileID: 5696189606749171042}
   - component: {fileID: 3847302160538169435}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8269805765366096364}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

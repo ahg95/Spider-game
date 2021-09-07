@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5685209918706630596}
   - component: {fileID: 2490742331965455740}
   - component: {fileID: 3124027579476484956}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GrapplingGun projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

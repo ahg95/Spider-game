@@ -359,7 +359,7 @@ MonoBehaviour:
   groundCheckRadius: 0.4
   groundObjectLayers:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 1025
   groundCheckOrigin: {fileID: 729994906096328846}
 --- !u!114 &1873779436
 MonoBehaviour:
