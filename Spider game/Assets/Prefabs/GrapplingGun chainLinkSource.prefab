@@ -58,6 +58,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -154,12 +155,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hookToConnectChainLinkTo: {fileID: 0}
-  chainLinkPrefab: {fileID: 7061715689586702715, guid: 163f67b42ca078649a2505ca0b8da1ac, type: 3}
-  chainLinkParent: {fileID: 0}
-  friction: 0
+  chainLinkPrefab: {fileID: 8353526655127520286, guid: 6d78ab889f4f02946bb5e09bd3a3dbde, type: 3}
+  maximumEffectiveChainLinkLength: 1
   pushOutForceAmount: 0
-  maximumPushOutSpeed: 0
-  maximumPullInSpeed: 0
+  maximumExpellSpeed: 0
+  maximumTakeUpSpeed: 0
+  friction: 0
+  chainLinkParent: {fileID: 0}
 --- !u!114 &5785719453463356790
 MonoBehaviour:
   m_ObjectHideFlags: 0

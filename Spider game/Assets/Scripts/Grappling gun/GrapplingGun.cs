@@ -81,7 +81,7 @@ namespace AnsgarsAssets
                 projectile.gameObject.SetActive(true);
 
             if (chainLinkSource)
-                projectile.gameObject.SetActive(true);
+                chainLinkSource.gameObject.SetActive(true);
         }
 
         void DisableInstantiatedObjectsIfExistent()
@@ -93,7 +93,7 @@ namespace AnsgarsAssets
                 projectile.gameObject.SetActive(false);
 
             if (chainLinkSource)
-                projectile.gameObject.SetActive(false);
+                chainLinkSource.gameObject.SetActive(false);
         }
 
         void DestroyInstantiatedObjectsIfExistent()
@@ -151,8 +151,8 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.GetChainLinkSource().maximumPushOutSpeed = maximumRopeExpellingSpeed;
-                chainLinkSource.GetChainLinkSource().maximumPullInSpeed = 0;
+                chainLinkSource.GetChainLinkSource().maximumExpellSpeed = maximumRopeExpellingSpeed;
+                chainLinkSource.GetChainLinkSource().maximumTakeUpSpeed = 0;
 
                 chainLinkSource.GetChainLinkSource().pushOutForceAmount = expellingRopeForce;
             }
@@ -171,8 +171,8 @@ namespace AnsgarsAssets
         {
             if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.GetChainLinkSource().maximumPushOutSpeed = 0;
-                chainLinkSource.GetChainLinkSource().maximumPullInSpeed = maximumRopeUptakingSpeed;
+                chainLinkSource.GetChainLinkSource().maximumExpellSpeed = 0;
+                chainLinkSource.GetChainLinkSource().maximumTakeUpSpeed = maximumRopeUptakingSpeed;
 
                 chainLinkSource.GetChainLinkSource().pushOutForceAmount = -uptakingRopeForce;
             }
@@ -211,11 +211,11 @@ namespace AnsgarsAssets
             }
             else if (gunState == RopeGunState.shot)
             {
-                chainLinkSource.GetChainLinkSource().PullInRopeInstantly();
+                chainLinkSource.GetChainLinkSource().DestroyChainAndResetHookPosition();
             }
             else if (gunState == RopeGunState.connected)
             {
-                chainLinkSource.GetChainLinkSource().PullInRopeInstantly();
+                chainLinkSource.GetChainLinkSource().DestroyChainAndResetHookPosition();
 
                 grappleDisconnected.Raise();
             }
@@ -223,12 +223,12 @@ namespace AnsgarsAssets
             chainLinkSource.GetParentConstraint().constraintActive = true;
             projectile.GetParentConstraint().constraintActive = true;
 
+            chainLinkSource.GetChainLinkSource().GetRigidbody().isKinematic = true;
+            projectile.GetRigidbody().isKinematic = true;
+
             chainLinkSource.GetDeactivatableFixedJoint().Deactivate();
 
-            // Unlocking the rope length before the projectile is shot prevents the projectile from being stopped by the SpringJoint
-            // used in the chainLinkSource. The projectile and the chainLinkSource are hold at the muzzle by the parent constraints,
-            // and therefore unlocking the rope length has no unexpected consequence.
-            chainLinkSource.GetChainLinkSource().UnlockRopeLength();
+            chainLinkSource.enabled = false;
             projectile.GetSticky().DisableStickiness();
 
             gunState = RopeGunState.loaded;
@@ -236,16 +236,23 @@ namespace AnsgarsAssets
 
         void SwitchToShotState()
         {
-            ShootProjectile();
-
             chainLinkSource.GetParentConstraint().constraintActive = false;
             projectile.GetParentConstraint().constraintActive = false;
+
+            chainLinkSource.GetChainLinkSource().GetRigidbody().isKinematic = false;
+            projectile.GetRigidbody().isKinematic = false;
 
             chainLinkSource.GetDeactivatableFixedJoint().Activate();
             chainLinkSource.GetDeactivatableFixedJoint().GetJoint().connectedBody = rigidBodyToConnectChainLinkSourceTo;
 
-            chainLinkSource.GetChainLinkSource().UnlockRopeLength();
+            chainLinkSource.enabled = true;
+
+            chainLinkSource.GetChainLinkSource().maximumTakeUpSpeed = 0;
+            chainLinkSource.GetChainLinkSource().maximumExpellSpeed = Mathf.Infinity;
+
             projectile.GetSticky().EnableStickiness();
+
+            ShootProjectile();
 
             gunState = RopeGunState.shot;
         }
@@ -340,5 +347,4 @@ namespace AnsgarsAssets
                 SwitchToConnectedState();
         }
     }
-
 }

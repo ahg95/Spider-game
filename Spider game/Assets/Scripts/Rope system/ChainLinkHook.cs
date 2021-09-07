@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class ChainLinkHook : MonoBehaviour
+namespace AnsgarsAssets
 {
-    protected new UnityEngine.Rigidbody rigidbody;
-
-    public Transform PositionToLinkChainLinkTo;
-
-    private void Enable()
+    [RequireComponent(typeof(Rigidbody))]
+    public class ChainLinkHook : MonoBehaviour
     {
-        if (PositionToLinkChainLinkTo == null)
-            PositionToLinkChainLinkTo = transform;
+        protected new Rigidbody rigidbody;
+
+        public Transform PositionToLinkChainLinkTo;
+
+        private void OnEnable()
+        {
+            if (PositionToLinkChainLinkTo == null)
+                PositionToLinkChainLinkTo = transform;
+        }
+
+        public Rigidbody GetRigidbody()
+        {
+            if (rigidbody == null)
+                rigidbody = GetComponent<Rigidbody>();
+            return rigidbody;
+        }
+
+        public Vector3 GetPositionToLinkChainLinkTo() => PositionToLinkChainLinkTo.position;
+
+        public Vector3 GetPositionToLinkChainLinkToLocal() => transform.InverseTransformPoint(GetPositionToLinkChainLinkTo());
+
+        public Vector3 GetPositionToLinkChainLinkToOffset() => PositionToLinkChainLinkTo.position - transform.position;
     }
-
-    public UnityEngine.Rigidbody GetRigidbody()
-    {
-        if (rigidbody == null)
-            rigidbody = GetComponent<UnityEngine.Rigidbody>();
-        return rigidbody;
-    }
-
-    public Vector3 GetPositionToLinkChainLinkTo() => PositionToLinkChainLinkTo.position;
-
-    public Vector3 GetPositionToLinkChainLinkToOffset() => PositionToLinkChainLinkTo.position - transform.position;
-
 }
