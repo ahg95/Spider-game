@@ -120,6 +120,8 @@ namespace AnsgarsAssets
         {
             amount = TryLengtheningFirstChainLinkBy(amount);
 
+            firstChainLink?.OrientHookPositionTowards(transform.position);
+
             while (0 < amount)
             {
                 // Add a ChainLink with the appropriate length
