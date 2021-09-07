@@ -70,7 +70,7 @@ namespace AnsgarsAssets
         private void OnEnable()
         {
             positionAfterPreviousFixedUpdate = transform.position;
-            ConfigureSpringJoint();
+            //ConfigureSpringJoint();
         }
 
         // Update is called once per frame
@@ -84,21 +84,19 @@ namespace AnsgarsAssets
                     float lengthToAddToChain = CalculateLengthToAddToChain();
 
                     AddLengthToChain(lengthToAddToChain);
-
-                    ConfigureSpringJoint();
                 }
                 else if (ChainShouldBeShortened())
                 {
                     float lengthToRemoveFromChain = CalculateAmountToShortenChain();
 
                     ShortenChainBy(lengthToRemoveFromChain);
-
-                    ConfigureSpringJoint();
                 }
 
                 ApplyPushOutForce();
 
                 ApplyFrictionToHookToConnectChainLinkTo();
+
+                ConfigureSpringJoint();
             }
 
             UpdatePositionAfterPreviousFixedUpdate();
@@ -341,8 +339,6 @@ namespace AnsgarsAssets
 
                 hookToConnectChainLinkTo.transform.position = transform.position;
             }
-
-            ConfigureSpringJoint();
         }
 
         public void SetHookToConnectChainLinkTo(ChainLinkHook hook)
@@ -371,8 +367,6 @@ namespace AnsgarsAssets
             maximumExpellSpeed = Mathf.Infinity;
             maximumTakeUpSpeed = Mathf.Infinity;
         }
-
-
 
         // <<<<< VALIDATION >>>>>
 
