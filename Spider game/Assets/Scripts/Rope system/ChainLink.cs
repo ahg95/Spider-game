@@ -75,6 +75,16 @@ namespace AnsgarsAssets
             transform.position = initialPositionToLinkToHook - GetPositionToLinkToHookOffset();
         }
 
+        public void AlignHookPositionWith(Vector3 position)
+        {
+            Vector3 directionOfPosition = position - GetPositionToLinkToHook();
+
+            if (Vector3.Angle(directionOfPosition, -transform.up) < 90)
+                OrientHookPositionTowards(position);
+            else
+                OrientHookPositionTowards(GetPositionToLinkToHook() - directionOfPosition);
+        }
+
         public void CopyVelocityOfAttachedToHook()
         {
             if (AttachedToHook)
