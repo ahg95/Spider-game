@@ -6095,7 +6095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: projectileVelocity
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: chainLinkSourceParent
