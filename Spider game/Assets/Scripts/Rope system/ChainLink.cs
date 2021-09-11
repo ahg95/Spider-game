@@ -14,6 +14,14 @@ namespace AnsgarsAssets
 
         public Transform PositionToLinkToHook;
 
+        public ChainLinkHook InitialHookToConnectTo;
+
+        public void Start()
+        {
+            if (InitialHookToConnectTo)
+                AttachToChainLinkHook(InitialHookToConnectTo);
+        }
+
         public Joint GetJoint()
         {
             if (joint == null)
@@ -30,6 +38,10 @@ namespace AnsgarsAssets
 
         public Vector3 GetPositionToLinkToHookOffset() => PositionToLinkToHook.position - transform.position;
 
+        /// <summary>
+        /// Returns a vector in world space pointing from the hook position to the position to link to hook.
+        /// </summary>
+        /// <returns></returns>
         public Vector3 GetLinkingPositionToHookPositionOffset() => GetPositionToLinkChainLinkTo() - GetPositionToLinkToHook();
 
         /// <summary>

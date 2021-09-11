@@ -52,6 +52,7 @@ namespace AnsgarsAssets
         VariableLengthChainLink firstChainLink;
 
         Vector3 positionAfterPreviousFixedUpdate;
+        float distanceToConnectedAnchorAfterPreviousFixedUpdate;
 
         private SpringJoint GetSpringJoint()
         {
@@ -70,7 +71,6 @@ namespace AnsgarsAssets
         private void OnEnable()
         {
             positionAfterPreviousFixedUpdate = transform.position;
-            //ConfigureSpringJoint();
         }
 
         // Update is called once per frame
@@ -79,32 +79,42 @@ namespace AnsgarsAssets
             // Only adjust the rope if there is something to connect it to.
             if (hookToConnectChainLinkTo)
             {
-                if (ChainShouldBeLengthened())
+                if (0 < maximumTakeUpSpeed || 0 < maximumExpellSpeed)
                 {
-                    float lengthToAddToChain = CalculateLengthToAddToChain();
+                    if (firstChainLink)
+                        firstChainLink.OrientHookPositionTowards(transform.position);
 
-                    AddLengthToChain(lengthToAddToChain);
-                }
-                else if (ChainShouldBeShortened())
-                {
-                    float lengthToRemoveFromChain = CalculateAmountToShortenChain();
+                    // Cheating here a bit...
+                    if (firstChainLink && firstChainLink.CurrentEffectiveLength < 0.005)
+                        RemoveFirstChainLink();
 
-                    ShortenChainBy(lengthToRemoveFromChain);
+                    if (ChainShouldBeLengthened())
+                    {
+                        float lengthToAddToChain = CalculateLengthToAddToChain();
+
+                        AddLengthToChain(lengthToAddToChain);
+                    }
+                    else if (ChainShouldBeShortened())
+                    {
+                        float lengthToRemoveFromChain = CalculateAmountToShortenChain();
+
+                        ShortenChainBy(lengthToRemoveFromChain);
+                    }
                 }
 
                 ApplyPushOutForce();
-
                 ApplyFrictionToHookToConnectChainLinkTo();
 
-                ConfigureSpringJoint();
+                AdjustSpringJoint();
             }
 
             UpdatePositionAfterPreviousFixedUpdate();
+            UpdateDistanceToConnectedAnchorAfterPreviousFixedUpdate();
         }
 
         bool ChainShouldBeLengthened()
         {
-            return 0 < maximumExpellSpeed && hookToConnectChainLinkTo && PointLiesInForwardDirection(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
+            return 0 < maximumExpellSpeed && hookToConnectChainLinkTo && (FirstChainLinkPointsTowardsSource() || (!firstChainLink && HookToConnectChainLinkToIsFurtherAwayThan(0)));
         }
 
         float CalculateLengthToAddToChain()
@@ -134,13 +144,13 @@ namespace AnsgarsAssets
 
                 // And copy the velocity. You can play around with this one and see what gives the best results.
                 //firstChainLink.ApplyForcesOfAttachedToHook();
-                //firstChainLink.CopyVelocityOfAttachedToHook();
+                firstChainLink.CopyVelocityOfAttachedToHook();
             }
         }
 
         bool ChainShouldBeShortened()
         {
-            return 0 < maximumTakeUpSpeed && firstChainLink && !PointLiesInForwardDirection(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
+            return 0 < maximumTakeUpSpeed && firstChainLink && !FirstChainLinkPointsTowardsSource();
         }
 
         float CalculateAmountToShortenChain()
@@ -172,21 +182,17 @@ namespace AnsgarsAssets
 
         void ApplyPushOutForce()
         {
-            if (hookToConnectChainLinkTo && pushOutForceAmount != 0) {
+            if (hookToConnectChainLinkTo) {
 
                 Vector3 pushOutForceDirection;
 
-                // If the rope is pulled in, it should be pulled towards the source.
-                if (pushOutForceAmount < 0)
-                {
-                    if (Utility.PointsAreFurtherApartThanDistance(hookToConnectChainLinkTo.transform.position, transform.position, 0))
-                        pushOutForceDirection = (hookToConnectChainLinkTo.transform.position - transform.position).normalized;
-                    else
-                        pushOutForceDirection = -transform.forward;
-                } else // Otherwise it should be expelled out forward.
+                if (firstChainLink)
+                    pushOutForceDirection = firstChainLink.transform.up;
+                else
                     pushOutForceDirection = transform.forward;
 
-                hookToConnectChainLinkTo.GetRigidbody().AddForceAtPosition(pushOutForceDirection * pushOutForceAmount, hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo());
+                hookToConnectChainLinkTo.GetRigidbody().AddForce(pushOutForceDirection * pushOutForceAmount);
+                
                 // There is a counter impulse in the opposite direction.
                 // COMMENTED OUT FOR DEBUGGING
                 //GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
@@ -208,7 +214,7 @@ namespace AnsgarsAssets
             }
         }
 
-        void ConfigureSpringJoint()
+        void AdjustSpringJoint()
         {
             float chainLengthAtWhichToPositionAnchor = maximumTakeUpSpeed * Time.fixedDeltaTime;
 
@@ -218,9 +224,43 @@ namespace AnsgarsAssets
 
         void UpdatePositionAfterPreviousFixedUpdate() => positionAfterPreviousFixedUpdate = transform.position;
 
+        void UpdateDistanceToConnectedAnchorAfterPreviousFixedUpdate() => distanceToConnectedAnchorAfterPreviousFixedUpdate = CalculateDistanceToConnectedAnchor();
 
+
+        float CalculateDistanceToConnectedAnchor()
+        {
+            float distanceToConnectedAnchor = 0;
+
+            if (GetSpringJoint().connectedBody)
+            {
+                Vector3 positionOfConnectedAnchor = GetSpringJoint().connectedBody.transform.TransformPoint(GetSpringJoint().connectedAnchor);
+
+                distanceToConnectedAnchor = Vector3.Distance(transform.position, positionOfConnectedAnchor);
+            }
+
+            return distanceToConnectedAnchor;
+        }
 
         // <<<<< ABSTRACTTION LEVEL DOWN >>>>>
+
+        bool FirstChainLinkPointsTowardsSource()
+        {
+            bool firstChainLinkPointsTowardsSource = false;
+
+            if (firstChainLink)
+            {
+                    Plane plane = new Plane(-firstChainLink.transform.up, firstChainLink.GetPositionToLinkChainLinkTo());
+
+                    firstChainLinkPointsTowardsSource = plane.GetSide(transform.position);
+            }
+
+            return firstChainLinkPointsTowardsSource;
+        }
+
+        bool HookToConnectChainLinkToIsFurtherAwayThan(float distance)
+        {
+            return hookToConnectChainLinkTo && Utility.PointsAreFurtherApartThanDistance(transform.position, hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), distance);
+        }
 
         /// <summary>
         /// Returns wether or not a given point is located at the forward side of this <see cref="ChainLinkSource"/> or not.
@@ -319,8 +359,7 @@ namespace AnsgarsAssets
 
         void UpdateSpringJointDistanceValuesBasedOnAnchorPositionInChain(float distanceOfAnchorFromChainBeginning)
         {
-            float minDistance = distanceOfAnchorFromChainBeginning - maximumTakeUpSpeed * Time.fixedDeltaTime;
-            GetSpringJoint().minDistance = Mathf.Max(0, minDistance);
+            GetSpringJoint().minDistance = distanceOfAnchorFromChainBeginning - maximumTakeUpSpeed * Time.fixedDeltaTime;
             GetSpringJoint().maxDistance = distanceOfAnchorFromChainBeginning + maximumExpellSpeed * Time.fixedDeltaTime;
         }
 
