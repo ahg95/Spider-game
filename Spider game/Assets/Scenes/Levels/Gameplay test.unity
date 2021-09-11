@@ -6087,11 +6087,11 @@ PrefabInstance:
       objectReference: {fileID: 1787541216}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: uptakingRopeForce
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: expellingRopeForce
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: projectileVelocity

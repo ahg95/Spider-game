@@ -198,8 +198,7 @@ namespace AnsgarsAssets
                 hookToConnectChainLinkTo.GetRigidbody().AddForce(pushOutForceDirection * pushOutForceAmount);
                 
                 // There is a counter impulse in the opposite direction.
-                // COMMENTED OUT FOR DEBUGGING
-                //GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
+                GetRigidbody().AddForce(-pushOutForceDirection * pushOutForceAmount);
             }
         }
 
