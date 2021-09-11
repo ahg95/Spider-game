@@ -82,7 +82,7 @@ namespace AnsgarsAssets
                 if (0 < maximumTakeUpSpeed || 0 < maximumExpellSpeed)
                 {
                     if (firstChainLink)
-                        firstChainLink.OrientHookPositionTowards(transform.position);
+                        firstChainLink.AlignHookPositionWith(transform.position);
 
                     if (ChainShouldBeLengthened())
                     {

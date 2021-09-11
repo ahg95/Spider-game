@@ -11,4 +11,9 @@ public class ChainLinkTester : MonoBehaviour
     {
         GetComponent<ChainLink>().OrientHookPositionTowards(VectorParameter.position);
     }
+
+    public void AlignHookPositionWithVectorParameter()
+    {
+        GetComponent<ChainLink>().AlignHookPositionWith(VectorParameter.position);
+    }
 }
