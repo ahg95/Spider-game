@@ -14,6 +14,14 @@ namespace AnsgarsAssets
 
         public Transform PositionToLinkToHook;
 
+        public ChainLinkHook InitialHookToConnectTo;
+
+        public void Start()
+        {
+            if (InitialHookToConnectTo)
+                AttachToChainLinkHook(InitialHookToConnectTo);
+        }
+
         public Joint GetJoint()
         {
             if (joint == null)
