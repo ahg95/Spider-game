@@ -84,10 +84,6 @@ namespace AnsgarsAssets
                     if (firstChainLink)
                         firstChainLink.OrientHookPositionTowards(transform.position);
 
-                    // Cheating here a bit...
-                    if (firstChainLink && firstChainLink.CurrentEffectiveLength < 0.005)
-                        RemoveFirstChainLink();
-
                     if (ChainShouldBeLengthened())
                     {
                         float lengthToAddToChain = CalculateLengthToAddToChain();
@@ -121,9 +117,9 @@ namespace AnsgarsAssets
         {
             // Do not add more length to the chain than is theoretically possible under the current maximumExpellSpeed and the passed time.
             float maximumLengthToAdd = Time.fixedDeltaTime * maximumExpellSpeed;
-            float gapSize = Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position);
+            float distanceToHookingPosition = Vector3.Distance(hookToConnectChainLinkTo.GetPositionToLinkChainLinkTo(), transform.position);
 
-            return Mathf.Min(maximumLengthToAdd, gapSize);
+            return Mathf.Min(maximumLengthToAdd, distanceToHookingPosition);
         }
 
         void AddLengthToChain(float amount)
@@ -155,12 +151,20 @@ namespace AnsgarsAssets
 
         float CalculateAmountToShortenChain()
         {
-            // Likewise to calculating the length to add to the chain, the chain should not be shortened more than what is possible under the
-            // current maximumTakeUpSpeed and the passed time.
-            float maximumLengthToRemove = Time.fixedDeltaTime * maximumTakeUpSpeed;
-            float lengthInside = Vector3.Distance(hookToConnectChainLinkTo.transform.position, transform.position);
+            float amountToShortenChain = 0;
 
-            return Mathf.Min(maximumLengthToRemove, lengthInside);
+            // If there is no first ChainLink then the chain should not be shortened.
+            if (firstChainLink)
+            {
+                // Likewise to calculating the length to add to the chain, the chain should not be shortened more than what is possible under the
+                // current maximumTakeUpSpeed and the passed time.
+                float maximumLengthToRemove = Time.fixedDeltaTime * maximumTakeUpSpeed;
+                float distanceToHookingPosition = Vector3.Distance(firstChainLink.GetPositionToLinkChainLinkTo(), transform.position);
+
+                amountToShortenChain = Mathf.Min(maximumLengthToRemove, distanceToHookingPosition);
+            }
+
+            return amountToShortenChain;
         }
 
         void ShortenChainBy(float amount)
