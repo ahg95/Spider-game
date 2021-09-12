@@ -11,10 +11,10 @@ namespace AnsgarsAssets
     {
         [Header("General")]
         public float projectileVelocity;
-
         public Transform muzzle;
         [Tooltip("The specified rigidbody and the source of the rope will be connected by a fixed joint.")]
         public Rigidbody rigidBodyToConnectChainLinkSourceTo;
+        public LayerMask objectsOccludingMuzzle;
 
         [Header("Prefabs")]
         public GameObject ropePrefab;
@@ -112,8 +112,14 @@ namespace AnsgarsAssets
 
         public void StartPressingTrigger()
         {
-            if (gunState == RopeGunState.loaded)
+            if (gunState == RopeGunState.loaded && MuzzleIsClear())
                 SwitchToShotState();
+        }
+
+        private bool MuzzleIsClear()
+        {
+            bool muzzleIsClear = !Physics.CheckSphere(muzzle.position, 0.3f, objectsOccludingMuzzle);
+            return muzzleIsClear;
         }
 
         public void StopPressingTrigger()
