@@ -83,10 +83,9 @@ namespace AnsgarsAssets
                 {
                     if (firstChainLink)
                     {
-                        //TODO
-                        //ChainLink secondChainLink = firstChainLink.AttachedToHook.GetComponent<ChainLink>();
+                        ChainLink secondChainLink = firstChainLink.AttachedToHook.GetComponent<ChainLink>();
 
-                        if (Utility.PointsAreFurtherApartThanDistance(firstChainLink.GetPositionToLinkToHook(), transform.position, firstChainLink.CurrentEffectiveLength))
+                        if ((!secondChainLink || secondChainLink.PositionToLinkChainLinkToPointsTowards(transform.position)) && Utility.PointsAreFurtherApartThanDistance(firstChainLink.GetPositionToLinkToHook(), transform.position, firstChainLink.CurrentEffectiveLength))
                             firstChainLink.OrientHookPositionTowards(transform.position);
                         else
                             firstChainLink.AlignHookPositionWith(transform.position);
