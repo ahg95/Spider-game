@@ -220,8 +220,8 @@ namespace AnsgarsAssets
                 grappleDisconnected.Raise();
             }
 
-            // Disable the collider of the grappler such that it does not collide with objects and consequently moves them when the gun is loaded
-            projectile.GetSticky().GetCollider().enabled = false;
+            // Change the layer of the projectile such that it does not collide with objects when the gun is loaded and is drawn by the correct camera
+            projectile.gameObject.layer = LayerMask.NameToLayer("GrapplingGun");
 
             chainLinkSource.GetParentConstraint().constraintActive = true;
             projectile.GetParentConstraint().constraintActive = true;
@@ -239,8 +239,8 @@ namespace AnsgarsAssets
 
         void SwitchToShotState()
         {
-            // Enable the collider of the grappler again since we have disabled it to prevent it from moving objects while the gun is loaded.
-            projectile.GetSticky().GetCollider().enabled = true;
+            // Change the layer of the projectile back to "Grapple" such that it can collide with objects again and is drawn by the correct camera.
+            projectile.gameObject.layer = LayerMask.NameToLayer("Grapple");
 
             chainLinkSource.GetParentConstraint().constraintActive = false;
             projectile.GetParentConstraint().constraintActive = false;
