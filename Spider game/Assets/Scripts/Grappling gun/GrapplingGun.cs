@@ -11,10 +11,10 @@ namespace AnsgarsAssets
     {
         [Header("General")]
         public float projectileVelocity;
-
         public Transform muzzle;
         [Tooltip("The specified rigidbody and the source of the rope will be connected by a fixed joint.")]
         public Rigidbody rigidBodyToConnectChainLinkSourceTo;
+        public LayerMask objectsOccludingMuzzle;
 
         [Header("Prefabs")]
         public GameObject ropePrefab;
@@ -112,8 +112,14 @@ namespace AnsgarsAssets
 
         public void StartPressingTrigger()
         {
-            if (gunState == RopeGunState.loaded)
+            if (gunState == RopeGunState.loaded && MuzzleIsClear())
                 SwitchToShotState();
+        }
+
+        private bool MuzzleIsClear()
+        {
+            bool muzzleIsClear = !Physics.CheckSphere(muzzle.position, 0.3f, objectsOccludingMuzzle);
+            return muzzleIsClear;
         }
 
         public void StopPressingTrigger()
@@ -220,6 +226,9 @@ namespace AnsgarsAssets
                 grappleDisconnected.Raise();
             }
 
+            // Change the layer of the projectile such that it does not collide with objects when the gun is loaded and is drawn by the correct camera
+            projectile.gameObject.layer = LayerMask.NameToLayer("GrapplingGun");
+
             chainLinkSource.GetParentConstraint().constraintActive = true;
             projectile.GetParentConstraint().constraintActive = true;
 
@@ -236,6 +245,9 @@ namespace AnsgarsAssets
 
         void SwitchToShotState()
         {
+            // Change the layer of the projectile back to "Grapple" such that it can collide with objects again and is drawn by the correct camera.
+            projectile.gameObject.layer = LayerMask.NameToLayer("Grapple");
+
             chainLinkSource.GetParentConstraint().constraintActive = false;
             projectile.GetParentConstraint().constraintActive = false;
 

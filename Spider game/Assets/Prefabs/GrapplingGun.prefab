@@ -323,6 +323,9 @@ MonoBehaviour:
   projectileVelocity: 50
   muzzle: {fileID: 7517466050065252032}
   rigidBodyToConnectChainLinkSourceTo: {fileID: 7387665756111160567}
+  objectsOccludingMuzzle:
+    serializedVersion: 2
+    m_Bits: 1047
   ropePrefab: {fileID: 8691312756685919538, guid: f1447c1dd05a78348b8323e25166ddf5, type: 3}
   projectilePrefab: {fileID: 2490742331965455740, guid: a9ad490f49988fd4bb82fea128055734, type: 3}
   chainLinkSourcePrefab: {fileID: 5785719453463356787, guid: aa4287faf5288a1419b817fd520a4657, type: 3}
