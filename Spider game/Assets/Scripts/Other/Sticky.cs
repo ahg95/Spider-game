@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 
 namespace AnsgarsAssets
 {
-    [RequireComponent(typeof(Rigidbody), typeof(DeactivatableFixedJoint))]
+    [RequireComponent(typeof(Rigidbody), typeof(DeactivatableFixedJoint), typeof(Collider))]
     public class Sticky : MonoBehaviour
     {
         public LayerMask layersToStickToOnTouch;
@@ -19,8 +19,8 @@ namespace AnsgarsAssets
         bool isStickingToSomething = false;
 
         new Rigidbody rigidbody;
-
         DeactivatableFixedJoint fixedJoint;
+        Collider collider;
 
         public Rigidbody GetRigidbody()
         {
@@ -36,6 +36,14 @@ namespace AnsgarsAssets
                 fixedJoint = GetComponent<DeactivatableFixedJoint>();
 
             return fixedJoint;
+        }
+
+        public Collider GetCollider()
+        {
+            if (!collider)
+                collider = GetComponent<Collider>();
+
+            return collider;
         }
 
         public void EnableStickiness() => stickOnTouch = true;
