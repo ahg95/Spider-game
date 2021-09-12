@@ -82,7 +82,12 @@ namespace AnsgarsAssets
                 if (0 < maximumTakeUpSpeed || 0 < maximumExpellSpeed)
                 {
                     if (firstChainLink)
-                        firstChainLink.AlignHookPositionWith(transform.position);
+                    {
+                        if (Utility.PointsAreFurtherApartThanDistance(firstChainLink.GetPositionToLinkToHook(), transform.position, firstChainLink.CurrentEffectiveLength))
+                            firstChainLink.OrientHookPositionTowards(transform.position);
+                        else
+                            firstChainLink.AlignHookPositionWith(transform.position);
+                    }
 
                     if (ChainShouldBeLengthened())
                     {
