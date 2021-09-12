@@ -106,6 +106,13 @@ namespace AnsgarsAssets
 
         }
 
+        public bool PositionToLinkChainLinkToPointsTowards(Vector3 point)
+        {
+            Plane plane = new Plane(-transform.up, GetPositionToLinkChainLinkTo());
+
+            return plane.GetSide(point);
+        }
+
         [Obsolete("Method AttachToChainLinkHookAndRotateTowards is deprecated, please use the method OrientPositionToHookChainLinkToTowards instead.")]
         public void AttachToChainLinkHookAndRotateTowards(ChainLinkHook hookToAttachTo, Vector3 positionToRotateChainLinkTowards)
         {

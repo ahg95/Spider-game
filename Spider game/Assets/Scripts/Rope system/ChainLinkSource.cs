@@ -83,6 +83,9 @@ namespace AnsgarsAssets
                 {
                     if (firstChainLink)
                     {
+                        //TODO
+                        //ChainLink secondChainLink = firstChainLink.AttachedToHook.GetComponent<ChainLink>();
+
                         if (Utility.PointsAreFurtherApartThanDistance(firstChainLink.GetPositionToLinkToHook(), transform.position, firstChainLink.CurrentEffectiveLength))
                             firstChainLink.OrientHookPositionTowards(transform.position);
                         else
@@ -256,11 +259,7 @@ namespace AnsgarsAssets
             bool firstChainLinkPointsTowardsSource = false;
 
             if (firstChainLink)
-            {
-                    Plane plane = new Plane(-firstChainLink.transform.up, firstChainLink.GetPositionToLinkChainLinkTo());
-
-                    firstChainLinkPointsTowardsSource = plane.GetSide(transform.position);
-            }
+                    firstChainLinkPointsTowardsSource = firstChainLink.PositionToLinkChainLinkToPointsTowards(transform.position);
 
             return firstChainLinkPointsTowardsSource;
         }
