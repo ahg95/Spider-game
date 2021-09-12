@@ -41,6 +41,18 @@ namespace AnsgarsAssets
         [Header("Events")]
         public GameEvent grappleDisconnected;
 
+        public GameEvent OnBeforeSwitchToUnloadedState;
+        public GameEvent OnAfterSwitchToUnloadedState;
+
+        public GameEvent OnBeforeSwitchToLoadedState;
+        public GameEvent OnAfterSwitchToLoadedState;
+
+        public GameEvent OnBeforeSwitchToShotState;
+        public GameEvent OnAfterSwitchToShotState;
+
+        public GameEvent OnBeforeSwitchToConnectedState;
+        public GameEvent OnAfterSwitchToConnectedState;
+
         GameObject rope;
         GrapplingGunProjectile projectile;
         GrapplingGunChainLinkSource chainLinkSource;
@@ -197,11 +209,15 @@ namespace AnsgarsAssets
 
         void SwitchToUnloadedState()
         {
+            OnBeforeSwitchToUnloadedState?.Raise();
+
             rope = null;
             projectile = null;
             chainLinkSource = null;
 
             gunState = RopeGunState.unloaded;
+
+            OnAfterSwitchToUnloadedState?.Raise();
 
             // Automatic reloading
             SwitchToLoadedState();
@@ -209,6 +225,8 @@ namespace AnsgarsAssets
 
         void SwitchToLoadedState()
         {
+            OnBeforeSwitchToLoadedState?.Raise();
+
             if (gunState == RopeGunState.unloaded)
             {
                 InstantiateAndConfigureRopeIfNotExistent();
@@ -241,10 +259,14 @@ namespace AnsgarsAssets
             projectile.GetSticky().DisableStickiness();
 
             gunState = RopeGunState.loaded;
+
+            OnAfterSwitchToLoadedState?.Raise();
         }
 
         void SwitchToShotState()
         {
+            OnBeforeSwitchToShotState?.Raise();
+
             // Change the layer of the projectile back to "Grapple" such that it can collide with objects again and is drawn by the correct camera.
             projectile.gameObject.layer = LayerMask.NameToLayer("Grapple");
 
@@ -267,13 +289,19 @@ namespace AnsgarsAssets
             ShootProjectile();
 
             gunState = RopeGunState.shot;
+
+            OnAfterSwitchToShotState?.Raise();
         }
 
         void SwitchToConnectedState()
         {
+            OnBeforeSwitchToConnectedState?.Raise();
+
             chainLinkSource.GetChainLinkSource().LockRopeLength();
 
             gunState = RopeGunState.connected;
+
+            OnAfterSwitchToConnectedState?.Raise();
         }
 
         // --- Other methods ---
