@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 8868387780125940916}
   - component: {fileID: 1932261191}
   - component: {fileID: 1932261192}
+  - component: {fileID: 5540788675325142045}
   m_Layer: 7
   m_Name: GrapplingGun
   m_TagString: Untagged
@@ -564,3 +565,20 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5540788675325142045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8868387780125940918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a9db7fcf9d1634c8185364d1b043a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joint: {fileID: 1932261192}
+  lightPositionSpring: 10
+  lightPositionDamper: 1
+  strongPositionSpring: 2000
+  strongPositionDamper: 100

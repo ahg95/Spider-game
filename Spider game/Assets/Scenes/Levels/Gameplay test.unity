@@ -253,6 +253,106 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90171040}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &100389981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2604392287078655361, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+  m_PrefabInstance: {fileID: 987026169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &100389983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100389981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 25fb76d4bb24f96438f1f1bf9631232c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 100389988}
+        m_TargetAssemblyTypeName: PhysicsWeaponHolder, Assembly-CSharp
+        m_MethodName: HoldWeaponLightly
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &100389988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1428391765446384938, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+  m_PrefabInstance: {fileID: 987026169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100389981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a9db7fcf9d1634c8185364d1b043a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &100389989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100389981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: db9d872889f07dc4f9ab65f416fbdb7b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 100389988}
+        m_TargetAssemblyTypeName: PhysicsWeaponHolder, Assembly-CSharp
+        m_MethodName: HoldWeaponStrongly
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &100389991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100389981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d11bae3f8f6f6d4896163d5125122cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 008002033b24ed147ac217a7095eb1b6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 100389988}
+        m_TargetAssemblyTypeName: PhysicsWeaponHolder, Assembly-CSharp
+        m_MethodName: AimForwardsInstantly
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &120111890
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +569,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19996
+  m_Name: pb_Mesh29368
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -957,7 +1057,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19658
+  m_Name: pb_Mesh29030
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5163,7 +5263,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27680
+  m_Name: pb_Mesh29144
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5755,7 +5855,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19912
+  m_Name: pb_Mesh29280
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6077,6 +6177,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1023006724994893233, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: mouseSensititvity
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428391765446384938, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: lightPositionDamper
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428391765446384938, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: lightPositionSpring
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428391765446384938, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: strongPositionDamper
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428391765446384938, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: strongPositionSpring
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: ropeParent
       value: 
@@ -6101,9 +6221,37 @@ PrefabInstance:
       propertyPath: chainLinkSourceParent
       value: 
       objectReference: {fileID: 1826965981}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: OnAfterSwitchToShotState
+      value: 
+      objectReference: {fileID: 11400000, guid: 25fb76d4bb24f96438f1f1bf9631232c, type: 2}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: OnBeforeSwitchToShotState
+      value: 
+      objectReference: {fileID: 11400000, guid: 008002033b24ed147ac217a7095eb1b6, type: 2}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: OnAfterSwitchToLoadedState
+      value: 
+      objectReference: {fileID: 11400000, guid: db9d872889f07dc4f9ab65f416fbdb7b, type: 2}
+    - target: {fileID: 2604392287078655364, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: OnAfterSwitchToUnloadedState
+      value: 
+      objectReference: {fileID: 11400000, guid: 5389a12f09a447948b9fbaffdecf7dc0, type: 2}
+    - target: {fileID: 6860811063666839167, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: m_SlerpDrive.positionDamper
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860811063666839167, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: m_SlerpDrive.positionSpring
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 8078875654491333591, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
       propertyPath: m_Name
       value: Player with Grappling gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078875654491333591, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd3f5c326e5c1524cbb7178e9fc161ae, type: 3}
@@ -9536,7 +9684,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19486
+  m_Name: pb_Mesh28858
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10341,7 +10489,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19582
+  m_Name: pb_Mesh28954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10966,7 +11114,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19630
+  m_Name: pb_Mesh29002
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11160,7 +11308,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19944
+  m_Name: pb_Mesh29314
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13319,7 +13467,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19498
+  m_Name: pb_Mesh28870
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13933,7 +14081,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19598
+  m_Name: pb_Mesh28970
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14284,7 +14432,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19824
+  m_Name: pb_Mesh29194
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14448,7 +14596,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27596
+  m_Name: pb_Mesh29060
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
