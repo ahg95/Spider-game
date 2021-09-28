@@ -59,9 +59,21 @@ namespace AnsgarsAssets
 
         RopeGunState gunState = RopeGunState.unloaded;
 
-        private void Update()
+        bool gunWasInShotStateDuringPreviousFixedUpdate = false;
+        int numberOfFramesInShotState = 0;
+
+
+        private void FixedUpdate()
         {
             if (gunState == RopeGunState.shot)
+                gunWasInShotStateDuringPreviousFixedUpdate = true;
+            else
+                gunWasInShotStateDuringPreviousFixedUpdate = false;
+        }
+
+        private void Update()
+        {
+            if (gunState == RopeGunState.shot && gunWasInShotStateDuringPreviousFixedUpdate)
                 AdjustMaximumExpellSpeedBasedOnRelativeGrapplerVelocity();
         }
 
@@ -69,9 +81,7 @@ namespace AnsgarsAssets
         {
             Vector3 relativeGrapplerVelocity = projectile.GetRigidbody().velocity - GetComponent<Rigidbody>().velocity;
 
-            float factor = relativeGrapplerVelocity.magnitude * 500;
-
-            chainLinkSource.GetChainLinkSource().maximumExpellSpeed = factor * Time.fixedDeltaTime;
+            chainLinkSource.GetChainLinkSource().maximumExpellSpeed = relativeGrapplerVelocity.magnitude;
         }
 
         enum RopeGunState
