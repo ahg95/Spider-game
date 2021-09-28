@@ -60,8 +60,6 @@ namespace AnsgarsAssets
         RopeGunState gunState = RopeGunState.unloaded;
 
         bool gunWasInShotStateDuringPreviousFixedUpdate = false;
-        int numberOfFramesInShotState = 0;
-
 
         private void FixedUpdate()
         {
@@ -384,7 +382,8 @@ namespace AnsgarsAssets
 
         private void AttachRopeToObjectAtPositionWithNormal(GameObject gameObject, Vector3 position, Vector3 direction)
         {
-            chainLinkSource.transform.position = position;
+            chainLinkSource.transform.position = position + direction.normalized * 0.3f;
+            chainLinkSource.gameObject.layer = LayerMask.NameToLayer("Grapple");
 
             // TESTS
             chainLinkSource.GetComponent<Rigidbody>().MovePosition(position);
