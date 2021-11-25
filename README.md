@@ -5,11 +5,16 @@ This is a first-person game project in which the player has a grappling gun that
 ## Player controls
 ### Movement
 Move: W, A, S, D
+
 Jump: Spacebar
 
 ### Grappling gun
 Shoot: LMB
+
 Reload: R
+
 Expell rope: LMB
+
 Pull in rope: RMB
+
 Connect rope to surface: Look at close surface and press E
