@@ -17,4 +17,4 @@ Expell rope: LMB
 
 Pull in rope: RMB
 
-Connect rope to surface: Look at close surface and press E
+Connect rope to surface: E (while looking at close surface)
